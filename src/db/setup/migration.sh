@@ -1,9 +1,9 @@
 echo 'start'
 
 export PGCLIENTENCODING=utf8
-export PGPASSWORD=cat_and_dog
-USER=cat_and_dog
-DATABASE=cat_and_dog
+export PGPASSWORD=you_and_world
+USER=you_and_world
+DATABASE=you_and_world
 
 psql -d $DATABASE -f migrations/set.role.sql -U $USER
 

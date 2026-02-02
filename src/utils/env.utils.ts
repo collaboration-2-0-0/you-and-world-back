@@ -22,11 +22,11 @@ export const getEnv = () => {
     API_UNAVAILABLE = false,
     EXIT_ON_ERROR = false,
     MAIL_CONFIRM_OFF = false,
-    TG_BOT = 'cat_n_dog_bot',
+    TG_BOT = 'you_and_world_bot',
     TG_BOT_TOKEN = '',
     ORIGIN = DEV
       ? `http://localhost:${PORT}`
-      : 'https://cat-and-dog-7967497105c1.herokuapp.com',
+      : 'https://you-and-world-3ce8d29203d0.herokuapp.com/',
     STATIC_PATH = 'public',
     LOGGER_COLORIZE = false,
     MAIL = 'google',

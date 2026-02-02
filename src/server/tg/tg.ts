@@ -111,7 +111,7 @@ class TgConnection implements IInputConnection {
       }
     }
 
-    const appName = 'Cat & Dog';
+    const appName = 'You & World';
     const message = `На сайті ${appName} нові події`;
     const inlineKyeboard = new InlineKeyboard().url(appName, this.origin);
     try {

@@ -1,12 +1,12 @@
 echo 'start'
 
 # prod
-DATABASE=postgresql-perpendicular-72796
-APP=cat-and-dog
+DATABASE=postgresql-graceful-47367
+APP=you-and-world
 
 # dev
 # DATABASE=?
-# APP=cat-and-dog-dev
+# APP=you-and-world-dev
 
 heroku pg:psql $DATABASE --app $APP -f create.heroku.sql
 heroku pg:psql $DATABASE --app $APP -f ../structure.sql

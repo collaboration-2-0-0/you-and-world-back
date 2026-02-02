@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "build:front": "cd ../cat-and-dog-frontend && npm run build",
+    "build:front": "cd ../you-and-world-ui && npm run build",
     "start": "node js/src/index.js",
     "pack": "npm run sync && npm run build:front && npm run rmassets && npm run sync",
     "dev": "cross-env NODE_ENV=development nodemon js/src/index.js",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/promotion-and-support/cat-and-dog-backend"
+    "url": "git+https://github.com/promotion-and-support/you-and-world-back"
   },
   "keywords": [
     "promotion",
@@ -61,7 +61,7 @@
     "@types/node": "^22.5.0",
     "@types/nodemailer": "^6.4.6",
     "@types/pg": "^8.6.5",
-    "@types/ws": "^8.5.3",
+    "@types/ws": "8.5.3",
     "grammy": "^1.16.1",
     "joi": "^17.6.2",
     "nodemailer": "^6.8.0",
@@ -69,6 +69,6 @@
     "pino": "^8.6.1",
     "pino-pretty": "^9.1.1",
     "typescript": "^4.8.4",
-    "ws": "^8.10.0"
+    "ws": "8.10.0"
   }
 }

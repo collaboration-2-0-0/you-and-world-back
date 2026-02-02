@@ -27,9 +27,9 @@ const connection = {
   local: {
     host,
     port: 5432,
-    database: 'cat_and_dog',
-    user: 'cat_and_dog',
-    password: 'cat_and_dog',
+    database: 'you_and_world',
+    user: 'you_and_world',
+    password: 'you_and_world',
   },
 }[dbUrl ? 'heroku' : 'local'];
 

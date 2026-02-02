@@ -1,9 +1,9 @@
 import { join, resolve } from 'node:path';
 
 export const BACK_PATH = './src/client';
-export const FRONT_PATH = '../cat-and-dog-frontend/src/app';
+export const FRONT_PATH = '../you-and-world-ui/src/app';
 export const BACK_STATIC_PATH = './public';
-export const FRONT_STATIC_PATH = '../cat-and-dog-frontend/dist';
+export const FRONT_STATIC_PATH = '../you-and-world-ui/dist';
 export const FROM_BACK_TO_FRONT = [
   'common',
   'common/server',
