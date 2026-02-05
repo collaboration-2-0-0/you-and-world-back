@@ -68,4 +68,15 @@ export class Account extends Store<AccountState> {
     }
     return success;
   }
+
+  async update(data: T.IUserUpdateParams): Promise<T.IUserResponse> {
+    try {
+      const user = await this.app.api.user.update(data);
+      user && this.setState({ user });
+      return user;
+    } catch (e: any) {
+      this.setError(e);
+      throw e;
+    }
+  }
 }
