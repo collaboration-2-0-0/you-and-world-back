@@ -70,7 +70,6 @@ export class Net extends Store<NetState> {
       this.setTree();
       this.setView();
     }
-    // await this.app.onNewNet();
     this.setState({});
   }
 
@@ -91,6 +90,32 @@ export class Net extends Store<NetState> {
   private setTree(tree: IMember[] = []) {
     if (this.$state.tree === tree) return;
     this.setState({ tree });
+  }
+
+  async create(args: Omit<T.INetCreateParams, 'node_id'>) {
+    try {
+      const parentNet = this.$state.userNet;
+      const net = await this.app.api.net.create({
+        node_id: null,
+        ...parentNet,
+        ...args,
+      });
+      if (net) await this.app.onNewNets();
+      return net;
+    } catch (e: any) {
+      this.setError(e);
+    }
+  }
+
+  async update(args: Omit<T.INetUpdateParams, 'node_id'>) {
+    try {
+      const net = await this.app.api.net.update({ ...this.$state.userNet!, ...args });
+      net && this.setState({ userNet: net });
+      return net;
+    } catch (e: any) {
+      this.setError(e);
+      throw e;
+    }
   }
 
   async enter(net_id: number) {

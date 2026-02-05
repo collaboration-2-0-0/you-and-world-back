@@ -21,7 +21,9 @@ export type INetUpdateParams = IUserNode & { goal: string };
 
 export type INetData = ITableNets & ITableNetsData & ITableNodes;
 
-export type INetResponse = Nullable<INetData>;
+export type INetResponse = Nullable<
+  INetData & { total_count_of_members: number }
+>;
 export type INetsResponse = INetData[];
 
 export type INetViewResponse = IMemberResponse[];

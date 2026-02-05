@@ -102,6 +102,7 @@ export class App extends Store<AppState> {
   }
 
   private onNewNet() {
+    this.userNets.getNets();
     this.setUserStatus();
   }
 
