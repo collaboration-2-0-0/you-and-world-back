@@ -14,19 +14,19 @@
 
 Структурована комунікація з набором правил для її реорганізації та оптимальне розподілення інформаційних потоків забезпечує прийняття ефективних рішень задля реалізації мети.
 
-[Приклад правил у спільноті](rules.md)
+## [Приклад правил у спільноті](rules.md)
 
-[Презентації](https://drive.google.com/file/d/1X1UfurNd4xwgco1Lvvm0PgWwHt2zOtOg/view?usp=sharing)
+## [Презентації](https://drive.google.com/file/d/1X1UfurNd4xwgco1Lvvm0PgWwHt2zOtOg/view?usp=sharing)
 
-[Презентаційні матеріали](https://github.com/mykhailo-vaskivnyuk/u-n-w-back/tree/feat/presentation/docs/presentation)
+## [Презентаційні матеріали](https://github.com/mykhailo-vaskivnyuk/u-n-w-back/tree/feat/presentation/docs/presentation)
 
 ## [Поняття](concepts.md)
 
 - Спільнота
 - Вузол
 - Координатор
-- Коло учасника
-- Дерево учасника
+- Коло
+- Дерево
 - Гілка
 
 ## [Функціонал](features.md)
@@ -38,3 +38,5 @@
 - Запит на приєднання
 - Обрання координатора
 - Діслайки
+- Від'єднання через неактивність
+- Від'єднання через відсутність координатора
