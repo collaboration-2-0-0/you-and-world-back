@@ -16,7 +16,7 @@
 
 ## [Приклад правил у спільноті](rules.md)
 
-## [Презентаційні матеріали](https://github.com/mykhailo-vaskivnyuk/u-n-w-back/tree/feat/presentation/docs/presentation)
+## [Презентаційні матеріали](../presentation/index.md)
 
 ## [Поняття](concepts.md)
 
