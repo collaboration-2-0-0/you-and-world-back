@@ -9,7 +9,7 @@ const create: THandler<INetInviteParams, string | null> = async (
   { member: m },
   { node_id, user_id },
 ) => {
-  const { goal, net_id } = await m!.getNet();
+  const { goal, net_id, name } = await m!.getNet();
   const { confirmed } = m!.get();
 
   if (!goal) return null; // bad request
@@ -36,9 +36,9 @@ const create: THandler<INetInviteParams, string | null> = async (
     ]);
 
     /* send to tg */
-    const message = 'Запрошення до спільноти';
+    const message = `Запрошення до спільноти: ${name || ''}`;
     const url = `${env.ORIGIN}/net/invite/${token}`;
-    const reply_markup = new InlineKeyboard().webApp('Приєднатись', url);
+    const reply_markup = new InlineKeyboard().webApp("При'єднатись", url);
     notificationService.sendToTelegram(waiting, message, { reply_markup });
 
     return token;
