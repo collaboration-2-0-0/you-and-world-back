@@ -11,6 +11,20 @@ export const createTree = async (t: ITransaction, node: ITableNodes) => {
   await t.execQuery.node.tree.create([node_level + 1, node_id, net_id]);
 };
 
+export const updateCountOfNets = async (
+  net_id: number,
+  addCount = 1,
+  t?: ITransaction,
+): Promise<void> => {
+  const [net] = await (t?.execQuery || execQuery).net.updateCountOfNets([
+    net_id,
+    addCount,
+  ]);
+  const { parent_net_id } = net!;
+  if (!parent_net_id) return;
+  await updateCountOfNets(parent_net_id, addCount);
+};
+
 export const createNet = async (
   user_id: number,
   parentNetId: number | null,
@@ -21,7 +35,7 @@ export const createNet = async (
   let net: ITableNets | undefined;
   if (parentNetId) {
     [net] = await t.execQuery.net.createChild([parentNetId]);
-    await new domain.net.NetArrange(t).updateCountOfNets(parentNetId);
+    await updateCountOfNets(parentNetId, 1, t);
   } else {
     [net] = await t.execQuery.net.createRoot([]);
     const { net_id: root_net_id } = net!;

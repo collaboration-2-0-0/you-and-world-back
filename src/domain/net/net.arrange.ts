@@ -11,31 +11,42 @@ export class NetArrange {
   static async removeMemberFromNet(event_type: NetEventKeys, member: IMember) {
     const { net_id, node_id, user_id } = member;
     let event!: NetEvent;
-    await exeWithNetLock(net_id, async (t) => {
+    const result = await exeWithNetLock(net_id, async (t) => {
       const member = await new Member().init(user_id, node_id);
       event = new NetEvent(net_id, event_type, member.get());
       const net = new NetArrange(t);
-      const nodesToArrange = await net.removeMemberFromNetAndSubnets(event);
+      const { nodesToArrange, netRemoved } =
+        await net.removeMemberFromNetAndSubnets(event);
       await net.arrangeNodes(event, nodesToArrange);
+      if (netRemoved) {
+        await t.execQuery.net.updateCountOfNets([net_id, -netRemoved]);
+      }
+      const [netExist] = await t.execQuery.net.get([net_id]);
+
       await event.commit(t);
+      return netRemoved + (netExist ? 0 : 1);
     });
     event?.send();
+    return result;
   }
 
   async removeMemberFromNetAndSubnets(event: NetEvent) {
-    const { event_type, net_id: root_net_id, member } = event;
+    const { event_type, net_id: parent_net_id, member } = event;
     const { user_id } = member!;
 
+    let netRemoved = 0;
     do {
-      const [member] = await execQuery.user.netData.getFurthestSubnet([
+      const [member] = await execQuery.user.nets.getChildOne([
         user_id,
-        root_net_id,
+        parent_net_id!,
       ]);
       if (!member) break;
-      await NetArrange.removeMemberFromNet(event_type, member);
+      netRemoved += await NetArrange.removeMemberFromNet(event_type, member);
     } while (true);
 
-    return this.removeMember(event);
+    const nodesToArrange = await this.removeMember(event);
+
+    return { nodesToArrange, netRemoved };
   }
 
   async removeMember(event: NetEvent) {
@@ -95,27 +106,27 @@ export class NetArrange {
     event: NetEvent,
     [...nodesToArrange]: (number | null)[] = [],
   ) {
-    // while (nodesToArrange.length) {
-    //   const node_id = nodesToArrange.shift();
-    //   if (!node_id) continue;
-    //   const removed = await this.tightenNodes(node_id, event);
-    //   if (removed) {
-    //     if (!removed.length) continue;
-    //     let i = -1;
-    //     for (const node_id of [...nodesToArrange]) {
-    //       i++;
-    //       if (!node_id) continue;
-    //       if (!removed.includes(node_id)) continue;
-    //       nodesToArrange.splice(i--, 1);
-    //     }
-    //     event.messages.removeFromNodes(removed);
-    //     continue;
-    //   }
-    //   const newNodesToArrange = await this.checkDislikes(event, node_id);
-    //   nodesToArrange = [...newNodesToArrange, ...nodesToArrange];
-    //   if (newNodesToArrange.length) continue;
-    //   await this.checkVotes(event, node_id);
-    // }
+    while (nodesToArrange.length) {
+      const node_id = nodesToArrange.shift();
+      if (!node_id) continue;
+      const removed = await this.tightenNodes(node_id, event);
+      if (removed) {
+        if (!removed.length) continue;
+        let i = -1;
+        for (const node_id of [...nodesToArrange]) {
+          i++;
+          if (!node_id) continue;
+          if (!removed.includes(node_id)) continue;
+          nodesToArrange.splice(i--, 1);
+        }
+        event.messages.removeFromNodes(removed);
+        continue;
+      }
+      const newNodesToArrange = await this.checkDislikes(event, node_id);
+      nodesToArrange = [...newNodesToArrange, ...nodesToArrange];
+      if (newNodesToArrange.length) continue;
+      await this.checkVotes(event, node_id);
+    }
   }
 
   async tightenNodes(
@@ -129,7 +140,6 @@ export class NetArrange {
     if (!count_of_members) {
       if (parent_node_id) return [];
       await t.execQuery.node.remove([node_id]);
-      await this.updateCountOfNets(net_id, -1);
       await t.execQuery.net.remove([net_id]);
       return [];
     }
@@ -157,16 +167,6 @@ export class NetArrange {
     const tightenEvent = event.createChild('TIGHTEN', tightenMember!);
     await tightenEvent.messages.create(t);
     return nodeIds;
-  }
-
-  async updateCountOfNets(net_id: number, addCount = 1): Promise<void> {
-    const [net] = await this.t.execQuery.net.updateCountOfNets([
-      net_id,
-      addCount,
-    ]);
-    const { parent_net_id } = net!;
-    if (!parent_net_id) return;
-    await this.updateCountOfNets(parent_net_id, addCount);
   }
 
   async changeLevelFromNode(nodeId: number) {
@@ -198,7 +198,9 @@ export class NetArrange {
     const { node_id } = memberWithMaxDislikes!;
     const [member] = await this.t.execQuery.member.get([node_id]);
     const childEvent = event.createChild('DISLIKE_DISCONNECT', member);
-    return this.removeMemberFromNetAndSubnets(childEvent);
+    const { nodesToArrange } =
+      await this.removeMemberFromNetAndSubnets(childEvent);
+    return nodesToArrange;
   }
 
   async checkVotes(event: NetEvent, parent_node_id: number) {

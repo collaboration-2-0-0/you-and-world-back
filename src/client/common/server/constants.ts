@@ -1,6 +1,6 @@
 export const PING_INTERVAL = 30000;
 
-export const MAX_NET_LEVEL = 1;
+export const MAX_NET_LEVEL = 2;
 export const MAX_NODE_LEVEL = 5;
 
 export const MEMBER_STATUS = [

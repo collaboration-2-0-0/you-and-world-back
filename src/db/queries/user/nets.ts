@@ -6,6 +6,10 @@ export interface IQueriesUserNets {
   getAll: TQuery<[['user_id', number]], IUserNet>;
   getWait: TQuery<[['user_id', number]], INet>;
   getTop: TQuery<[['user_id', number]], IMember>;
+  getChildOne: TQuery<
+    [['user_id', number], ['parent_net_id', number]],
+    IMember
+  >;
 }
 
 export const getAll = `
@@ -55,4 +59,19 @@ export const getTop = `
   WHERE
     members.user_id = $1 AND
     nets.net_level = 0
+`;
+
+export const getChildOne = `
+  SELECT
+    nodes.*,
+    members.*
+  FROM members
+  INNER JOIN nodes ON
+    nodes.node_id = members.member_id
+  INNER JOIN nets ON
+    nets.net_id = nodes.net_id
+  WHERE
+    members.user_id = $1 AND
+    nets.parent_net_id = $2
+  LIMIT 1
 `;
