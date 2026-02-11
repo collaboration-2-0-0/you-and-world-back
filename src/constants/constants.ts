@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { INetEventTo } from '../domain/types/net.event.types';
 import { NetEventKeys } from '../client/common/server/types/types';
 export const BUILD_PATH = 'js';

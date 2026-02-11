@@ -90,6 +90,7 @@ const config: IConfig = {
         time: 0,
       },
     ],
+    excludeEndpoints: ['admin', 'login.js', 'signup.js'],
   },
   inConnection: {
     transport,

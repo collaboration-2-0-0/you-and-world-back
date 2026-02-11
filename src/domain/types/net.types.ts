@@ -12,5 +12,5 @@ export type IUserNet = T.ITableNets &
 export type INetNode = {
   member: INetMember;
   tree: INetNode[] | null;
-  // connection: boolean;
+  connection: boolean;
 };

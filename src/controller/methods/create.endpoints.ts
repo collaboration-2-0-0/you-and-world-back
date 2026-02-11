@@ -3,19 +3,23 @@ import fsp from 'node:fs/promises';
 import { IEndpoints, THandler } from '../types';
 import { EXCLUDE_ENDPOINTS } from '../constants';
 
-export const createRoutes = async (dirPath: string): Promise<IEndpoints> => {
+export const createRoutes = async (
+  dirPath: string,
+  exclude: string[] = [],
+): Promise<IEndpoints> => {
   const route: IEndpoints = {};
   const routePath = path.resolve(dirPath);
   const dir = await fsp.opendir(routePath);
+  const excludeEndpoints = [...EXCLUDE_ENDPOINTS, ...exclude];
 
   for await (const item of dir) {
     const ext = path.extname(item.name);
     const name = path.basename(item.name, ext);
-    if (EXCLUDE_ENDPOINTS.includes(name)) continue;
+    if (excludeEndpoints.includes(name)) continue;
 
     if (item.isDirectory()) {
       const dirPath = path.join(routePath, name);
-      route[name] = await createRoutes(dirPath);
+      route[name] = await createRoutes(dirPath, exclude);
       continue;
     }
 

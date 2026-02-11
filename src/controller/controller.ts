@@ -50,8 +50,8 @@ class Controller implements IController {
     }
 
     try {
-      const { apiPath } = this.config;
-      this.endpoints = await createRoutes(apiPath);
+      const { apiPath, excludeEndpoints } = this.config;
+      this.endpoints = await createRoutes(apiPath, excludeEndpoints);
       await createClientApi(this.config, this.endpoints);
     } catch (e: any) {
       logger.error(e);

@@ -34,6 +34,7 @@ export interface IControllerConfig {
     >;
   };
   tasks?: ITask[];
+  excludeEndpoints?: string[];
 }
 
 export interface ITask {

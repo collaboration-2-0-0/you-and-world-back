@@ -18,11 +18,13 @@ export const UserResponseSchema = [
   } as Record<keyof OmitNull<IUserResponse>, TJoiSchema>,
 ];
 
+/* for tests */
 export const SignupParamsSchema = {
-  name: Joi.string().required(),
   email: Joi.string().required().email(),
+  name: Joi.string().required(),
 };
 
+/* for tests */
 export const LoginParamsSchema = {
   email: Joi.string().required().email(),
   password: Joi.string().required(),

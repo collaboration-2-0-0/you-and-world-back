@@ -7,3 +7,15 @@ export type IUserUpdateParams = Pick<
   ITableUsers,
   'name' | 'mobile' | 'password'
 >;
+
+/* for tests */
+export type ILoginParams = {
+  email: string;
+  password: string;
+};
+
+/* for tests */
+export type ISignupParams = {
+  name: string;
+  email: string;
+};

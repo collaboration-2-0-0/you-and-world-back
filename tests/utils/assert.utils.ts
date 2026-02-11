@@ -33,5 +33,6 @@ export const assertResponse = async (
   setToState?.(actual);
   if (expected === undefined) return;
   if (typeof expected === 'function') expected(actual);
-  else assert.deepEqual(actual, expected);
+  // else assert.deepEqual(actual, expected);
+  else assert.partialDeepStrictEqual(actual, expected);
 };

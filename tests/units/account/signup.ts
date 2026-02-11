@@ -27,14 +27,14 @@ export const user =
             mobile: null,
             name: `Учасник ${user}`,
             user_id: actual.user_id,
-            user_status: 'LOGGEDIN',
+            user_status: 'LOGGED_IN',
             chat_id: null,
           }),
         setToState: (actual) => (state.user = actual),
       },
-      // {
-      //   name: '/chat/connect/user',
-      //   params: {},
-      // },
+      {
+        name: '/chat/connect/user',
+        params: {},
+      },
     ] as IOperationData[],
   });
