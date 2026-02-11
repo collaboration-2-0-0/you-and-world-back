@@ -17,9 +17,6 @@ export const getApi = (
     'confirm': (options: P.ITokenParams) =>
       fetch<P.IUserResponse>('/account/confirm', options),
 
-    'login': (options: P.ILoginParams) =>
-      fetch<P.IUserResponse>('/account/login', options),
-
     'login_tg': (options: Q.TAccountLogin_tg) =>
       fetch<P.IUserResponse>('/account/login_tg', options),
 
@@ -30,9 +27,6 @@ export const getApi = (
     'restore': (options: P.ITokenParams) =>
       fetch<P.IUserResponse>('/account/restore', options),
 
-    'signup': (options: P.ISignupParams) =>
-      fetch<P.IUserResponse>('/account/signup', options),
-
     'signup_tg': (options: Q.TAccountSignup_tg) =>
       fetch<P.IUserResponse>('/account/signup_tg', options),
 
@@ -41,13 +35,6 @@ export const getApi = (
         'name': () => fetch<string>('/account/messenger/get/name'),
 
       },
-    },
-  },
-  'admin': {
-    'net': {
-      'get': (options: P.INetEnterParams) =>
-        fetch<Q.TAdminNetGetResponse>('/admin/net/get', options),
-
     },
   },
   'bot': {

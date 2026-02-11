@@ -13,9 +13,9 @@ export const createRoutes = async (
   const excludeEndpoints = [...EXCLUDE_ENDPOINTS, ...exclude];
 
   for await (const item of dir) {
+    if (excludeEndpoints.includes(item.name)) continue;
     const ext = path.extname(item.name);
     const name = path.basename(item.name, ext);
-    if (excludeEndpoints.includes(name)) continue;
 
     if (item.isDirectory()) {
       const dirPath = path.join(routePath, name);
