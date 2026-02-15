@@ -23,7 +23,7 @@ const confirm: THandler<IMemberConfirmParams, boolean> = async (
     await net.updateCountOfMembers(member_id);
     await domain.net.createTree(t, member);
 
-    event = new domain.event.NetEvent(net_id, 'CONFIRM', member);
+    event = new domain.event.NetEvent(m!.getNet(), 'CONFIRM', member);
     await event.messages.create(t);
     await event.commit(t);
 

@@ -1,13 +1,22 @@
 import { DomainError } from '../errors';
 import { IMember } from '../types/member.types';
+import { INet } from '../types/net.types';
 
 export class Member {
-  private member!: IMember;
+  private user_id: number;
+  private node_id: number;
+  private member: IMember | null = null;
+  private net: INet | null = null;
 
-  async init(user_id: number, node_id: number) {
+  constructor(user_id: number, node_id: number) {
+    this.user_id = user_id;
+    this.node_id = node_id;
+  }
+
+  async init() {
     const [member] = await execQuery.user.netData.findByNode([
-      user_id,
-      node_id,
+      this.user_id,
+      this.node_id,
     ]);
     if (!member) throw new DomainError('NOT_FOUND');
     this.member = member;
@@ -15,13 +24,16 @@ export class Member {
   }
 
   async reinit() {
-    const { user_id, node_id } = this.get();
-    return this.init(user_id, node_id);
+    await this.init();
+    await this.setNet();
   }
 
   get() {
-    if (this.member) return this.member;
-    throw new DomainError('NOT_FOUND');
+    return this.member!;
+  }
+
+  getNet() {
+    return this.net!;
   }
 
   status() {
@@ -29,9 +41,9 @@ export class Member {
     return confirmed ? 'INSIDE_NET' : 'INVITING';
   }
 
-  async getNet() {
+  private async setNet() {
     const { net_id } = this.get();
     const [net] = await execQuery.net.getData([net_id]);
-    return net!;
+    this.net = net!;
   }
 }

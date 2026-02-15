@@ -11,8 +11,8 @@ const setUserNet: TInputModule =
 
     const { session } = context;
     const user_id = session.read('user_id')!;
-    const member = new domain.member.Member();
-    await member.init(user_id, node_id!);
+    const member = new domain.member.Member(user_id, node_id!);
+    await member.init();
 
     const status = member.status();
     const allowedForNetUser = handler.allowedForNetUser || 'INSIDE_NET';

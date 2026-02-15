@@ -9,10 +9,13 @@ const create: THandler<IMemberInviteParams, string | null> = async (
   { member: m },
   { node_id, member_id, member_name },
 ) => {
-  const { goal, net_id } = await m!.getNet();
-  if (!goal) return null; // bad request
+  const { net_id } = m!.get();
   return exeWithNetLock(net_id, async () => {
     await m!.reinit();
+
+    const { goal } = m!.getNet();
+    if (!goal) return null; // bad request
+
     const [member] = await execQuery.member.find.inTree([node_id, member_id]);
     if (!member) return null; // bad request
 

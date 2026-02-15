@@ -2,30 +2,31 @@
 
 import { NetEventKeys } from '../../client/common/server/types/types';
 import { ITransaction } from '../../db/types/types';
+import { INet } from '../types/net.types';
 import { IMember } from '../types/member.types';
 import { EventMessages } from './event.messages';
 
 export class NetEvent {
   private notifService = notificationService;
   private children: NetEvent[] = [];
-  public net_id: number | null;
+  public net: INet | null;
   public event_type: NetEventKeys;
   public member: IMember | null;
   public messages: EventMessages;
 
   constructor(
-    net_id: number | null,
+    net: INet | null,
     event_type: NetEventKeys,
     member: IMember | null = null,
   ) {
-    this.net_id = net_id;
+    this.net = net;
     this.event_type = event_type;
     this.member = member;
     this.messages = new EventMessages(this);
   }
 
   createChild(event_type: NetEventKeys, member: IMember | null = null) {
-    const event = new NetEvent(this.net_id, event_type, member);
+    const event = new NetEvent(this.net, event_type, member);
     this.children.push(event);
     return event;
   }
@@ -42,7 +43,7 @@ export class NetEvent {
     for (const record of messages.records) {
       const { user_id, net_id, net_view, from_node_id, message } = record;
       const params = [
-        net_id === undefined ? this.net_id : net_id,
+        net_id === undefined ? this.net && this.net.net_id : net_id,
         net_view,
         from_node_id,
         event_type,
@@ -60,17 +61,17 @@ export class NetEvent {
   }
 
   private async getUsers(from_node_id: number | null, t?: ITransaction) {
-    const { net_id, event_type } = this;
-    if (!net_id) return []; // throw error
+    const { net, event_type } = this;
+    if (!net) return []; // throw error
     let users;
     if (event_type === 'WAIT') {
       users = await (t?.execQuery || execQuery).net.users.toSendWaitingEvents([
-        net_id,
+        net.net_id,
         this.event_type,
       ]);
     } else {
       users = await (t?.execQuery || execQuery).net.users.toSendNewEvents([
-        net_id,
+        net.net_id,
         from_node_id,
         event_type,
       ]);
@@ -83,7 +84,7 @@ export class NetEvent {
     /* send events */
     for (const record of this.messages.instantRecords) {
       this.notifService.sendEvent({
-        net_id: this.net_id,
+        net_id: this.net && this.net.net_id,
         event_type: this.event_type,
         ...record,
       });
@@ -94,10 +95,10 @@ export class NetEvent {
       if (user_id) {
         // for user
         this.notifService.sendEventOrNotif(user_id, record.message);
-      } else if (this.net_id) {
+      } else if (this.net) {
         // for users in net
         this.notifService.sendNetEventOrNotif(
-          this.net_id,
+          this.net.net_id,
           from_node_id,
           record.message,
         );

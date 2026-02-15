@@ -11,15 +11,15 @@ const create: THandler<INetCreateParams, INetResponse> = async (
   { name },
 ) => {
   const user_id = session.read('user_id')!;
-  let parentNetId: number | null = null;
-  if (member) {
-    const net = await member.getNet();
-    const { net_id, net_level } = net;
-    if (net_level >= MAX_NET_LEVEL) return null;
-    parentNetId = net_id;
-  }
+  const parentNetId = member?.get().net_id ?? null;
+
   return domain.utils.exeWithNetLock(parentNetId, async (t) => {
-    member && (await member!.reinit());
+    if (member) {
+      await member.reinit();
+      const { net_level } = member.getNet();
+      if (net_level >= MAX_NET_LEVEL) return null;
+    }
+
     return domain.net.createNet(user_id, parentNetId, name, t);
   });
 };

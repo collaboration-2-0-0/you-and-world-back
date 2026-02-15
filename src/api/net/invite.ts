@@ -9,13 +9,15 @@ const create: THandler<INetInviteParams, string | null> = async (
   { origin, member: m },
   { node_id, user_id },
 ) => {
-  const { goal, net_id, name } = await m!.getNet();
-  const { confirmed, username } = m!.get();
-
-  if (!goal) return null; // bad request
-  if (!confirmed) return null; // bad request
+  const { net_id, name, confirmed, username } = m!.get();
 
   const result = exeWithNetLock(net_id, async () => {
+    await m!.reinit();
+
+    const { goal } = m!.getNet();
+    if (!goal) return null; // bad request
+    if (!confirmed) return null; // bad request
+
     const [waiting] = await execQuery.net.wait.getByUser([net_id, user_id]);
     if (!waiting?.chat_id) return null; // bad request
 

@@ -1,8 +1,5 @@
 import { format } from 'node:util';
-import {
-  IEventRecord,
-  INetResponse,
-} from '../../client/common/server/types/types';
+import { IEventRecord } from '../../client/common/server/types/types';
 import { ITransaction } from '../../db/types/types';
 import { IMember } from '../types/member.types';
 import { INetEventTo } from '../../domain/types/net.event.types';
@@ -17,7 +14,6 @@ export class EventMessages {
   private event: NetEvent;
   private member: IMember | null;
   private eventToMessages: INetEventTo;
-  private net: INetResponse = null;
   public readonly records: IEventRecord[] = [];
   public readonly instantRecords: IEventRecord[] = [];
 
@@ -45,15 +41,6 @@ export class EventMessages {
       if (!nodeIds.includes(from_node_id)) continue;
       this.records.splice(i--, 1);
     }
-  }
-
-  private async getNet() {
-    if (this.net) return this.net;
-    const { net_id } = this.event;
-    if (!net_id) return null;
-    const [net] = await execQuery.net.get([net_id]);
-    this.net = net || null;
-    return this.net;
   }
 
   async createInCircle(t?: ITransaction) {
@@ -125,13 +112,12 @@ export class EventMessages {
   }
 
   async createMessageToMember() {
-    const { event_type } = this.event;
+    const { event_type, net } = this.event;
     let message = this.eventToMessages.MEMBER;
     if (message === undefined) return;
     const { user_id } = this.member!;
     const isNet = SET_NET_ID_FOR.includes(event_type);
     if (!isNet) {
-      const net = await this.getNet();
       const { name } = net!;
       message = format(message, name);
     }
@@ -162,7 +148,7 @@ export class EventMessages {
   }
 
   async createToConnected(user_id: number) {
-    const net = await this.getNet();
+    const { net } = this.event;
     const message = format(this.eventToMessages.CONNECTED, net?.name);
     this.records.push({
       user_id,

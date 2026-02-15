@@ -50,7 +50,7 @@ export const create: THandler<IWaitCreateParams, INetConnectByLink> = async (
 
     /* create messages */
     const eventType = 'WAIT';
-    event = new domain.event.NetEvent(net_id, eventType);
+    event = new domain.event.NetEvent(net, eventType);
     await event.messages.create(t);
     await event.commit(t);
 

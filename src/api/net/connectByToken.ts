@@ -51,7 +51,7 @@ const connectByToken: THandler<ITokenParams, INetConnectByToken> = async (
       confirmed,
     } as IMember;
     const eventType = confirmed ? 'CONNECT_AND_CONFIRM' : 'CONNECT';
-    event = new domain.event.NetEvent(net_id, eventType, newMember);
+    event = new domain.event.NetEvent(node, eventType, newMember);
     await event.messages.create(t);
     await event.commit(t);
 

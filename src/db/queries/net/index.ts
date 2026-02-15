@@ -100,9 +100,6 @@ export const get = `
 export const getData = `
   SELECT
     nets.*,
-    nets.net_id::int,
-    nets.net_level::int,
-    nets.parent_net_id::int,
     nets_data.*
   FROM nets
   INNER JOIN nets_data ON

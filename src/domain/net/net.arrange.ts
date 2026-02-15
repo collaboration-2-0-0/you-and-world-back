@@ -12,8 +12,9 @@ export class NetArrange {
     const { net_id, node_id, user_id } = member;
     let event!: NetEvent;
     const result = await exeWithNetLock(net_id, async (t) => {
-      const member = await new Member().init(user_id, node_id);
-      event = new NetEvent(net_id, event_type, member.get());
+      const member = new Member(user_id, node_id);
+      await member.reinit();
+      event = new NetEvent(member.getNet(), event_type, member.get());
       const net = new NetArrange(t);
       const { nodesToArrange, netRemoved } =
         await net.removeMemberFromNetAndSubnets(event);
@@ -24,24 +25,29 @@ export class NetArrange {
       const [netExist] = await t.execQuery.net.get([net_id]);
 
       await event.commit(t);
-      return netRemoved + (netExist ? 0 : 1);
+
+      return {
+        netRemoved: netRemoved + (netExist ? 0 : 1),
+        parent_net_id: member.getNet().parent_net_id,
+      };
     });
     event?.send();
     return result;
   }
 
   async removeMemberFromNetAndSubnets(event: NetEvent) {
-    const { event_type, net_id: parent_net_id, member } = event;
+    const { event_type, net: parent_net, member } = event;
     const { user_id } = member!;
 
     let netRemoved = 0;
     do {
       const [member] = await execQuery.user.nets.getChildOne([
         user_id,
-        parent_net_id!,
+        parent_net!.parent_net_id!,
       ]);
       if (!member) break;
-      netRemoved += await NetArrange.removeMemberFromNet(event_type, member);
+      const result = await NetArrange.removeMemberFromNet(event_type, member);
+      netRemoved += result.netRemoved;
     } while (true);
 
     const nodesToArrange = await this.removeMember(event);
@@ -84,8 +90,8 @@ export class NetArrange {
   }
 
   async removeConnectedMember(event: NetEvent, user_id: number) {
-    const { net_id } = event;
-    await this.t.execQuery.member.removeByNet([user_id, net_id]);
+    const { net } = event;
+    await this.t.execQuery.member.removeByNet([user_id, net && net.net_id]);
     await event.messages.createToConnected(user_id);
   }
 

@@ -5,14 +5,13 @@ import { UserNodeSchema } from '../schema/schema';
 
 const leave: THandler<IUserNode> = async ({ member: m }) => {
   const member = m!.get();
-  const net = await m!.getNet();
   const { confirmed } = member;
   const event_type = confirmed ? 'LEAVE' : 'LEAVE_CONNECTED';
   const remove = domain.net.NetArrange.removeMemberFromNet;
-  const netRemoved = await remove(event_type, member);
+  const { netRemoved, parent_net_id } = await remove(event_type, member);
 
-  if (netRemoved && net.parent_net_id) {
-    await domain.net.updateCountOfNets(net.parent_net_id, -netRemoved);
+  if (netRemoved && parent_net_id) {
+    await domain.net.updateCountOfNets(parent_net_id, -netRemoved);
   }
 
   return true;
