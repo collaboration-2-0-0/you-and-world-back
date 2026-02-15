@@ -94,11 +94,15 @@ export class NetEvent {
       const { user_id, from_node_id } = record;
       if (user_id) {
         // for user
-        this.notifService.sendEventOrNotif(user_id, record.message);
+        this.notifService.sendEventOrNotif(
+          user_id,
+          record.message,
+          record.netName,
+        );
       } else if (this.net) {
         // for users in net
         this.notifService.sendNetEventOrNotif(
-          this.net.net_id,
+          this.net,
           from_node_id,
           record.message,
         );

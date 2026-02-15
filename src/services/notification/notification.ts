@@ -4,6 +4,7 @@ import { IServices } from '../../controller/types';
 import { IConnectionService } from '../../server/types';
 import { ChatService } from '../chat/chat';
 import { ITableMessages, ITableUsers } from '../../domain/types/db.types';
+import { INet } from '../../domain/types/net.types';
 import { IMeesageStream } from './notifications.types';
 
 type IInstantEvent = Omit<T.IEventMessage, 'type' | 'event_id' | 'date'>;
@@ -132,7 +133,7 @@ export class NotificationService {
     }
   }
 
-  async sendEventOrNotif(user_id: number, messageText: string) {
+  async sendEventOrNotif(user_id: number, message: string, netName = '') {
     const connectionIds = this.chat.getUserConnections(user_id);
     if (connectionIds) {
       const message: T.INewEventsMessage = {
@@ -140,6 +141,8 @@ export class NotificationService {
       };
       this.messageStream.push({ user_id, connectionIds, message });
     }
+
+    const messageText = netName ? `<b>${netName}</b>\n${message}` : message;
     this.sendToTgOrEmail(user_id, messageText).catch(logger.error.bind(logger));
   }
 
@@ -172,12 +175,8 @@ export class NotificationService {
     this.mailStream.push(user);
   }
 
-  sendNetEventOrNotif(
-    net_id: number,
-    from_node_id: number | null,
-    message: string,
-  ) {
-    this.sendNetEventOrNotifToTg(net_id, from_node_id, message).catch(
+  sendNetEventOrNotif(net: INet, from_node_id: number | null, message: string) {
+    this.sendNetEventOrNotifToTg(net, from_node_id, message).catch(
       logger.error.bind(logger),
     );
     // this.sendNetEventOrNotifToEmail(net_id, from_node_id).catch(
@@ -186,26 +185,32 @@ export class NotificationService {
   }
 
   async sendNetEventOrNotifToTg(
-    net_id: number,
+    net: INet,
     from_node_id: number | null,
-    messageText: string,
+    message: string,
   ) {
     // const prevNotifDate = new Date().getTime() - this.tgInterval;
     // const prevNotifDateStr = new Date(prevNotifDate).toUTCString();
     const users = await execQuery.net.users.toNotifyOnTg([
-      net_id,
+      net.net_id,
       from_node_id,
       // prevNotifDateStr,
       new Date().toUTCString(),
     ]);
 
-    const message: T.INewEventsMessage = { type: 'NEW_EVENTS' };
+    const newEventsMessage: T.INewEventsMessage = { type: 'NEW_EVENTS' };
     for (const user of users) {
       const { user_id } = user!;
       const connectionIds = this.chat.getUserConnections(user_id);
       if (connectionIds) {
-        this.messageStream.push({ user_id, connectionIds, message });
+        this.messageStream.push({
+          user_id,
+          connectionIds,
+          message: newEventsMessage,
+        });
       }
+
+      const messageText = `<b>${net.name}</b>\n${message}`;
       this.tgStream1.push({ user, message: messageText });
     }
   }

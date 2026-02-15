@@ -72,6 +72,7 @@ export class EventMessages {
       net_view: 'tree',
       from_node_id,
       message,
+      netName: this.event.net?.name,
     };
     const { event_type } = this.event;
     if (INSTANT_EVENTS.includes(event_type)) this.instantRecords.push(record);
@@ -88,6 +89,7 @@ export class EventMessages {
       net_view: 'circle',
       from_node_id,
       message,
+      netName: this.event.net?.name,
     };
     const { event_type } = this.event;
     if (INSTANT_EVENTS.includes(event_type)) this.instantRecords.push(record);
@@ -107,6 +109,7 @@ export class EventMessages {
         net_view: 'circle',
         from_node_id,
         message,
+        netName: this.event.net?.name,
       });
     }
   }
@@ -127,6 +130,7 @@ export class EventMessages {
       net_view: isNet ? 'net' : null,
       from_node_id: null,
       message,
+      netName: net?.name,
     });
   }
 
@@ -139,6 +143,7 @@ export class EventMessages {
       net_view: 'net',
       from_node_id: member && member.node_id,
       message,
+      netName: this.event.net?.name,
     };
     if (INSTANT_EVENTS.includes(event_type)) {
       this.instantRecords.push(record);
@@ -156,6 +161,7 @@ export class EventMessages {
       net_view: null,
       from_node_id: null,
       message,
+      netName: net?.name,
     });
   }
 }
