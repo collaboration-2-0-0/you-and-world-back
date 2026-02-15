@@ -1,7 +1,11 @@
 import { ITableUsers } from '../../../local/imports';
-import { IUser } from './user.types';
+import { IUser, UserStatusKey } from './user.types';
 
-export type IUserResponse = IUser | null;
+export type IUserResponse =
+  | (IUser & {
+      user_status: UserStatusKey;
+    })
+  | null;
 
 export type IUserUpdateParams = Pick<
   ITableUsers,

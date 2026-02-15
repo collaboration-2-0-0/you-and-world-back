@@ -46,9 +46,8 @@ export const getNodes = `
 export const getMembers = `
   SELECT 
     nodes.*,
-    nodes.net_id::int,
-    members.user_id::int, 
-    members.confirmed
+    members.*
+-- users.*
   FROM nodes
   INNER JOIN members ON
     members.member_id = nodes.node_id

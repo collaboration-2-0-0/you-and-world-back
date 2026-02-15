@@ -59,7 +59,10 @@ export type IWaitCreateParams = {
 
 export type IWaitNets = Pick<INet, 'net_id' | 'name'>[];
 
-export type INetWaiting = Pick<ITableUsers, 'user_id' | 'name' | 'chat_id'> &
+export type INetWaiting = Pick<
+  ITableUsers,
+  'user_id' | 'name' | 'chat_id' | 'username'
+> &
   Pick<ITableNetsGuests, 'comment'>;
 export type INetWaitingResponse = INetWaiting[];
 

@@ -14,8 +14,7 @@ export interface IQueriesNetWait {
 
 export const get = `
   SELECT
-    users.user_id,
-    users.name,
+    users.*,
     nets_guests.comment
   FROM nets_guests
   INNER JOIN users ON

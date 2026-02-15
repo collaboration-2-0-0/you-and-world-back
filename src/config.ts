@@ -5,6 +5,7 @@ import { createPathResolve } from './utils/utils';
 import { getEnv } from './utils/env.utils';
 
 const resolvePath = createPathResolve(BUILD_SRC_PATH);
+
 const {
   TRANSPORT: transport,
   HOST: host,
@@ -19,6 +20,7 @@ const {
   MAIL_PASSWORD: mailPass,
   ...restEnv
 } = getEnv();
+
 const connection = {
   heroku: {
     connectionString: dbUrl,
@@ -32,6 +34,9 @@ const connection = {
     password: 'you_and_world',
   },
 }[dbUrl ? 'heroku' : 'local'];
+
+const excludeEndpoints =
+  restEnv.DEV || restEnv.TEST ? [] : ['admin', 'login.js', 'signup.js'];
 
 const mailConfig = {
   google: {
@@ -90,7 +95,7 @@ const config: IConfig = {
         time: 0,
       },
     ],
-    excludeEndpoints: ['admin', 'login.js', 'signup.js'],
+    excludeEndpoints,
   },
   inConnection: {
     transport,

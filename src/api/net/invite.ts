@@ -6,11 +6,11 @@ import { exeWithNetLock } from '../../domain/utils/utils';
 import { JOI_NULL } from '../schema/schema';
 
 const create: THandler<INetInviteParams, string | null> = async (
-  { member: m },
+  { origin, member: m },
   { node_id, user_id },
 ) => {
   const { goal, net_id, name } = await m!.getNet();
-  const { confirmed } = m!.get();
+  const { confirmed, username } = m!.get();
 
   if (!goal) return null; // bad request
   if (!confirmed) return null; // bad request
@@ -36,10 +36,12 @@ const create: THandler<INetInviteParams, string | null> = async (
     ]);
 
     /* send to tg */
-    const message = `Запрошення до спільноти: ${name || ''}`;
-    const url = `${env.ORIGIN}/net/invite/${token}`;
-    const reply_markup = new InlineKeyboard().webApp('Приєднатись', url);
-    notificationService.sendToTelegram(waiting, message, { reply_markup });
+    const message = `@${username} запросив вас до спільноти \n<b>${name}</b>`;
+    const url = `${origin}/net/invite/${token}`;
+    const reply_markup = new InlineKeyboard().webApp('ПРИЄДНАТИСЬ', url);
+    await notificationService.sendToTelegram(waiting, message, {
+      reply_markup,
+    });
 
     return token;
   });

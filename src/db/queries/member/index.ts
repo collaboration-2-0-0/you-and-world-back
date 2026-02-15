@@ -76,11 +76,8 @@ export const removeByNet = `
 export const get = `
   SELECT
     nodes.*,
-    nodes.net_id::int,
-    members.*,
-    nodes.node_id::int,
-    nodes.parent_node_id::int,
-    members.user_id::int
+    members.*
+-- users.*
   FROM nodes
   INNER JOIN members ON
     members.member_id = nodes.node_id

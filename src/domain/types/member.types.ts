@@ -1,11 +1,8 @@
 import * as T from './db.types';
 import { OuterJoin } from './util.types';
 
-export type IMember = T.ITableNodes & T.ITableMembers;
-export type IMemberNode = T.ITableNodes;
-export type INodeMember = T.ITableNodes &
-  T.ITableMembers &
-  T.ITableMembersInvites;
+export type IMember = T.ITableMembers & T.ITableUsers & T.ITableNodes;
+export type IMemberWithInvites = IMember & T.ITableMembersInvites;
 
 export type IBranchDislikes = Pick<T.ITableNodes, 'node_id'> & {
   dislike_count: number;

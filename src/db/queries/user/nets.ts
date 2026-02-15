@@ -65,6 +65,7 @@ export const getChildOne = `
   SELECT
     nodes.*,
     members.*
+-- users.*
   FROM members
   INNER JOIN nodes ON
     nodes.node_id = members.member_id

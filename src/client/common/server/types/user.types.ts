@@ -11,6 +11,4 @@ export const USER_STATUS_MAP = {
 };
 export type UserStatusKey = keyof typeof USER_STATUS_MAP;
 
-export type IUser = Omit<ITableUsers, 'password'> & {
-  user_status: UserStatusKey;
-};
+export type IUser = Omit<ITableUsers, 'password'>;

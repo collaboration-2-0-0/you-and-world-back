@@ -5,7 +5,6 @@ import { TFetch } from '../../src/client/common/client/connection/types';
 import originConfig from '../../src/config';
 import App from '../../src/app/app';
 import { setToGlobal } from '../../src/app/methods/utils';
-import { EXCLUDE_ENDPOINTS } from '../../src/controller/constants';
 import { ITestCase, ITestRunnerData } from '../types/types';
 import { getHttpConnection as http } from '../client/http';
 import { getWsConnection as ws } from '../client/ws';
@@ -50,7 +49,6 @@ const getConfig = (
     controller: {
       ...originConfig.controller,
       tasks: [],
-      excludeEndpoints: EXCLUDE_ENDPOINTS,
     },
   };
   return Object.assign(config, testConfig);

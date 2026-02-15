@@ -10,6 +10,6 @@ APP=you-and-world-dev
 
 heroku pg:psql $DATABASE --app $APP -f create.heroku.sql
 # heroku pg:psql $DATABASE --app $APP -f ../backup.sql
-heroku pg:psql $DATABASE --app $APP -f ../../../../.local/net_init.sql
+heroku pg:psql $DATABASE --app $APP -f ../../../../.local/net_init_1.sql
 
 echo 'end'

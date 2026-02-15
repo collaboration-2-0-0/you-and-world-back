@@ -48,6 +48,8 @@ Table "users" {
   "password" "character varying(255)" [default: NULL]
   "confirmed" boolean [not null, default: false]
   "chat_id" "character varying(50)" [default: NULL]
+  "username" "character varying(50)" [default: NULL]
+  "photo_url" "character varying(100)" [default: NULL]
   Indexes {
     email [type: btree, unique, name: "users_email_idx"]
     chat_id [type: btree, unique, name: "users_chat_idx"]

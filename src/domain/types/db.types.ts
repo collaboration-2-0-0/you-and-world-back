@@ -25,6 +25,8 @@ export type ITableUsers = {
   confirmed: boolean;
   chat_id: string | null;
   password: string | null;
+  username: string | null;
+  photo_url: string | null;
 };
 
 export type ITableUsersTokens = {

@@ -10,14 +10,13 @@ export interface IQueriesUserNetData {
 export const findByNode = `
   SELECT
     nodes.*,
-    nodes.node_id::int,
-    nodes.parent_node_id::int,
-    nodes.net_id::int,
     members.*,
-    members.user_id::int
+    users.*
   FROM members
   INNER JOIN nodes ON
     nodes.node_id = members.member_id
+  INNER JOIN users ON
+    users.user_id = members.user_id
   WHERE
     members.user_id = $1 AND
     members.member_id = $2

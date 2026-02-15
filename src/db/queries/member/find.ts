@@ -1,15 +1,18 @@
-import { IMember, INodeMember } from '../../../domain/types/member.types';
+import {
+  IMember,
+  IMemberWithInvites,
+} from '../../../domain/types/member.types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesMemberFind {
   unactive: TQuery<[['date', string]], IMember>;
   inTree: TQuery<
     [['user_node_id', number], ['member_node_id', number]],
-    INodeMember
+    IMemberWithInvites
   >;
   inCircle: TQuery<
     [['parent_node_id', number], ['member_node_id', number]],
-    INodeMember
+    IMemberWithInvites
   >;
   getByChatId: TQuery<[['chat_id', string]], IMember>;
 }
@@ -17,9 +20,8 @@ export interface IQueriesMemberFind {
 export const unactive = `
   SELECT
     nodes.*,
-    nodes.net_id::int,
-    members.user_id::int,
-    members.confirmed
+    members.*
+-- users.*
   FROM members
   INNER JOIN nodes ON
     nodes.node_id = members.member_id
@@ -32,11 +34,11 @@ export const unactive = `
 export const inTree = `
   SELECT
     nodes.*,
-    nodes.parent_node_id::int,
+
     members.*,
-    members.user_id::int,
     members_invites.member_name,
     members_invites.token
+-- users.*
   FROM nodes
   LEFT JOIN members ON
     members.member_id = nodes.node_id
@@ -51,9 +53,9 @@ export const inCircle = `
   SELECT
     nodes.*,
     members.*,
-    members.user_id::int,
     members_invites.member_name,
     members_invites.token
+-- users.*
   FROM nodes
   LEFT JOIN members ON
     members.member_id = nodes.node_id
@@ -69,6 +71,7 @@ export const inCircle = `
 export const getByChatId = `SELECT
     nodes.*,
     members.*
+-- users.*
   FROM nodes
   JOIN members ON
     members.member_id = nodes.node_id

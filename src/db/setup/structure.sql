@@ -305,7 +305,9 @@ CREATE TABLE public.users (
     mobile character varying(50) DEFAULT NULL::character varying,
     password character varying(255) DEFAULT NULL::character varying,
     confirmed boolean DEFAULT false NOT NULL,
-    chat_id character varying(50) DEFAULT NULL::character varying
+    chat_id character varying(50) DEFAULT NULL::character varying,
+    username character varying(50) DEFAULT NULL::character varying,
+    photo_url character varying(100) DEFAULT NULL::character varying
 );
 
 
@@ -491,7 +493,7 @@ COPY public.subscriptions (user_id, type, sent_date, subject, message_date) FROM
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: you_and_world
 --
 
-COPY public.users (user_id, email, name, mobile, password, confirmed, chat_id) FROM stdin;
+COPY public.users (user_id, email, name, mobile, password, confirmed, chat_id, username, photo_url) FROM stdin;
 \.
 
 
