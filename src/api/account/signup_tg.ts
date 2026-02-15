@@ -9,13 +9,18 @@ const signup_tg: THandler<{ initData: string }, IUserResponse> = async (
 ) => {
   const tgUser = cryptoService.verifyTgData(initData);
   if (!tgUser) return null;
-  const { id: chat_id, username, first_name, last_name } = tgUser;
+  const { id: chat_id, username, first_name, last_name, photo_url } = tgUser;
 
   const [userExists] = await execQuery.user.findByChatId([chat_id]);
   if (userExists) return null;
 
-  const name = `${first_name} ${last_name}`.trim() || username || null;
-  const [user] = await execQuery.user.createByChatId([name, chat_id]);
+  const name = `${first_name} ${last_name}`.trim() || username;
+  const [user] = await execQuery.user.createByChatId([
+    name,
+    chat_id,
+    username,
+    photo_url,
+  ]);
   const { user_id } = user!;
   const user_status = 'LOGGED_IN';
   session.write('user_id', user_id);
