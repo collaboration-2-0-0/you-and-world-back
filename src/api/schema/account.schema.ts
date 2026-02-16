@@ -34,7 +34,7 @@ export const EnterParamsSchema = {
   email: Joi.string().required().email(),
 };
 
-export const UserUpdateParamsSchema = {
+export const UserUpdateSchema = {
   name: [Joi.string().empty(''), JOI_NULL],
   mobile: [Joi.string().empty(''), JOI_NULL],
   password: [Joi.string().empty(''), JOI_NULL],

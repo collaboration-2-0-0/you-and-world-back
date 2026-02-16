@@ -1,12 +1,9 @@
 import { THandler } from '../../controller/types';
 import {
   IUserResponse,
-  IUserUpdateParams,
+  IUserUpdate,
 } from '../../client/common/server/types/types';
-import {
-  UserResponseSchema,
-  UserUpdateParamsSchema,
-} from '../schema/account.schema';
+import { UserResponseSchema, UserUpdateSchema } from '../schema/account.schema';
 
 export const read: THandler<never, IUserResponse> = async ({ session }) => {
   const user_id = session.read('user_id');
@@ -18,7 +15,7 @@ export const read: THandler<never, IUserResponse> = async ({ session }) => {
 read.responseSchema = UserResponseSchema;
 read.allowedForUser = 'NOT_LOGGED_IN';
 
-export const update: THandler<IUserUpdateParams, IUserResponse> = async (
+export const update: THandler<IUserUpdate, IUserResponse> = async (
   { session },
   data,
 ) => {
@@ -35,5 +32,5 @@ export const update: THandler<IUserUpdateParams, IUserResponse> = async (
   [user] = await execQuery.user.update([user_id, ...newUserData]);
   return { ...user!, user_status };
 };
-update.paramsSchema = UserUpdateParamsSchema;
+update.paramsSchema = UserUpdateSchema;
 update.responseSchema = UserResponseSchema;

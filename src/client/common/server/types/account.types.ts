@@ -1,16 +1,9 @@
 import { ITableUsers } from '../../../local/imports';
+import { Nullable } from './common.types';
 import { IUser, UserStatusKey } from './user.types';
+export type IUserResponse = Nullable<IUser & { user_status: UserStatusKey }>;
 
-export type IUserResponse =
-  | (IUser & {
-      user_status: UserStatusKey;
-    })
-  | null;
-
-export type IUserUpdateParams = Pick<
-  ITableUsers,
-  'name' | 'mobile' | 'password'
->;
+export type IUserUpdate = Pick<ITableUsers, 'name' | 'mobile' | 'password'>;
 
 /* for tests */
 export type ILoginParams = {
