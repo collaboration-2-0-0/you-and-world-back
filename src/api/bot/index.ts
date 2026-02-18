@@ -5,7 +5,7 @@ import { THandler } from '../../controller/types';
 // const ALLOWED_FOR = ['OWNER', 'ADMIN'];
 
 export const message: THandler<
-  { chatId: string; message: Record<string, string> },
+  { chatId: number; message: Record<string, string> },
   boolean
 > = async ({ isAdmin }, { chatId, message }) => {
   if (!isAdmin) {
