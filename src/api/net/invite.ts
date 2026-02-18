@@ -38,7 +38,7 @@ const create: THandler<INetInviteParams, string | null> = async (
     ]);
 
     /* send to tg */
-    const message = `@${username} запросив вас до спільноти \n<b>${name}</b>`;
+    const message = `@${username} запросив вас до спільноти \n<b>${m?.getNet().name}</b>`;
     const url = `${origin}/net/invite/${token}`;
     const reply_markup = new InlineKeyboard().webApp('ПРИЄДНАТИСЬ', url);
     await notificationService.sendToTelegram(waiting, message, {

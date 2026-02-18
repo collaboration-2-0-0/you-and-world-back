@@ -20,13 +20,17 @@ export const getOparation = (ctx: Context, origin: string) => {
   if (startParam) {
     const url = getUrlFromArg(origin, startParam);
 
+    if (url) {
+      return { url };
+    }
+
     const operation = {
       options: { sessionKey: 'messenger', origin: 'https://t.me' },
       names: 'account/messenger/link/connect'.split('/'),
       data: { params: { chatId, token: startParam } },
     };
 
-    return url ? { url } : { operation };
+    return { operation };
   }
 
   const operation = {

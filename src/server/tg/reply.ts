@@ -3,49 +3,26 @@ import { env } from 'node:process';
 import { Context, InlineKeyboard } from 'grammy';
 
 const origin = env.ORIGIN || 'https://example.com';
-const contacts = new URL(origin);
-contacts.pathname = '/contacts';
-const help = new URL(origin);
-help.pathname = '/help';
+const contacts = new URL('/contacts', origin).href;
+const about = new URL('/about', origin).href;
 
 export const greeting = (ctx: Context) => {
   if (env.DEV === 'true') {
     const btns = [[{ text: origin, web_app: { url: origin } }]];
     const inlineKyeboard = new InlineKeyboard(btns);
-    return ctx.reply('OPEN UI', { reply_markup: inlineKyeboard });
+    ctx.reply('ORIGIN', { reply_markup: inlineKyeboard });
   }
 
-  //   const text = `
-  // Цей інструмент створено для бажаючих допомагати притулку.
-  // Ви зможете отримувати повідомлення про поточний стан справ та потреби.
-  // Щоб обрати зручний варіант підписки - натисність <b>OPEN</b>.
-  // `;
-
-  //   const text = `
-  // Цей інструмент створено для спільноти, мета якої:
-
-  // 'Створити всі необхідні умови та можливості для творчості кожної особистості'.
-
-  // Ви зможете отримувати повідомлення про поточний стан справ та потреби.
-
-  // Щоб обрати зручний варіант підписки - натисність <b>OPEN</b>.
-  // `;
-
-  // return ctx.reply(text, { parse_mode: 'HTML' });
+  return ctx.reply(`Вітаю, ${ctx.chat?.first_name} !`, { parse_mode: 'HTML' });
 };
 
 export const forbidden = (ctx: Context) => {
   const btns = [
-    [{ text: 'КОНТАКТИ', web_app: { url: contacts.href } }],
-    [{ text: 'ДОВІДКА', web_app: { url: help.href } }],
+    [{ text: 'КОНТАКТИ', web_app: { url: contacts } }],
+    [{ text: 'ДОВІДКА', web_app: { url: about } }],
   ];
   const inlineKyeboard = new InlineKeyboard(btns);
-  return ctx.reply(
-    `
-Ви не можете відправляти повідомлення.
-Якщо у Вас запитання по користуванню ботом - подивіться Довідку.
-При потребі поспілкуватись з адміном - подивіться Контакти.
-`,
-    { reply_markup: inlineKyeboard },
-  );
+  return ctx.reply('Ви не можете відправляти повідомлення', {
+    reply_markup: inlineKyeboard,
+  });
 };

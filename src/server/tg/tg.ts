@@ -111,18 +111,18 @@ class TgConnection implements IInputConnection {
       }
     }
 
-    const appName = 'You & World';
-    const message = `На сайті ${appName} нові події`;
-    const inlineKyeboard = new InlineKeyboard().url(appName, this.origin);
-    try {
-      await this.server.api.sendMessage(chatId, message, {
-        reply_markup: inlineKyeboard,
-      });
-      return true;
-    } catch (e) {
-      logger.warn(e);
-      return false;
-    }
+    // const appName = 'You & World';
+    // const message = `На сайті ${appName} нові події`;
+    // const inlineKyeboard = new InlineKeyboard().url(appName, this.origin);
+    // try {
+    //   await this.server.api.sendMessage(chatId, message, {
+    //     reply_markup: inlineKyeboard,
+    //   });
+    //   return true;
+    // } catch (e) {
+    //   logger.warn(e);
+    return false;
+    // }
   }
 
   private handleError(error: BotError) {
