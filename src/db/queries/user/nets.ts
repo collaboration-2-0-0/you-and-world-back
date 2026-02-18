@@ -10,6 +10,7 @@ export interface IQueriesUserNets {
     [['user_id', number], ['parent_net_id', number]],
     IMember
   >;
+  getWhereIsAdmin: TQuery<[['user_id', number]], INet>;
 }
 
 export const getAll = `
@@ -75,4 +76,22 @@ export const getChildOne = `
     members.user_id = $1 AND
     nets.parent_net_id = $2
   LIMIT 1
+`;
+
+export const getWhereIsAdmin = `
+  SELECT
+    nets.*,
+    nets_data.*
+  FROM members
+  INNER JOIN nodes ON
+    nodes.node_id = members.member_id
+  INNER JOIN nets ON
+    nets.net_id = nodes.net_id
+  INNER JOIN nets_data ON
+    nets_data.net_id = nets.net_id
+  WHERE
+    members.user_id = $1 AND
+    nodes.parent_node_id ISNULL AND
+    nets.net_level = 0
+  ORDER BY nets.name
 `;
