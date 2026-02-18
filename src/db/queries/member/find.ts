@@ -14,7 +14,7 @@ export interface IQueriesMemberFind {
     [['parent_node_id', number], ['member_node_id', number]],
     IMemberWithInvites
   >;
-  getByChatId: TQuery<[['chat_id', string]], IMember>;
+  getByChatId: TQuery<[['chat_id', number]], IMember>;
 }
 
 export const unactive = `

@@ -59,7 +59,7 @@ export const findByToken = `
 `;
 
 export const findByChatId = `
-  SELECT *, users.user_id::int
+  SELECT *
   FROM users
   WHERE chat_id = $1
 `;

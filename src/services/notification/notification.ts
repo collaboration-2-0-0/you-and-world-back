@@ -13,7 +13,7 @@ export class NotificationService {
   private connection: IConnectionService;
   private tg: IConnectionService;
   private chat: ChatService;
-  private tgInterval: number;
+  // private tgInterval: number;
   private emailInterval: number;
   private messageStream: Readable & AsyncIterable<IMeesageStream>;
   private tgStream1: Readable &
@@ -31,7 +31,7 @@ export class NotificationService {
     this.connection = connectionService;
     this.tg = messengerService;
     this.chat = chatService!;
-    this.tgInterval = Number(env.NOTIFICATION_INTERVAL);
+    // this.tgInterval = Number(env.NOTIFICATION_INTERVAL);
     this.emailInterval = Number(env.NOTIFICATION_INTERVAL);
     this.messageStream = new Readable({ read: () => true, objectMode: true });
     this.tgStream1 = new Readable({ read: () => true, objectMode: true });
@@ -211,6 +211,7 @@ export class NotificationService {
       }
 
       const messageText = `<b>${net.name}</b>\n${message}`;
+      // todo add web_app button with defined pathname, e.g. origin/net/waiting
       this.tgStream1.push({ user, message: messageText });
     }
   }
