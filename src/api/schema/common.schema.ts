@@ -6,4 +6,8 @@ export const JOI_REQUIRED = (...schemaArr: AnySchema[]) =>
     .try(...schemaArr)
     .required();
 
-export const EchoDataSchema = {};
+export const EmptySchema = {};
+
+export const TokenSchema = {
+  token: Joi.string().required(),
+};

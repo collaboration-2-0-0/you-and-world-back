@@ -1,16 +1,16 @@
 import Joi from 'joi';
 import { THandler } from '../controller/types';
-import { IEchoData } from '../client/common/server/types/types';
-import { EchoDataSchema } from './schema/schema';
+import { IEmpty } from '../client/app/types/types';
+import { EmptySchema } from './schema/schema';
 
 export const health: THandler<never, string> = async () => 'API IS READY';
 health.responseSchema = Joi.string();
 health.allowedForUser = 'NOT_LOGGED_IN';
 
-export const echo: THandler<IEchoData, IEchoData> = async (_, data) => {
+export const echo: THandler<IEmpty, IEmpty> = async (_, data) => {
   logger.debug('', data);
   return data;
 };
-echo.paramsSchema = EchoDataSchema;
-echo.responseSchema = EchoDataSchema;
+echo.paramsSchema = EmptySchema;
+echo.responseSchema = EmptySchema;
 echo.allowedForUser = 'NOT_LOGGED_IN';

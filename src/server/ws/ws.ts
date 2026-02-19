@@ -3,11 +3,8 @@ import { IInputConnection, IRequest } from '../types';
 import { IWsConfig, IWsConnection, IWsServer, TWsResModule } from './types';
 import { IOperation, TOperationResponse } from '../../types/operation.types';
 import { IHttpServer } from '../http/types';
-import {
-  IMessage,
-  MessageTypeKeys,
-} from '../../client/common/server/types/types';
-import { PING_INTERVAL } from '../../client/common/server/constants';
+import { IMessage, MessageTypeKeys } from '../../client/app/types/types';
+import { PING_INTERVAL } from '../../client/app/constants';
 import { MAX_CHAT_INDEX } from '../../constants/constants';
 import { ServerError } from '../errors';
 import { handleError } from './methods/handle.error';

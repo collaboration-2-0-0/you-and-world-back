@@ -1,12 +1,12 @@
 import { THandler } from '../../controller/types';
 import {
-  ITokenParams,
+  IToken,
   IUserResponse,
   UserStatusKey,
-} from '../../client/common/server/types/types';
-import { TokenParamsSchema, UserResponseSchema } from '../schema/schema';
+} from '../../client/app/types/types';
+import { TokenSchema, UserResponseSchema } from '../schema/schema';
 
-const confirm: THandler<ITokenParams, IUserResponse> = async (
+const confirm: THandler<IToken, IUserResponse> = async (
   { session },
   { token },
 ) => {
@@ -20,7 +20,7 @@ const confirm: THandler<ITokenParams, IUserResponse> = async (
   session.write('user_status', user_status);
   return { ...user, user_status };
 };
-confirm.paramsSchema = TokenParamsSchema;
+confirm.paramsSchema = TokenSchema;
 confirm.responseSchema = UserResponseSchema;
 confirm.allowedForUser = 'NOT_LOGGED_IN';
 

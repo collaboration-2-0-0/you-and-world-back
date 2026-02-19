@@ -2,7 +2,7 @@ import {
   ISignupParams,
   IUserResponse,
   UserStatusKey,
-} from '../../client/common/server/types/types';
+} from '../../client/app/types/types';
 import { THandler } from '../../controller/types';
 import { SignupParamsSchema, UserResponseSchema } from '../schema/schema';
 
@@ -19,7 +19,8 @@ const signup: THandler<ISignupParams, IUserResponse> = async (
   let user_status: UserStatusKey;
   if (env.MAIL_CONFIRM_OFF) {
     user_status = 'LOGGED_IN';
-    execQuery.user.confirm([user_id]);
+    await execQuery.user.confirm([user_id]);
+    user!.confirmed = true;
   } else {
     user_status = 'NOT_CONFIRMED';
     await execQuery.user.token.create([user_id, token]);

@@ -1,6 +1,6 @@
 import { Message } from 'grammy/types';
 // eslint-disable-next-line max-len
-import { SubscriptionSubjectKeys } from '../../client/common/server/types/subscription.types';
+import { SubscriptionSubjectKeys } from '../../client/app/types/subscription.types';
 import { ITableMessages, ITableUsers } from '../types/db.types';
 
 const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {

@@ -1,8 +1,5 @@
 import ws from 'ws';
-import {
-  IMessage,
-  MessageTypeKeys,
-} from '../../client/common/server/types/types';
+import { IMessage, MessageTypeKeys } from '../../client/app/types/types';
 import { IOperation, TOperationResponse } from '../../types/operation.types';
 import { TWsResModulesKeys } from './constants';
 

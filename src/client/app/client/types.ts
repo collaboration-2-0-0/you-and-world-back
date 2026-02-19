@@ -1,5 +1,5 @@
-import * as T from '../server/types/types';
-import { MemberStatusKeys } from '../server/constants';
+import * as T from '../types/types';
+import { MemberStatusKeys } from '../constants';
 
 export interface INets {
   parentNets: T.INetsResponse;

@@ -4,7 +4,7 @@ import {
   ITableNodes,
   OuterJoin,
   IMember,
-} from '../../../local/imports';
+} from '../../local/imports';
 
 export type IUserNode = { node_id: number };
 

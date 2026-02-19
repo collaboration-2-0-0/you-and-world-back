@@ -1,5 +1,5 @@
 import { INIT_DATA, IS_DEV } from '../../../local/imports';
-import * as T from '../../server/types/types';
+import * as T from '../../types/types';
 import { Store } from '../lib/store/store';
 import { App } from '../app';
 import { Messenger } from './messenger.service';

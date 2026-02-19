@@ -10,11 +10,11 @@ export const getApi = (
 ) => ({
   'health': () => fetch<string>('/health'),
 
-  'echo': (options: P.IEchoData) =>
-    fetch<P.IEchoData>('/echo', options),
+  'echo': (options: P.IEmpty) =>
+    fetch<P.IEmpty>('/echo', options),
 
   'account': {
-    'confirm': (options: P.ITokenParams) =>
+    'confirm': (options: P.IToken) =>
       fetch<P.IUserResponse>('/account/confirm', options),
 
     'login_tg': (options: Q.TAccountLogin_tg) =>
@@ -24,7 +24,7 @@ export const getApi = (
 
     'remove': () => fetch<boolean>('/account/remove'),
 
-    'restore': (options: P.ITokenParams) =>
+    'restore': (options: P.IToken) =>
       fetch<P.IUserResponse>('/account/restore', options),
 
     'signup_tg': (options: Q.TAccountSignup_tg) =>
@@ -92,7 +92,7 @@ export const getApi = (
     },
   },
   'net': {
-    'connectByToken': (options: P.ITokenParams) =>
+    'connectByToken': (options: P.IToken) =>
       fetch<P.INetConnectByToken>('/net/connectByToken', options),
 
     'create': (options: P.INetCreateParams) =>

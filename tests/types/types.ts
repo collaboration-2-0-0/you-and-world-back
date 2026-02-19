@@ -1,5 +1,5 @@
 import { mock } from 'node:test';
-import { TFetch } from '../../src/client/common/client/connection/types';
+import { TFetch } from '../../src/client/app/client/connection/types';
 import { TTransport } from '../../src/server/types';
 import { IConfig } from '../../src/types/config.types';
 import { IParams, TOperationResponse } from '../../src/types/operation.types';

@@ -1,7 +1,7 @@
-import * as T from '../../server/types/types';
+import * as T from '../../types/types';
 import { IMember } from '../types';
 import { HttpResponseError } from '../connection/errors';
-import { getMemberStatus } from '../../server/utils';
+import { getMemberStatus } from '../../utils';
 import { Store } from '../lib/store/store';
 import { App } from '../app';
 import { Member } from './member.service';
@@ -206,7 +206,7 @@ export class Net extends Store<NetState> {
     return name || memberName || `Учасник ${position}`;
   }
 
-  async connectByInvite(args: T.ITokenParams) {
+  async connectByInvite(args: T.IToken) {
     try {
       const result = await this.app.api.net.connectByToken(args);
       const { error } = result || {};

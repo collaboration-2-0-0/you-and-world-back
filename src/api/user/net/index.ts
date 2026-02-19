@@ -1,7 +1,7 @@
 import {
   INetEnterParams,
   IUserNetDataResponse,
-} from '../../../client/common/server/types/types';
+} from '../../../client/app/types/types';
 import { THandler } from '../../../controller/types';
 import { HandlerError } from '../../../controller/errors';
 import {

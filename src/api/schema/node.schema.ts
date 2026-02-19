@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { JOI_NULL } from './index.schema';
+import { JOI_NULL } from './common.schema';
 
 export const NodeSchema = {
   node_id: Joi.number(),

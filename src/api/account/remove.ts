@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { THandler } from '../../controller/types';
 
-const remove: THandler = async ({ session }) => {
+const remove: THandler<never, boolean> = async ({ session }) => {
   const user_id = session.read('user_id')!;
   await execQuery.user.remove([user_id]);
   await session.clear();

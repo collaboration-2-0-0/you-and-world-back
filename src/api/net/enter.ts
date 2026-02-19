@@ -1,8 +1,5 @@
 import { THandler } from '../../controller/types';
-import {
-  INetEnterParams,
-  INetResponse,
-} from '../../client/common/server/types/types';
+import { INetEnterParams, INetResponse } from '../../client/app/types/types';
 import { HandlerError } from '../../controller/errors';
 import { NetResponseSchema, NetEnterParamsSchema } from '../schema/schema';
 

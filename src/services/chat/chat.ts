@@ -1,4 +1,4 @@
-// import * as T from '../../client/common/server/types/types';
+// import * as T from '../../client/common/types/types';
 // import { IChatMapValue } from './types';
 // import { IMemberNode } from '../../domain/types/member.types';
 // import {

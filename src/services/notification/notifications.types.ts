@@ -1,7 +1,4 @@
-import {
-  IEventMessage,
-  INewEventsMessage,
-} from '../../client/common/server/types/types';
+import { IEventMessage, INewEventsMessage } from '../../client/app/types/types';
 
 export interface IMeesageStream {
   user_id?: number;

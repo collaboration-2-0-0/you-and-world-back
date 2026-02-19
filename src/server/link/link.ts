@@ -2,7 +2,7 @@ import { THandleOperation } from '../../types/operation.types';
 import {
   IMessage,
   MessageTypeKeys,
-} from '../../client/common/server/types/messages.types';
+} from '../../client/app/types/messages.types';
 import { IInputConnection, IServer } from '../types';
 import { ILinkConnection } from './types';
 // import { MAX_CHAT_INDEX } from '../../constants/constants';

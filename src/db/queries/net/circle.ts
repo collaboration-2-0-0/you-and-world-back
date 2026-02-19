@@ -1,4 +1,4 @@
-import { IMemberResponse } from '../../../client/common/server/types/types';
+import { IMemberResponse } from '../../../client/app/types/types';
 import { TQuery } from '../../types/types';
 import { IMember } from '../../../domain/types/member.types';
 

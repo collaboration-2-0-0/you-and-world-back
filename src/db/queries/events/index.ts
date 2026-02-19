@@ -2,7 +2,7 @@ import {
   IEvent,
   NetEventKeys,
   NetViewKeys,
-} from '../../../client/common/server/types/types';
+} from '../../../client/app/types/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesEvents {

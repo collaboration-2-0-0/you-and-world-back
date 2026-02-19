@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import { IUserNetDataResponse } from '../../client/common/server/types/types';
+import { IUserNetDataResponse } from '../../client/app/types/types';
 import { TJoiSchema } from '../../controller/types';
-import { JOI_NULL } from './index.schema';
+import { JOI_NULL } from './common.schema';
 
 export const UserNetDataResponseSchema = {
   node_id: Joi.number(),

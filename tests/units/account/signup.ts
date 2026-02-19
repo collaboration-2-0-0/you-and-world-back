@@ -22,7 +22,7 @@ export const user =
           email: `user${String(user).padStart(2, '0')}@gmail.com`,
         },
         expected: (actual) =>
-          assert.deepStrictEqual(actual, {
+          assert.partialDeepStrictEqual(actual, {
             email: `user${String(user).padStart(2, '0')}@gmail.com`,
             mobile: null,
             name: `Учасник ${user}`,

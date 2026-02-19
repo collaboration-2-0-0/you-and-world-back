@@ -1,4 +1,4 @@
-import * as T from '../../server/types/types';
+import * as T from '../../types/types';
 import { Store } from '@client/lib/store/store';
 import { EventStore } from './event.store.class';
 import { App } from '@client/app';

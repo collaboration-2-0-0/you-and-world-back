@@ -4,7 +4,7 @@ import { THandler } from '../../controller/types';
 //   IChatSendMessage,
 //   IChatGetMessages,
 //   IChatGetMessagesResponse,
-// } from '../../client/common/server/types/types';
+// } from '../../client/common/types/types';
 // import {
 //   ChatGetMessagesResponseSchema,
 //   ChatGetMessagesSchema,

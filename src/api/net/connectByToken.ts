@@ -1,13 +1,10 @@
 import { THandler } from '../../controller/types';
-import {
-  INetConnectByToken,
-  ITokenParams,
-} from '../../client/common/server/types/types';
+import { INetConnectByToken, IToken } from '../../client/app/types/types';
 import { IMember } from '../../domain/types/member.types';
 import { NetEvent } from '../../domain/event/event';
-import { TokenParamsSchema, NetConnectByTokenSchema } from '../schema/schema';
+import { TokenSchema, NetConnectByTokenSchema } from '../schema/schema';
 
-const connectByToken: THandler<ITokenParams, INetConnectByToken> = async (
+const connectByToken: THandler<IToken, INetConnectByToken> = async (
   { session },
   { token },
 ) => {
@@ -60,7 +57,7 @@ const connectByToken: THandler<ITokenParams, INetConnectByToken> = async (
   event?.send();
   return result;
 };
-connectByToken.paramsSchema = TokenParamsSchema;
+connectByToken.paramsSchema = TokenSchema;
 connectByToken.responseSchema = NetConnectByTokenSchema;
 connectByToken.checkNet = false;
 

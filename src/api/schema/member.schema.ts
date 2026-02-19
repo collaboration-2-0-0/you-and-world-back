@@ -3,9 +3,9 @@ import {
   IMemberConfirmParams,
   IMemberInviteParams,
   IMemberResponse,
-} from '../../client/common/server/types/types';
+} from '../../client/app/types/types';
 import { TJoiSchema } from '../../controller/types';
-import { JOI_NULL } from './index.schema';
+import { JOI_NULL } from './common.schema';
 
 export const MemberConfirmParamsSchema = {
   node_id: Joi.number().required(),

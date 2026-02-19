@@ -1,5 +1,5 @@
 import { format } from 'node:util';
-import { IEventRecord } from '../../client/common/server/types/types';
+import { IEventRecord } from '../../client/app/types/types';
 import { ITransaction } from '../../db/types/types';
 import { IMember } from '../types/member.types';
 import { INetEventTo } from '../../domain/types/net.event.types';

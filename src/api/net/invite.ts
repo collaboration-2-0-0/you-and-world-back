@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { InlineKeyboard } from 'grammy';
 import { THandler } from '../../controller/types';
-import { INetInviteParams } from '../../client/common/server/types/types';
+import { INetInviteParams } from '../../client/app/types/types';
 import { exeWithNetLock } from '../../domain/utils/utils';
 import { JOI_NULL } from '../schema/schema';
 

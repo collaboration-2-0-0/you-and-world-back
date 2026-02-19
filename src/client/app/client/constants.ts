@@ -1,4 +1,4 @@
-import { MEMBER_STATUS } from '../server/constants';
+import { MEMBER_STATUS } from '../constants';
 import { createEnumFromArray } from '../../local/imports';
 
 export enum AppStatus {

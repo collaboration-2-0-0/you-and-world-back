@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { IOperationData, TMockFunction } from '../types/types';
-import { delay } from '../../src/client/common/client/connection/utils';
-import { TFetch } from '../../src/client/common/client/connection/types';
+import { delay } from '../../src/client/app/client/connection/utils';
+import { TFetch } from '../../src/client/app/client/connection/types';
 
 export const assertDb = async (operation: IOperationData) => {
   const { query, expectedQueryResult: expected } = operation;

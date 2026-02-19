@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 import { Readable } from 'node:stream';
-import { TPromiseExecutor } from '../../../src/client/common/types';
+import { TPromiseExecutor } from '../../client/app/types/types';
 import { IOperation, TOperationResponse } from '../../types/operation.types';
 import { IInputConnection, IRequest } from '../types';
 import {

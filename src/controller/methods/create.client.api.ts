@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import { Writable } from 'node:stream';
-import { TPromiseExecutor } from '../../client/common/types';
+import { TPromiseExecutor } from '../../client/app/types/types';
 import { IControllerConfig, IEndpoints, TJoiSchema, THandler } from '../types';
 import * as tpl from './templates';
 import { isHandler, getTypeName, getTypeNameFromPathname } from '../utils';

@@ -8,7 +8,7 @@ import {
   ITableNetsGuests,
   ITableUsers,
   OuterJoin,
-} from '../../../local/imports';
+} from '../../local/imports';
 import { IMemberResponse, IUserNode, Nullable } from './types';
 
 export type INetCreateParams = Pick<ITableNetsData, 'name'> & {

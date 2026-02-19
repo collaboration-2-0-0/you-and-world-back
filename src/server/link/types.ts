@@ -1,7 +1,7 @@
 import {
   IMessage,
   MessageTypeKeys,
-} from '../../client/common/server/types/messages.types';
+} from '../../client/app/types/messages.types';
 
 export interface ILinkConfig {
   path: string;

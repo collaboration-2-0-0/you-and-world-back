@@ -1,4 +1,4 @@
-import { INetWaiting } from '../../../client/common/server/types/types';
+import { INetWaiting } from '../../../client/app/types/types';
 import { ITableNets } from '../../../domain/types/db.types';
 import { TQuery } from '../../types/types';
 

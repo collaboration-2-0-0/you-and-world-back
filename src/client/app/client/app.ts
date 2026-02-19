@@ -1,4 +1,4 @@
-import * as T from '../server/types/types';
+import * as T from '../types/types';
 import { Store } from './lib/store/store';
 import { Account } from './services/account.service';
 import { Subscription } from './services/subscription.service';

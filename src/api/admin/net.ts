@@ -1,5 +1,5 @@
 import { THandler } from '../../controller/types';
-import { INetEnterParams } from '../../client/common/server/types/types';
+import { INetEnterParams } from '../../client/app/types/types';
 import { NetEnterParamsSchema } from '../schema/schema';
 
 export const get: THandler<INetEnterParams, any> = async (_, { net_id }) => {

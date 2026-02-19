@@ -1,5 +1,5 @@
 import { API_URL } from '../../../local/imports';
-import { getApi, IClientApi } from '../../server/client.api';
+import { getApi, IClientApi } from '../../client.api';
 import { HttpResponseError } from '../connection/errors';
 import { getConnection as getHttpConnection } from '../connection/http';
 import { getConnection as getWsConnection } from '../connection/ws';

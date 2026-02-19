@@ -2,7 +2,7 @@ import {
   ILoginParams,
   IUserResponse,
   UserStatusKey,
-} from '../../client/common/server/types/types';
+} from '../../client/app/types/types';
 import { THandler } from '../../controller/types';
 import { LoginParamsSchema, UserResponseSchema } from '../schema/schema';
 

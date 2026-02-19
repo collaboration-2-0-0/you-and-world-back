@@ -7,9 +7,9 @@ import {
   INetWaiting,
   IWaitNets,
   OmitNull,
-} from '../../client/common/server/types/types';
+} from '../../client/app/types/types';
 import { TJoiSchema } from '../../controller/types';
-import { JOI_NULL } from './index.schema';
+import { JOI_NULL } from './common.schema';
 import { NodeSchema } from './node.schema';
 import { MemberResponseSchema } from './member.schema';
 
