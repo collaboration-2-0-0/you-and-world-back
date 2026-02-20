@@ -1,4 +1,4 @@
-import { IMemberResponse } from '../../../client/common/server/types/types';
+import { IMemberResponse } from '../../../shared/server/types/types';
 import { ITableNodes } from '../../../domain/types/db.types';
 import { TQuery } from '../../types/types';
 import { IMember } from '../../../domain/types/member.types';

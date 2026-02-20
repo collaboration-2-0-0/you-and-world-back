@@ -1,20 +1,17 @@
 import { WebSocket } from 'ws';
-import {
-  IWsResponse,
-  TFetch,
-} from '../../src/client/common/client/connection/types';
-import { TPromiseExecutor } from '../../src/client/common/types';
+import { IWsResponse, TFetch } from '../client/types';
+import { TPromiseExecutor } from '../../src/shared/server/types/types';
 import {
   CONNECTION_ATTEMPT_COUNT,
   CONNECTION_ATTEMPT_DELAY,
   CONNECTION_TIMEOUT,
-} from '../../src/client/common/client/constants';
-import { PING_INTERVAL } from '../../src/client/common/server/constants';
+} from '../client/constants';
+import { PING_INTERVAL } from '../../src/shared/server/constants';
 // eslint-disable-next-line max-len
-import { HttpResponseError } from '../../src/client/common/client/connection/errors';
+import { HttpResponseError } from '../client/errors';
 // eslint-disable-next-line max-len
-import { EventEmitter } from '../../src/client/common/client/lib/event-emitter/event.emitter';
-import { delay } from '../../src/client/common/client/connection/utils';
+import { EventEmitter } from '../client/event-emitter/event.emitter';
+import { delay } from '../../src/shared/server/utils';
 import { createUnicCode } from '../../src/utils/crypto';
 
 class WsConnection extends EventEmitter {

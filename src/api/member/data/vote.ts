@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import { THandler } from '../../../controller/types';
 // eslint-disable-next-line max-len
-import { IMemberConfirmParams } from '../../../client/common/server/types/types';
-import { getMemberStatus } from '../../../client/common/server/utils';
+import { IMemberConfirmParams } from '../../../shared/server/types/types';
+import { getMemberStatus } from '../../../shared/server/utils';
 import { NetEvent } from '../../../domain/event/event';
 import { MemberConfirmParamsSchema, JOI_NULL } from '../../schema/schema';
 

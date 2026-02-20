@@ -3,17 +3,14 @@ import { IInputConnection, IRequest } from '../types';
 import { IWsConfig, IWsConnection, IWsServer, TWsResModule } from './types';
 import { IOperation, TOperationResponse } from '../../types/operation.types';
 import { IHttpServer } from '../http/types';
-import {
-  IMessage,
-  MessageTypeKeys,
-} from '../../client/common/server/types/types';
-import { PING_INTERVAL } from '../../client/common/server/constants';
+import { IMessage, MessageTypeKeys } from '../../shared/server/types/types';
+import { PING_INTERVAL } from '../../shared/server/constants';
 import { MAX_CHAT_INDEX } from '../../constants/constants';
 import { ServerError } from '../errors';
 import { handleError } from './methods/handle.error';
 import { applyResModules } from './methods/utils';
 import { getSessionKey } from '../utils';
-import { delay, excludeNullUndefined } from '../../utils/utils';
+import { delay, excludeNullUndefined } from '../../shared/server/utils';
 
 class WsConnection implements IInputConnection {
   private config: IWsConfig;

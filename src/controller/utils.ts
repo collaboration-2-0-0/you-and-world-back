@@ -36,7 +36,7 @@ export const getTypeName = (
   const typeNameExport = type === 'params' ? typeName : typeName + 'Response';
   if (SIMPLE_TYPES.includes(types)) return types;
   typesStream.write(tpl.strExportTypes(typeNameExport, types));
-  return types && 'Q.' + typeNameExport;
+  return types && 'P.' + typeNameExport;
 };
 
 export const outputSchemaToSchema = (

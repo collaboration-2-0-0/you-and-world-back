@@ -6,7 +6,7 @@ import {
   INetWaitingResponse,
   IUserNode,
   IWaitCreateParams,
-} from '../../client/common/server/types/types';
+} from '../../shared/server/types/types';
 import { NetEvent } from '../../domain/event/event';
 import {
   NetConnectByTokenSchema,

@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { THandler } from '../../controller/types';
-// import * as T from '../../client/common/server/types/types';
+// import * as T from '../../client/common/types/types';
 // import { ChatConnectAllSchema } from '../schema/chat.schema';
 
 // export const nets: THandler<never, T.IChatConnectAll> = async ({

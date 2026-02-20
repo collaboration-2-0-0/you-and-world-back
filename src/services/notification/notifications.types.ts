@@ -1,7 +1,7 @@
 import {
   IEventMessage,
   INewEventsMessage,
-} from '../../client/common/server/types/types';
+} from '../../shared/server/types/types';
 
 export interface IMeesageStream {
   user_id?: number;
