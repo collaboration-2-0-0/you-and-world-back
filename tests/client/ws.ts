@@ -1,6 +1,6 @@
 import { WebSocket } from 'ws';
 import { IWsResponse, TFetch } from '../client/types';
-import { TPromiseExecutor } from '../../src/shared/server/types/types';
+import { TPromiseExecutor } from '../../src/shared/server/types';
 import {
   CONNECTION_ATTEMPT_COUNT,
   CONNECTION_ATTEMPT_DELAY,

@@ -1,6 +1,6 @@
 import { TQuery } from '../../types/types';
-import { IUserNetDataResponse } from '../../../shared/server/types/types';
-import { IMember } from '../../../domain/types/member.types';
+import { IUserNetDataResponse } from '../../../shared/server/types';
+import { IMember } from '@domain/types';
 
 export interface IQueriesUserNetData {
   findByNode: TQuery<[['user_id', number], ['node_id', number]], IMember>;

@@ -1,5 +1,5 @@
 import { TQuery } from '../../../types/types';
-import { INetMember } from '../../../../domain/types/member.types';
+import { INetMember } from '@domain/types';
 
 export interface IQueriesNetStructure {
   root: TQuery<[['net_id', number]], INetMember>;

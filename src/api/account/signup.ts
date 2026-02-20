@@ -1,8 +1,4 @@
-import {
-  ISignupParams,
-  IUserResponse,
-  UserStatusKey,
-} from '../../shared/server/types/types';
+import { ISignupParams, IUserResponse, UserStatusKey } from '@shared/types';
 import { THandler } from '../../controller/types';
 import { SignupParamsSchema, UserResponseSchema } from '../schema/schema';
 

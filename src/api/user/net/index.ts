@@ -1,7 +1,4 @@
-import {
-  INetEnterParams,
-  IUserNetDataResponse,
-} from '../../../shared/server/types/types';
+import { INetEnterParams, IUserNetDataResponse } from '@shared/types';
 import { THandler } from '../../../controller/types';
 import { HandlerError } from '../../../controller/errors';
 import {

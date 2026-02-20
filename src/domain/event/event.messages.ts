@@ -1,8 +1,7 @@
 import { format } from 'node:util';
-import { IEventRecord } from '../../shared/server/types/types';
+import { IEventRecord } from '../../shared/server/types';
 import { ITransaction } from '../../db/types/types';
-import { IMember } from '../types/member.types';
-import { INetEventTo } from '../../domain/types/net.event.types';
+import { INetEventTo, IMember } from '@domain/types';
 import {
   INSTANT_EVENTS,
   NET_MESSAGES_MAP,

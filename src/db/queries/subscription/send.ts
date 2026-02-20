@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { ITableUsers } from '../../../domain/types/db.types';
+import { ITableUsers } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 const INTERVAL = +(process.env.NOTIFICATION_INTERVAL || 0);

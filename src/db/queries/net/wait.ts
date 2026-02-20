@@ -1,5 +1,5 @@
-import { INetWaiting } from '../../../shared/server/types/types';
-import { ITableNets } from '../../../domain/types/db.types';
+import { INetWaiting } from '../../../shared/server/types';
+import { ITableNets } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesNetWait {

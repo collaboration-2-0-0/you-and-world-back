@@ -1,8 +1,5 @@
 import { TQuery } from '../../types/types';
-import {
-  IBranchDislikes,
-  IBranchVotes,
-} from '../../../domain/types/member.types';
+import { IBranchDislikes, IBranchVotes } from '@domain/types';
 
 export interface IQueriesNetBranch {
   getDislikes: TQuery<[['branch_id', number]], IBranchDislikes>;

@@ -4,14 +4,14 @@
   "description": "service for promotion",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tspc",
     "build:front": "cd ../you-and-world-ui && npm run build",
     "start": "node js/src/index.js",
     "pack": "npm run sync && npm run build:front && npm run rmassets && npm run sync",
     "dev": "cross-env NODE_ENV=development nodemon js/src/index.js",
     "debug": "nodemon --inspect js/src/index.js",
     "test": "cross-env NODE_ENV=test node js/tests/app.test.js",
-    "watch": "npm run rmjs && tsc --watch",
+    "watch": "npm run rmjs && tspc --watch",
     "lint": "eslint .",
     "format": "prettier --write .",
     "db:setup": "cd src/db/setup && sh ./setup.sh",
@@ -55,7 +55,9 @@
     "eslint": "^8.24.0",
     "eslint-plugin-import": "^2.26.0",
     "nodemon": "^2.0.20",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "ts-patch": "^3.3.0",
+    "typescript-transform-paths": "^3.5.6"
   },
   "dependencies": {
     "@types/node": "^22.5.0",
@@ -68,7 +70,7 @@
     "pg": "^8.8.0",
     "pino": "^8.6.1",
     "pino-pretty": "^9.1.1",
-    "typescript": "^4.8.4",
+    "typescript": "~5.6.2",
     "ws": "8.10.0"
   }
 }

@@ -1,7 +1,6 @@
-import { IMemberResponse } from '../../../shared/server/types/types';
-import { ITableNodes } from '../../../domain/types/db.types';
+import { IMemberResponse } from '../../../shared/server/types';
+import { ITableNodes, IMember } from '@domain/types';
 import { TQuery } from '../../types/types';
-import { IMember } from '../../../domain/types/member.types';
 
 export interface IQueriesNetTree {
   getData: TQuery<[['parent_node_id', number]], IMemberResponse>;

@@ -1,9 +1,5 @@
 import { THandler } from '../../controller/types';
-import {
-  IToken,
-  IUserResponse,
-  UserStatusKey,
-} from '../../shared/server/types/types';
+import { IToken, IUserResponse, UserStatusKey } from '@shared/types';
 import { TokenSchema, UserResponseSchema } from '../schema/schema';
 
 const confirm: THandler<IToken, IUserResponse> = async (

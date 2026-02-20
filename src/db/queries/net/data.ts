@@ -1,4 +1,4 @@
-import { ITableNetsData } from '../../../domain/types/db.types';
+import { ITableNetsData } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesNetData {

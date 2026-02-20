@@ -1,4 +1,4 @@
-import { INetViewResponse, IUserNode } from '../../shared/server/types/types';
+import { INetViewResponse, IUserNode } from '@shared/types';
 import { THandler } from '../../controller/types';
 import { UserNodeSchema, NetViewResponseSchema } from '../schema/schema';
 

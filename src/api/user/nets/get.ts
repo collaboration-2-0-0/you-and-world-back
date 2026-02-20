@@ -1,4 +1,4 @@
-import { IWaitNets, INetsResponse } from '../../../shared/server/types/types';
+import { IWaitNets, INetsResponse } from '@shared/types';
 import { THandler } from '../../../controller/types';
 import { NetsResponseSchema, WaitNetsSchema } from '../../schema/schema';
 

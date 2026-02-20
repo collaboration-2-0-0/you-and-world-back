@@ -1,5 +1,5 @@
-import { INetEventTo } from '../domain/types/net.event.types';
-import { NetEventKeys } from '../shared/server/types/types';
+import { INetEventTo } from '@domain/types';
+import { NetEventKeys } from '../shared/server/types';
 export const BUILD_PATH = 'js';
 export const BUILD_SRC_PATH = 'js/src';
 export const MAX_CHAT_MESSAGE_COUNT = 10;

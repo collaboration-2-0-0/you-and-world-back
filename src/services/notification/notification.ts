@@ -1,10 +1,9 @@
 import { Readable } from 'node:stream';
-import * as T from '../../shared/server/types/types';
+import * as T from '../../shared/server/types';
 import { IServices } from '../../controller/types';
 import { IConnectionService } from '../../server/types';
 import { ChatService } from '../chat/chat';
-import { ITableMessages, ITableUsers } from '../../domain/types/db.types';
-import { INet } from '../../domain/types/net.types';
+import { ITableMessages, ITableUsers, INet } from '@domain/types';
 import { IMeesageStream } from './notifications.types';
 
 type IInstantEvent = Omit<T.IEventMessage, 'type' | 'event_id' | 'date'>;

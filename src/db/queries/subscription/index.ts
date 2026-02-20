@@ -1,4 +1,4 @@
-import { ITableSubscriptions } from '../../../domain/types/db.types';
+import { ITableSubscriptions } from '@domain/types';
 import { TQuery } from '../../types/types';
 import { IQueriesSubscriptionSend } from './send';
 

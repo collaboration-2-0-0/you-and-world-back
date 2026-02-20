@@ -1,5 +1,5 @@
 import { TQuery } from '../../types/types';
-import { ITableUsersEvents } from '../../../domain/types/db.types';
+import { ITableUsersEvents } from '@domain/types';
 
 export interface IQueriesUserEvents {
   write: TQuery<[['user_id', number], ['notification_date', string]]>;

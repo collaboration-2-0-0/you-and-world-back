@@ -1,4 +1,4 @@
-import { ITableNodes } from '../../../domain/types/db.types';
+import { ITableNodes } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesNodeTree {

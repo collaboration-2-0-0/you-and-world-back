@@ -1,4 +1,4 @@
-import { ITableSessions } from '../../../domain/types/db.types';
+import { ITableSessions } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesSession {

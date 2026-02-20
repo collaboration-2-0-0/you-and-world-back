@@ -5,8 +5,8 @@ import {
   TOperationResponse,
   IParams,
 } from '../types/operation.types';
-import { ITableUsers } from '../domain/types/db.types';
-import { UserStatusKey } from '../shared/server/types/types';
+import { ITableUsers } from '@domain/types';
+import { UserStatusKey } from '../shared/server/types';
 import { IMailService } from '../services/mail/types';
 import { ChatService } from '../services/chat/chat';
 import { NotificationService } from '../services/notification/notification';
@@ -16,7 +16,7 @@ import {
   TOutputModulesKeys,
   TServicesKeys,
 } from './constants';
-import { Member } from '../domain/member/member';
+import { Member } from '@domain/member/member';
 
 export interface IControllerConfig {
   path: string;

@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import { InlineKeyboard } from 'grammy';
 import { THandler } from '../../controller/types';
-import { INetInviteParams } from '../../shared/server/types/types';
-import { exeWithNetLock } from '../../domain/utils/utils';
+import { INetInviteParams } from '@shared/types';
+import { exeWithNetLock } from '@domain/utils/utils';
 import { JOI_NULL } from '../schema/schema';
 
 const create: THandler<INetInviteParams, string | null> = async (

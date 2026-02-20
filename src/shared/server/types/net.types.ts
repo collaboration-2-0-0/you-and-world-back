@@ -9,7 +9,7 @@ import {
   ITableUsers,
   OuterJoin,
 } from '../../local/imports';
-import { IMemberResponse, IUserNode, Nullable } from './types';
+import { IMemberResponse, IUserNode, Nullable } from './index';
 
 export type INetCreateParams = Pick<ITableNetsData, 'name'> & {
   node_id: number | null;

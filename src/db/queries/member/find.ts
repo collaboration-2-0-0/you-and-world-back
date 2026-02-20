@@ -1,7 +1,4 @@
-import {
-  IMember,
-  IMemberWithInvites,
-} from '../../../domain/types/member.types';
+import { IMember, IMemberWithInvites } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesMemberFind {

@@ -1,5 +1,5 @@
 import { THandler } from '../../controller/types';
-import { IUserResponse, IUserUpdate } from '../../shared/server/types/types';
+import { IUserResponse, IUserUpdate } from '@shared/types';
 import { UserResponseSchema, UserUpdateSchema } from '../schema/account.schema';
 
 export const read: THandler<never, IUserResponse> = async ({ session }) => {

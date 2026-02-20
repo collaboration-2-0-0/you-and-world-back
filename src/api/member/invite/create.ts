@@ -1,9 +1,9 @@
 import Joi from 'joi';
 import { THandler } from '../../../controller/types';
-import { IMemberInviteParams } from '../../../shared/server/types/types';
+import { IMemberInviteParams } from '@shared/types';
 import { MemberInviteParamsSchema, JOI_NULL } from '../../schema/schema';
-import { getMemberStatus } from '../../../shared/server/utils';
-import { exeWithNetLock } from '../../../domain/utils/utils';
+import { getMemberStatus } from '@shared/utils';
+import { exeWithNetLock } from '@domain/utils/utils';
 
 const create: THandler<IMemberInviteParams, string | null> = async (
   { member: m },

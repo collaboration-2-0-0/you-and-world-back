@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import { NetEventKeys } from '../../shared/server/types/types';
+import { NetEventKeys } from '../../shared/server/types';
 import { ITransaction } from '../../db/types/types';
 import { INet } from '../types/net.types';
 import { IMember } from '../types/member.types';

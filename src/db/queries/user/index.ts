@@ -1,4 +1,4 @@
-import { ITableUsers } from '../../../domain/types/db.types';
+import { ITableUsers } from '@domain/types';
 import { TQuery } from '../../types/types';
 import { IQueriesUserToken } from './token';
 import { IQueriesUserMessenger } from './messenger';
