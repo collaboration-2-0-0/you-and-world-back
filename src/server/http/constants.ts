@@ -1,4 +1,4 @@
-import { getEnumFromMap } from '../../utils/utils';
+import { getEnumFromMap } from '../../shared/server/transform.utils';
 
 export const INDEX = 'index.html';
 export const UNAVAILABLE = '503.html';

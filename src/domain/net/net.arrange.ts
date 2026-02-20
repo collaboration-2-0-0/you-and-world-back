@@ -1,4 +1,4 @@
-import { NetEventKeys } from '../../client/app/types/types';
+import { NetEventKeys } from '../../shared/server/types/types';
 import { ITransaction } from '../../db/types/types';
 import { IMember } from '../types/member.types';
 import { NetEvent } from '../event/event';

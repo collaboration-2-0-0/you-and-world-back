@@ -1,5 +1,8 @@
 import { THandler } from '../../controller/types';
-import { INetUpdateParams, INetResponse } from '../../client/app/types/types';
+import {
+  INetUpdateParams,
+  INetResponse,
+} from '../../shared/server/types/types';
 import { NetResponseSchema, NetUpdateParamsSchema } from '../schema/schema';
 
 const update: THandler<INetUpdateParams, INetResponse> = async (

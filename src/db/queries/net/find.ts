@@ -2,7 +2,7 @@ import {
   INetData,
   INetResponse,
   OmitNull,
-} from '../../../client/app/types/types';
+} from '../../../shared/server/types/types';
 import { ITableNets, ITableNetsData } from '../../../domain/types/db.types';
 import { TQuery } from '../../types/types';
 

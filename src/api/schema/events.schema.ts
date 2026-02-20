@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { NET_EVENT_MAP } from '../../client/app/types/types';
+import { NET_EVENT_MAP } from '../../shared/server/types/types';
 import { JOI_NULL } from './common.schema';
 
 export const EventsSchema = {

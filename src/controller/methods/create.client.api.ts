@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import { Writable } from 'node:stream';
-import { TPromiseExecutor } from '../../client/app/types/types';
+import { TPromiseExecutor } from '../../shared/server/types/types';
 import { IControllerConfig, IEndpoints, TJoiSchema, THandler } from '../types';
 import * as tpl from './templates';
 import { isHandler, getTypeName, getTypeNameFromPathname } from '../utils';
@@ -33,8 +33,7 @@ export const createClientApi = (
     typesStream.on('finish', handleFinish);
     const apiTypesPath = path.resolve(config.apiPath, 'schema/schema.js');
     const apiTypes = require(apiTypesPath) as Record<string, TJoiSchema>;
-    apiStream.write(tpl.strGetApi(typesFileNameBase));
-    typesStream.write(tpl.tplImport);
+    apiStream.write(tpl.tplGetApi);
     createJs(apiTypes, apiStream, typesStream)(endpoints);
     apiStream.write(');\n');
     apiStream.close();

@@ -74,7 +74,7 @@ const config: IConfig = {
     apiPath: resolvePath('api'),
     servicesPath: resolvePath('services'),
     modulesPath: resolvePath('controller/modules'),
-    clientApiPath: resolve('src/client/app/client.api.ts'),
+    clientApiPath: resolve('src/shared/server/client.api.ts'),
     services: ['mailService', 'chatService', 'notificationService'],
     inputModules: [
       'setSession',

@@ -22,3 +22,14 @@ export type IMemberResponse = ITableNodes &
   OuterJoin<ITableMembersToMembers> & {
     vote_count: number;
   };
+
+export const MEMBER_STATUS = [
+  'UNAVAILABLE',
+  'EMPTY',
+  'FREE',
+  'INVITED',
+  'CONNECTED',
+  'ACTIVE',
+] as const;
+
+export type MemberStatusKeys = (typeof MEMBER_STATUS)[number];

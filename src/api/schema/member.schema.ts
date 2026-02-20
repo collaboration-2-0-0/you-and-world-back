@@ -3,7 +3,7 @@ import {
   IMemberConfirmParams,
   IMemberInviteParams,
   IMemberResponse,
-} from '../../client/app/types/types';
+} from '../../shared/server/types/types';
 import { TJoiSchema } from '../../controller/types';
 import { JOI_NULL } from './common.schema';
 

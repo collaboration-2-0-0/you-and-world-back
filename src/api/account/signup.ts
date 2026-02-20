@@ -2,7 +2,7 @@ import {
   ISignupParams,
   IUserResponse,
   UserStatusKey,
-} from '../../client/app/types/types';
+} from '../../shared/server/types/types';
 import { THandler } from '../../controller/types';
 import { SignupParamsSchema, UserResponseSchema } from '../schema/schema';
 

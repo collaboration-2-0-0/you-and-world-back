@@ -1,23 +1,14 @@
 import { join, resolve } from 'node:path';
 
-export const BACK_PATH = './src/client';
-export const FRONT_PATH = '../you-and-world-ui/src/client';
+export const BACK_PATH = './src/shared';
+export const FRONT_PATH = '../you-and-world-ui/src/shared';
 export const BACK_STATIC_PATH = './public';
 export const FRONT_STATIC_PATH = '../you-and-world-ui/dist';
-export const FROM_BACK_TO_FRONT = ['app', 'app/types'].map((i) =>
+export const FROM_BACK_TO_FRONT = ['server', 'server/types'].map((i) =>
   join(BACK_PATH, i),
 );
 
-export const FROM_FRONT_TO_BACK = [
-  'app/client',
-  'app/client/connection',
-  'app/client/lib',
-  'app/client/services',
-].map((i) => join(FRONT_PATH, i));
-
 export const EXCLUDE_FROM_BACK = ['local'].map((i) => join(BACK_PATH, i));
-
-export const EXCLUDE_FROM_FRONT = ['local'].map((i) => join(FRONT_PATH, i));
 
 export const EXCLUDE_STATIC = [].map((i) => join(FRONT_STATIC_PATH, i));
 

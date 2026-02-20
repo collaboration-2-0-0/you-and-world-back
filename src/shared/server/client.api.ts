@@ -1,7 +1,6 @@
 
 /* eslint-disable max-len */
 import * as P from './types/types';
-import * as Q from './types/client.api.types';
 
 export type IClientApi = ReturnType<typeof getApi>;
 
@@ -17,7 +16,10 @@ export const getApi = (
     'confirm': (options: P.IToken) =>
       fetch<P.IUserResponse>('/account/confirm', options),
 
-    'login_tg': (options: Q.TAccountLogin_tg) =>
+    'login': (options: P.ILoginParams) =>
+      fetch<P.IUserResponse>('/account/login', options),
+
+    'login_tg': (options: P.TAccountLogin_tg) =>
       fetch<P.IUserResponse>('/account/login_tg', options),
 
     'logout': () => fetch<boolean>('/account/logout'),
@@ -27,7 +29,10 @@ export const getApi = (
     'restore': (options: P.IToken) =>
       fetch<P.IUserResponse>('/account/restore', options),
 
-    'signup_tg': (options: Q.TAccountSignup_tg) =>
+    'signup': (options: P.ISignupParams) =>
+      fetch<P.IUserResponse>('/account/signup', options),
+
+    'signup_tg': (options: P.TAccountSignup_tg) =>
       fetch<P.IUserResponse>('/account/signup_tg', options),
 
     'messenger': {
@@ -35,6 +40,13 @@ export const getApi = (
         'name': () => fetch<string>('/account/messenger/get/name'),
 
       },
+    },
+  },
+  'admin': {
+    'net': {
+      'get': (options: P.INetEnterParams) =>
+        fetch<P.TAdminNetGetResponse>('/admin/net/get', options),
+
     },
   },
   'bot': {
@@ -50,10 +62,10 @@ export const getApi = (
 
   },
   'events': {
-    'read': (options: Q.TEventsRead) =>
+    'read': (options: P.TEventsRead) =>
       fetch<P.IEvents>('/events/read', options),
 
-    'confirm': (options: Q.TEventsConfirm) =>
+    'confirm': (options: P.TEventsConfirm) =>
       fetch<boolean>('/events/confirm', options),
 
   },
@@ -69,7 +81,7 @@ export const getApi = (
       },
       'vote': {
         'set': (options: P.IMemberConfirmParams) =>
-          fetch<Q.TMemberDataVoteSetResponse>('/member/data/vote/set', options),
+          fetch<P.TMemberDataVoteSetResponse>('/member/data/vote/set', options),
 
         'unSet': (options: P.IMemberConfirmParams) =>
           fetch<boolean>('/member/data/vote/unSet', options),
@@ -84,7 +96,7 @@ export const getApi = (
         fetch<boolean>('/member/invite/confirm', options),
 
       'create': (options: P.IMemberInviteParams) =>
-        fetch<Q.TMemberInviteCreateResponse>('/member/invite/create', options),
+        fetch<P.TMemberInviteCreateResponse>('/member/invite/create', options),
 
       'refuse': (options: P.IMemberConfirmParams) =>
         fetch<boolean>('/member/invite/refuse', options),
@@ -107,8 +119,8 @@ export const getApi = (
     'getTree': (options: P.IUserNode) =>
       fetch<P.INetViewResponse>('/net/getTree', options),
 
-    'invite': (options: Q.TNetInvite) =>
-      fetch<Q.TNetInviteResponse>('/net/invite', options),
+    'invite': (options: P.TNetInvite) =>
+      fetch<P.TNetInviteResponse>('/net/invite', options),
 
     'leave': (options: P.IUserNode) =>
       fetch<boolean>('/net/leave', options),
@@ -134,7 +146,7 @@ export const getApi = (
     'update': (options: P.IUpdateSubscription) =>
       fetch<boolean>('/subscription/update', options),
 
-    'remove': (options: Q.TSubscriptionRemove) =>
+    'remove': (options: P.TSubscriptionRemove) =>
       fetch<boolean>('/subscription/remove', options),
 
     'sending': () => fetch<boolean>('/subscription/sending'),

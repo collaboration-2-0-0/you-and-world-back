@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { THandler } from '../controller/types';
-import { IEmpty } from '../client/app/types/types';
+import { IEmpty } from '../shared/server/types/types';
 import { EmptySchema } from './schema/schema';
 
 export const health: THandler<never, string> = async () => 'API IS READY';

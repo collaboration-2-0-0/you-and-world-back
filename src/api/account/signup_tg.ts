@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { IUserResponse } from '../../client/app/types/types';
+import { IUserResponse } from '../../shared/server/types/types';
 import { THandler } from '../../controller/types';
 import { UserResponseSchema } from '../schema/schema';
 

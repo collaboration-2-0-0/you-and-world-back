@@ -1,5 +1,4 @@
-import { IMemberResponse } from './types/types';
-import { MemberStatusKeys } from './constants';
+import { IMemberResponse, MemberStatusKeys } from './types/types';
 
 export const getMemberStatus = (
   member: Pick<IMemberResponse, 'count_of_members' | 'confirmed' | 'token'>,
@@ -11,3 +10,12 @@ export const getMemberStatus = (
   if (token) return 'INVITED';
   return 'EMPTY';
 };
+
+export const delay = (timeout: number) =>
+  new Promise((rv) => {
+    setTimeout(rv, timeout);
+  });
+
+export const excludeNullUndefined = <T>(
+  value: T | null | undefined,
+): value is T => value !== null && value !== undefined;

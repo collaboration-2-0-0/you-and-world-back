@@ -1,4 +1,4 @@
-import { TFetch } from '../../src/client/app/client/connection/types';
+import { TFetch } from './types';
 import { createUnicCode } from '../../src/utils/crypto';
 
 const getConnection = (baseUrl: string): TFetch => {

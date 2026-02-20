@@ -1,7 +1,7 @@
 import { mock } from 'node:test';
 import { IConfig } from '../../src/types/config.types';
 import { TTransport } from '../../src/server/types';
-import { TFetch } from '../../src/client/app/client/connection/types';
+import { TFetch } from '../client/types';
 import originConfig from '../../src/config';
 import App from '../../src/app/app';
 import { setToGlobal } from '../../src/app/methods/utils';

@@ -1,5 +1,5 @@
-import { MEMBER_STATUS } from '../constants';
-import { createEnumFromArray } from '../../local/imports';
+import { MEMBER_STATUS } from '../../src/shared/server/types/types';
+import { createEnumFromArray } from '../../src/shared/server/transform.utils';
 
 export enum AppStatus {
   INITING = 'initing',

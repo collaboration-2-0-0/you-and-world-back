@@ -5,4 +5,4 @@ export * from './net.types';
 export * from './member.types';
 export * from './events.types';
 export * from './messages.types';
-export * from '../../local/imports';
+export * from './client.api.types';

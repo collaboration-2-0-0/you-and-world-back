@@ -4,7 +4,7 @@ import {
   IGetSubscription,
   IUpdateSubscription,
   SubscriptionSubjectKeys,
-} from '../../client/app/types/subscription.types';
+} from '../../shared/server/types/subscription.types';
 import {
   GetSubscriptionSchema,
   UpdateSubscriptionSchema,

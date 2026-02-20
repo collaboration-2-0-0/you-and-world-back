@@ -3,7 +3,7 @@ import {
   IToken,
   IUserResponse,
   UserStatusKey,
-} from '../../client/app/types/types';
+} from '../../shared/server/types/types';
 import { TokenSchema, UserResponseSchema } from '../schema/schema';
 
 const confirm: THandler<IToken, IUserResponse> = async (

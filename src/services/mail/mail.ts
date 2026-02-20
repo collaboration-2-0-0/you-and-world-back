@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import { format } from 'node:util';
 import { SentMessageInfo, MailOptions } from 'nodemailer/lib/smtp-transport';
 import { TMailType } from './types';
-import { TPromiseExecutor } from '../../client/app/types/types';
+import { TPromiseExecutor } from '../../shared/server/types/types';
 import {
   MAIL_COMMON_OPTIONS,
   MAIL_OPTIONS_MAP,

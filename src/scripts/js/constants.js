@@ -3,9 +3,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 exports.BUILD_PATH = 'js';
 exports.FILES_TO_COPY_FROM_BACK_TO_FRONT =
   exports.EXCLUDE_STATIC =
-  exports.EXCLUDE_FROM_FRONT =
   exports.EXCLUDE_FROM_BACK =
-  exports.FROM_FRONT_TO_BACK =
   exports.FROM_BACK_TO_FRONT =
   exports.FRONT_STATIC_PATH =
   exports.BACK_STATIC_PATH =
@@ -13,24 +11,15 @@ exports.FILES_TO_COPY_FROM_BACK_TO_FRONT =
   exports.BACK_PATH =
     void 0;
 const node_path_1 = require('node:path');
-exports.BACK_PATH = './src/client';
-exports.FRONT_PATH = '../you-and-world-ui/src/client';
+exports.BACK_PATH = './src/shared';
+exports.FRONT_PATH = '../you-and-world-ui/src/shared';
 exports.BACK_STATIC_PATH = './public';
 exports.FRONT_STATIC_PATH = '../you-and-world-ui/dist';
-exports.FROM_BACK_TO_FRONT = ['app', 'app/types'].map((i) =>
+exports.FROM_BACK_TO_FRONT = ['server', 'server/types'].map((i) =>
   (0, node_path_1.join)(exports.BACK_PATH, i),
 );
-exports.FROM_FRONT_TO_BACK = [
-  'app/client',
-  'app/client/connection',
-  'app/client/lib',
-  'app/client/services',
-].map((i) => (0, node_path_1.join)(exports.FRONT_PATH, i));
 exports.EXCLUDE_FROM_BACK = ['local'].map((i) =>
   (0, node_path_1.join)(exports.BACK_PATH, i),
-);
-exports.EXCLUDE_FROM_FRONT = ['local'].map((i) =>
-  (0, node_path_1.join)(exports.FRONT_PATH, i),
 );
 exports.EXCLUDE_STATIC = [].map((i) =>
   (0, node_path_1.join)(exports.FRONT_STATIC_PATH, i),
