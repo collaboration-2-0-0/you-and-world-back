@@ -1,6 +1,5 @@
-import { NetEventKeys } from '../../shared/server/types';
 import { ITransaction } from '../../db/types/types';
-import { IMember } from '../types/member.types';
+import { NetEventKeys, IMember } from '../types';
 import { NetEvent } from '../event/event';
 import { Member } from '../member/member';
 import { exeWithNetLock } from '../utils/utils';

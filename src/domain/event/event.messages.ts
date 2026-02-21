@@ -1,12 +1,11 @@
 import { format } from 'node:util';
-import { IEventRecord } from '../../shared/server/types';
 import { ITransaction } from '../../db/types/types';
-import { INetEventTo, IMember } from '@domain/types';
 import {
   INSTANT_EVENTS,
   NET_MESSAGES_MAP,
   SET_NET_ID_FOR,
 } from '../../constants/constants';
+import { IEventRecord, INetEventTo, IMember } from '../types';
 import { NetEvent } from './event';
 
 export class EventMessages {

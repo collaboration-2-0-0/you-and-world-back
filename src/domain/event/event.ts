@@ -1,9 +1,5 @@
-/* eslint-disable max-len */
-
-import { NetEventKeys } from '../../shared/server/types';
 import { ITransaction } from '../../db/types/types';
-import { INet } from '../types/net.types';
-import { IMember } from '../types/member.types';
+import { NetEventKeys, INet, IMember } from '../types';
 import { EventMessages } from './event.messages';
 
 export class NetEvent {

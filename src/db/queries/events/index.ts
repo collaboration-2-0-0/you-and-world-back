@@ -1,8 +1,4 @@
-import {
-  IEvent,
-  NetEventKeys,
-  NetViewKeys,
-} from '../../../shared/server/types';
+import { IEvent, NetEventKeys, NetViewKeys } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesEvents {

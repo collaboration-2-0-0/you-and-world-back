@@ -30,6 +30,7 @@ exports.FILES_TO_COPY_FROM_BACK_TO_FRONT = [
   ['src/domain/types/net.types.ts', 'local/net.types.ts'],
   ['src/domain/types/member.types.ts', 'local/member.types.ts'],
   ['src/domain/types/user.types.ts', 'local/user.types.ts'],
+  ['src/domain/types/event.types.ts', 'local/event.types.ts'],
 ].map(([i, j]) => [
   (0, node_path_1.resolve)(i),
   (0, node_path_1.join)(exports.FRONT_PATH, j),

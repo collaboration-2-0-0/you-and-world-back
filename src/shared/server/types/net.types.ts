@@ -8,6 +8,7 @@ import {
   ITableNetsGuests,
   ITableUsers,
   OuterJoin,
+  NetViewKeys,
 } from '../../local/imports';
 import { IMemberResponse, IUserNode, Nullable } from './index';
 
@@ -27,8 +28,7 @@ export type INetResponse = Nullable<
 export type INetsResponse = INetData[];
 
 export type INetViewResponse = IMemberResponse[];
-export const NET_VIEW_MAP = ['net', 'tree', 'circle'] as const;
-export type NetViewKeys = (typeof NET_VIEW_MAP)[number];
+
 export type NetViewEnum = Exclude<NetViewKeys, 'net'>;
 
 export type IUserNetDataResponse = Pick<
