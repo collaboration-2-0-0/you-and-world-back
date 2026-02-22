@@ -1,6 +1,6 @@
 import { env } from 'node:process';
 import { Bot, BotError, Context, InlineKeyboard } from 'grammy';
-import { THandleOperation } from '../../controller/operation.types';
+import { IOperation, THandleOperation } from '../../controller/operation.types';
 import { IInputConnection } from '../types';
 import { ITgConfig, ITgServer } from './types';
 import { ServerError } from '../errors';
@@ -16,6 +16,7 @@ class TgConnection implements IInputConnection {
     this.server = new Bot(this.config.token);
     this.server.on('message', this.handleRequest.bind(this));
     this.server.on('edit', this.handleRequest.bind(this));
+    this.server.on('callback_query', this.handleCallback.bind(this));
     this.server.catch(this.handleError.bind(this));
   }
 
@@ -76,21 +77,55 @@ class TgConnection implements IInputConnection {
       });
     }
 
-    if (operation) {
-      try {
-        const result = await this.exec!(operation);
-        if (result) {
-          return; // ctx.reply('Відправлено');
-        } else {
-          forbidden(ctx);
-        }
-      } catch (e) {
-        ctx.reply('Сталася помилка!');
-      }
+    return this.execOperation(ctx, operation);
+  }
+
+  async execOperation(ctx: Context, operation?: IOperation) {
+    if (!operation) {
+      greeting(ctx);
       return;
     }
 
-    greeting(ctx);
+    try {
+      const result = await this.exec!(operation);
+      if (!result) {
+        forbidden(ctx);
+      }
+    } catch (e) {
+      ctx.reply('Сталася помилка!');
+    }
+  }
+
+  handleCallback(ctx: Context) {
+    const { chat, callbackQuery } = ctx;
+    const chatId = chat?.id;
+    const { data = '' } = callbackQuery || {};
+    ctx.answerCallbackQuery();
+
+    console.log({ chatId, data });
+
+    const [, netId] = data.split(':');
+
+    if (!chatId || !netId) {
+      return ctx.reply('Сталася помилка!');
+    }
+
+    const operation = {
+      options: {
+        sessionKey: 'messenger',
+        origin: 'https://t.me',
+        isAdmin: true,
+      },
+      names: 'bot/message'.split('/'),
+      data: {
+        params: {
+          chatId,
+          netId,
+        },
+      },
+    };
+
+    this.execOperation(ctx, operation);
   }
 
   private async sendNotification(
