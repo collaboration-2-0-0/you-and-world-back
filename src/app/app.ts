@@ -1,6 +1,6 @@
 import { IControllerContext } from './types';
-import { IConfig } from '../types/config.types';
-import { IOperation } from '../types/operation.types';
+import { IConfig } from '@root/config/types';
+import { IOperation } from '../controller/operation.types';
 import { ILogger } from '../logger/types';
 import { IDatabase } from '../db/types/types';
 import { IController } from '../controller/types';

@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
-import { IConfig } from './types/config.types';
-import { BUILD_SRC_PATH } from './constants/constants';
-import { createPathResolve } from './utils/utils';
-import { getEnv } from './utils/env.utils';
+import { createPathResolve } from '../utils/utils';
+import { getEnv } from '../utils/env.utils';
+import { IConfig } from './types';
+import { BUILD_SRC_PATH } from './constants';
 
 const resolvePath = createPathResolve(BUILD_SRC_PATH);
 
@@ -75,6 +75,7 @@ const config: IConfig = {
     servicesPath: resolvePath('services'),
     modulesPath: resolvePath('controller/modules'),
     clientApiPath: resolve('src/shared/server/client.api.ts'),
+    clientApiTypesPath: resolve('src/shared/types/api/client.api.types.ts'),
     services: ['mailService', 'chatService', 'notificationService'],
     inputModules: [
       'setSession',

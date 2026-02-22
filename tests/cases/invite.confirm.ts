@@ -1,4 +1,4 @@
-import config from '../../src/config';
+import config from '@root/config';
 import { ITestUnitsMap } from '../types/test.units.types';
 import { ITestCase } from '../types/types';
 

@@ -1,4 +1,4 @@
-import { BUILD_PATH } from '../constants/constants';
+import { BUILD_PATH } from './constants';
 import { rmDir } from './utils';
 
 const removeJs = async () => {

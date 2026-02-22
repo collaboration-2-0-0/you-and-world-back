@@ -1,7 +1,6 @@
 import { Message } from 'grammy/types';
-// eslint-disable-next-line max-len
-import { SubscriptionSubjectKeys } from '../../shared/server/types/subscription.types';
 import { ITableMessages, ITableUsers } from '../types/db.types';
+import { SubscriptionSubjectKeys } from '../types';
 
 const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {
   '#news': 'URGENT',

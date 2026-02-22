@@ -1,4 +1,4 @@
-import { IOperation, TOperationResponse } from '../../types/operation.types';
+import { IOperation, TOperationResponse } from '../operation.types';
 import { IControllerConfig, IContext, THandler } from '../types';
 import { INPUT_MODULES_MAP, OUTPUT_MODULES_MAP } from '../constants';
 import { createPathResolve } from '../../utils/utils';

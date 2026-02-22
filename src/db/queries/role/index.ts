@@ -1,4 +1,4 @@
-import { ITableRoles } from '../../../domain/types/db.types';
+import { ITableRoles } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesRole {

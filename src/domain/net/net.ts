@@ -1,8 +1,6 @@
 import { ITransaction } from '../../db/types/types';
-import { ITableNets, ITableNodes } from '../types/db.types';
-import { INetMember } from '../types/member.types';
-import { INetNode } from '../types/net.types';
-import { MAX_NODE_LEVEL } from '../../shared/server/constants';
+import { ITableNets, ITableNodes, INetMember, INetNode } from '../types';
+import { MAX_NODE_LEVEL } from './constants';
 import { NetArrange } from './net.arrange';
 
 export const createTree = async (t: ITransaction, node: ITableNodes) => {

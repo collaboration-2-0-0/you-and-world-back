@@ -1,8 +1,11 @@
 import { mock } from 'node:test';
 import { TFetch } from '../client/types';
 import { TTransport } from '../../src/server/types';
-import { IConfig } from '../../src/types/config.types';
-import { IParams, TOperationResponse } from '../../src/types/operation.types';
+import { IConfig } from '@root/config/types';
+import {
+  IParams,
+  TOperationResponse,
+} from '../../src/controller/operation.types';
 
 export interface ITestCase {
   title: string;

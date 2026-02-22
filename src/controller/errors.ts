@@ -1,5 +1,5 @@
 import { ValidationErrorItem } from 'joi';
-import { TOperationResponse } from '../types/operation.types';
+import { TOperationResponse } from './operation.types';
 
 export const CONTROLLER_ERROR_MAP = {
   CONTROLLER_ERROR: 'CONTROLLER ERROR',

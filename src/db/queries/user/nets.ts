@@ -1,6 +1,5 @@
 import { TQuery } from '../../types/types';
-import { INet, IUserNet } from '../../../domain/types/net.types';
-import { IMember } from '../../../domain/types/member.types';
+import { INet, IUserNet, IMember } from '@domain/types';
 
 export interface IQueriesUserNets {
   getAll: TQuery<[['user_id', number]], IUserNet>;

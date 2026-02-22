@@ -1,10 +1,9 @@
 import Joi from 'joi';
-// eslint-disable-next-line max-len
-import { IMemberConfirmParams } from '../../../shared/server/types/types';
+import { IMemberConfirmParams } from '@root/shared/types/api';
 import { THandler } from '../../../controller/types';
-import { NetEvent } from '../../../domain/event/event';
+import { NetEvent } from '@domain/event/event';
 import { MemberConfirmParamsSchema } from '../../schema/schema';
-import { getMemberStatus } from '../../../shared/server/utils';
+import { getMemberStatus } from '@shared/server/utils';
 
 const confirm: THandler<IMemberConfirmParams, boolean> = async (
   { member: m },

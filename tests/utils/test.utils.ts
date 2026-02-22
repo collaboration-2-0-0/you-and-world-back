@@ -1,8 +1,8 @@
 import { mock } from 'node:test';
-import { IConfig } from '../../src/types/config.types';
+import { IConfig } from '@root/config/types';
 import { TTransport } from '../../src/server/types';
 import { TFetch } from '../client/types';
-import originConfig from '../../src/config';
+import originConfig from '@root/config';
 import App from '../../src/app/app';
 import { setToGlobal } from '../../src/app/methods/utils';
 import { ITestCase, ITestRunnerData } from '../types/types';

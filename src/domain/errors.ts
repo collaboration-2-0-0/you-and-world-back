@@ -1,4 +1,4 @@
-import { TOperationResponse } from '../types/operation.types';
+import { TOperationResponse } from '../controller/operation.types';
 
 export const DOMAIN_ERROR_MAP = {
   NOT_FOUND: 'NOT_FOUND',

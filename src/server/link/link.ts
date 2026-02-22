@@ -1,8 +1,8 @@
-import { THandleOperation } from '../../types/operation.types';
+import { THandleOperation } from '../../controller/operation.types';
 import {
   IMessage,
   MessageTypeKeys,
-} from '../../shared/server/types/messages.types';
+} from '../../shared/types/api/messages.types';
 import { IInputConnection, IServer } from '../types';
 import { ILinkConnection } from './types';
 // import { MAX_CHAT_INDEX } from '../../constants/constants';

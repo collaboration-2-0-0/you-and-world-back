@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { IEvents } from '../../shared/server/types/types';
+import { IEvents } from '@root/shared/types/api';
 import { THandler } from '../../controller/types';
 import { EventsSchema } from '../schema/schema';
 

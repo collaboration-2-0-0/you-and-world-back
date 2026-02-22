@@ -1,6 +1,9 @@
 import ws from 'ws';
-import { IMessage, MessageTypeKeys } from '../../shared/server/types/types';
-import { IOperation, TOperationResponse } from '../../types/operation.types';
+import { IMessage, MessageTypeKeys } from '../../shared/types/api';
+import {
+  IOperation,
+  TOperationResponse,
+} from '../../controller/operation.types';
 import { TWsResModulesKeys } from './constants';
 
 export interface IWsConfig {

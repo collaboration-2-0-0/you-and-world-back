@@ -17,7 +17,14 @@ export const resolve = (parentModuleDir: string, modulePath: string) => {
 
 const addExt = (moduleFullPath: string) => {
   const moduleExt = path.extname(moduleFullPath);
-  if (!moduleExt) return moduleFullPath + '.js';
+  if (!moduleExt) {
+    try {
+      fs.statSync(moduleFullPath + '.js');
+      return moduleFullPath + '.js';
+    } catch {
+      return moduleFullPath + '/index.js';
+    }
+  }
   try {
     fs.statSync(moduleFullPath);
     return moduleFullPath;

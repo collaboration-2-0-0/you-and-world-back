@@ -1,4 +1,4 @@
-import { ITableUsers } from '../../../domain/types/db.types';
+import { ITableUsers } from '@domain/types';
 import { TQuery } from '../../types/types';
 
 export interface IQueriesNetUsers {

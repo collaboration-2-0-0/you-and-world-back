@@ -9,7 +9,7 @@ import {
   IControllerConfig,
   ITask,
 } from './types';
-import { IOperation, TOperationResponse } from '../types/operation.types';
+import { IOperation, TOperationResponse } from './operation.types';
 import { ControllerError } from './errors';
 import { isHandler } from './utils';
 import { errorHandler } from './methods/error.handler';
@@ -20,7 +20,7 @@ import { createRoutes } from './methods/create.endpoints';
 import { setToGlobal } from '../app/methods/utils';
 import { pathToArray } from '../utils/utils';
 import * as cryptoService from '../utils/crypto';
-import * as domain from '../domain/index';
+import * as domain from '../domain';
 
 class Controller implements IController {
   private endpoints?: IEndpoints;

@@ -1,6 +1,6 @@
 import http from 'node:http';
 import { Readable } from 'node:stream';
-import { IOperation } from '../../types/operation.types';
+import { IOperation } from '../../controller/operation.types';
 import { IRequest } from '../types';
 import {
   ResMimeTypeKeys,

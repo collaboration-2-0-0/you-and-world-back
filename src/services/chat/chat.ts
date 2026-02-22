@@ -1,6 +1,6 @@
 // import * as T from '../../client/common/types/types';
 // import { IChatMapValue } from './types';
-// import { IMemberNode } from '../../domain/types/member.types';
+// import { IMemberNode } from '@domain/types';
 // import {
 //   MAX_CHAT_INDEX,
 //   MAX_CHAT_MESSAGE_COUNT,

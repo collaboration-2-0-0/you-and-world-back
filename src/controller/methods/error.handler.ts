@@ -1,5 +1,5 @@
 import { DatabaseError } from '../../db/errors';
-import { DomainError, DomainErrorCode } from '../../domain/errors';
+import { DomainError, DomainErrorCode } from '@domain/errors';
 import {
   HandlerError,
   ControllerError,
