@@ -1,7 +1,10 @@
 import { Server } from 'ws';
 import { IInputConnection, IRequest } from '../types';
 import { IWsConfig, IWsConnection, IWsServer, TWsResModule } from './types';
-import { IOperation, TOperationResponse } from '../../types/operation.types';
+import {
+  IOperation,
+  TOperationResponse,
+} from '../../controller/operation.types';
 import { IHttpServer } from '../http/types';
 import { IMessage, MessageTypeKeys } from '../../shared/server/types';
 import { PING_INTERVAL } from '../../shared/server/constants';

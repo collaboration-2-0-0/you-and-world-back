@@ -9,7 +9,7 @@ import {
   IControllerConfig,
   ITask,
 } from './types';
-import { IOperation, TOperationResponse } from '../types/operation.types';
+import { IOperation, TOperationResponse } from './operation.types';
 import { ControllerError } from './errors';
 import { isHandler } from './utils';
 import { errorHandler } from './methods/error.handler';

@@ -1,4 +1,4 @@
-import { IConfig } from '../types/config.types';
+import { IConfig } from '@root/config/types';
 import { ILogger } from '../logger/types';
 import { IDatabase, IDatabaseQueries } from '../db/types/types';
 import { IController } from '../controller/types';

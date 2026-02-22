@@ -4,7 +4,7 @@ import {
   ReqMimeTypesKeys,
   REQ_MIME_TYPES_MAP,
 } from '../constants';
-import { IOperation, IParams } from '../../../types/operation.types';
+import { IOperation, IParams } from '../../../controller/operation.types';
 import { IRequest } from '../../types';
 import { IHttpConfig, IHttpContext, THttpReqModule } from '../types';
 import { ServerError } from '../../errors';

@@ -2,7 +2,7 @@
 import { format } from 'node:util';
 import { Readable } from 'node:stream';
 import { join } from 'node:path';
-import { IOperation } from '../../../types/operation.types';
+import { IOperation } from '../../../controller/operation.types';
 import { IRequest } from '../../types';
 import {
   IHttpConfig,

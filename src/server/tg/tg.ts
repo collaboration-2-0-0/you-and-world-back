@@ -1,6 +1,6 @@
 import { env } from 'node:process';
 import { Bot, BotError, Context, InlineKeyboard } from 'grammy';
-import { THandleOperation } from '../../types/operation.types';
+import { THandleOperation } from '../../controller/operation.types';
 import { IInputConnection } from '../types';
 import { ITgConfig, ITgServer } from './types';
 import { ServerError } from '../errors';

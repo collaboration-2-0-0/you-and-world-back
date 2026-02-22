@@ -1,10 +1,6 @@
 import Joi, { ObjectSchema } from 'joi';
 import { IObject } from '../types/types';
-import {
-  IOperation,
-  TOperationResponse,
-  IParams,
-} from '../types/operation.types';
+import { IOperation, TOperationResponse, IParams } from './operation.types';
 import { ITableUsers } from '@domain/types';
 import { UserStatusKey } from '../shared/server/types';
 import { IMailService } from '../services/mail/types';

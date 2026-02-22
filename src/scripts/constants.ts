@@ -1,5 +1,6 @@
 import { join, resolve } from 'node:path';
 
+export const BUILD_PATH = 'js';
 export const BACK_PATH = './src/shared';
 export const FRONT_PATH = '../you-and-world-ui/src/shared';
 export const BACK_STATIC_PATH = './public';

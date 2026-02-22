@@ -1,6 +1,5 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
-exports.BUILD_PATH = 'js';
 exports.FILES_TO_COPY_FROM_BACK_TO_FRONT =
   exports.EXCLUDE_STATIC =
   exports.EXCLUDE_FROM_BACK =
@@ -9,8 +8,10 @@ exports.FILES_TO_COPY_FROM_BACK_TO_FRONT =
   exports.BACK_STATIC_PATH =
   exports.FRONT_PATH =
   exports.BACK_PATH =
+  exports.BUILD_PATH =
     void 0;
 const node_path_1 = require('node:path');
+exports.BUILD_PATH = 'js';
 exports.BACK_PATH = './src/shared';
 exports.FRONT_PATH = '../you-and-world-ui/src/shared';
 exports.BACK_STATIC_PATH = './public';

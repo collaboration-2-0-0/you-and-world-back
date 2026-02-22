@@ -1,5 +1,5 @@
-import { DomainError } from '../errors';
 import { IMember, INet } from '../types';
+import { DomainError } from '../errors';
 
 export class Member {
   private user_id: number;

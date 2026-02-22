@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
-import { IConfig } from './types/config.types';
-import { BUILD_SRC_PATH } from './constants/constants';
-import { createPathResolve } from './utils/utils';
-import { getEnv } from './utils/env.utils';
+import { createPathResolve } from '../utils/utils';
+import { getEnv } from '../utils/env.utils';
+import { IConfig } from './types';
+import { BUILD_SRC_PATH } from './constants';
 
 const resolvePath = createPathResolve(BUILD_SRC_PATH);
 

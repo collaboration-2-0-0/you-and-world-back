@@ -1,6 +1,6 @@
 import { env } from 'node:process';
 import { readFileSync } from 'node:fs';
-import { CleanedEnvKeys, ICleanedEnv } from '../types/config.types';
+import { CleanedEnvKeys, ICleanedEnv } from '@root/config/types';
 import { SyncCalc } from './calc';
 
 export const getEnv = () => {

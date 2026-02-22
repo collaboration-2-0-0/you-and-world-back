@@ -1,4 +1,4 @@
-import { THandleOperation } from '../../types/operation.types';
+import { THandleOperation } from '../../controller/operation.types';
 import {
   IMessage,
   MessageTypeKeys,
