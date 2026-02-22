@@ -1,5 +1,5 @@
 import { TQuery } from '../../types/types';
-import { IUserNetDataResponse } from '../../../shared/server/types';
+import { IUserNetDataResponse } from '../../../shared/types/api';
 import { IMember } from '@domain/types';
 
 export interface IQueriesUserNetData {

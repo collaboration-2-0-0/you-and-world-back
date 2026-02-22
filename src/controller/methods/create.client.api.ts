@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import { Writable } from 'node:stream';
-import { TPromiseExecutor } from '@shared/types';
+import { TPromiseExecutor } from '@root/shared/types/api';
 import { IControllerConfig, IEndpoints, TJoiSchema, THandler } from '../types';
 import * as tpl from './templates';
 import { isHandler, getTypeName, getTypeNameFromPathname } from '../utils';
@@ -12,12 +12,8 @@ export const createClientApi = (
 ) => {
   const executor: TPromiseExecutor<void> = (rv, rj) => {
     const apiPath = config.clientApiPath;
-    const apiExt = path.extname(apiPath);
-    const apiDir = path.dirname(apiPath);
-    const apiFileNameBase = path.basename(apiPath, apiExt);
-    const typesFileNameBase = apiFileNameBase + '.types';
-    const typesFileName = typesFileNameBase + '.ts';
-    const typesPath = path.join(apiDir, 'types', typesFileName);
+    const typesPath = config.clientApiTypesPath;
+
     const apiStream = fs.createWriteStream(apiPath);
     const typesStream = fs.createWriteStream(typesPath);
     let done = false;

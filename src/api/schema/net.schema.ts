@@ -7,7 +7,7 @@ import {
   INetWaiting,
   IWaitNets,
   OmitNull,
-} from '@shared/types';
+} from '@root/shared/types/api';
 import { TJoiSchema } from '../../controller/types';
 import { JOI_NULL } from './common.schema';
 import { NodeSchema } from './node.schema';

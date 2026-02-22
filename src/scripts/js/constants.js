@@ -16,7 +16,7 @@ exports.BACK_PATH = './src/shared';
 exports.FRONT_PATH = '../you-and-world-ui/src/shared';
 exports.BACK_STATIC_PATH = './public';
 exports.FRONT_STATIC_PATH = '../you-and-world-ui/dist';
-exports.FROM_BACK_TO_FRONT = ['server', 'server/types'].map((i) =>
+exports.FROM_BACK_TO_FRONT = ['server', 'types', 'types/api'].map((i) =>
   (0, node_path_1.join)(exports.BACK_PATH, i),
 );
 exports.EXCLUDE_FROM_BACK = ['local'].map((i) =>

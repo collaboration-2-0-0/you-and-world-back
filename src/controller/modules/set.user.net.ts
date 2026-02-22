@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { TInputModule } from '../types';
-import { USER_STATUS_MAP } from '../../shared/server/types';
+import { USER_STATUS_MAP } from '../../shared/types/api';
 import { HandlerError } from '../errors';
 
 const setUserNet: TInputModule =

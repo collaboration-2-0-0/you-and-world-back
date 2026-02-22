@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { THandler } from '../../controller/types';
-import { IUserResponse, UserStatusKey } from '@shared/types';
+import { IUserResponse, UserStatusKey } from '@root/shared/types/api';
 import { UserResponseSchema } from '../schema/schema';
 
 const login_tg: THandler<{ initData: string }, IUserResponse> = async (

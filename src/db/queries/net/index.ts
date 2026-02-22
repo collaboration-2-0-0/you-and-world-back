@@ -1,4 +1,4 @@
-import { INetResponse, OmitNull } from '../../../shared/server/types';
+import { INetResponse, OmitNull } from '../../../shared/types/api';
 import { ITableNets, INet } from '@domain/types';
 import { TQuery } from '../../types/types';
 import { IQueriesNetData } from './data';

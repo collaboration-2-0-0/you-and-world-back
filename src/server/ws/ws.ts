@@ -6,7 +6,7 @@ import {
   TOperationResponse,
 } from '../../controller/operation.types';
 import { IHttpServer } from '../http/types';
-import { IMessage, MessageTypeKeys } from '../../shared/server/types';
+import { IMessage, MessageTypeKeys } from '../../shared/types/api';
 import { PING_INTERVAL } from '../../shared/server/constants';
 import { MAX_CHAT_INDEX } from '../../constants/constants';
 import { ServerError } from '../errors';

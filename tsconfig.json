@@ -32,7 +32,7 @@
     "paths": {
       "@root/*": ["./src/*"],
       "@domain/*": ["./src/domain/*"],
-      "@shared/*": ["./src/shared/server/*"]
+      "@shared/*": ["./src/shared/*"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": ["node_modules/@types", "./src/**"],         /* Specify multiple folders that act like './node_modules/@types'. */

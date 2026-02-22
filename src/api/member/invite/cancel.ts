@@ -1,9 +1,8 @@
 import Joi from 'joi';
-// eslint-disable-next-line max-len
-import { IMemberConfirmParams } from '@shared/types';
+import { IMemberConfirmParams } from '@root/shared/types/api';
 import { THandler } from '../../../controller/types';
 import { MemberConfirmParamsSchema } from '../../schema/schema';
-import { getMemberStatus } from '@shared/utils';
+import { getMemberStatus } from '@shared/server/utils';
 
 const cancel: THandler<IMemberConfirmParams, boolean> = async (
   _,

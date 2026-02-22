@@ -1,5 +1,5 @@
 import { THandler } from '../../controller/types';
-import { INetConnectByToken, IToken } from '@shared/types';
+import { INetConnectByToken, IToken } from '@root/shared/types/api';
 import type { IMember } from '@domain/types';
 import { NetEvent } from '@domain/event/event';
 import { TokenSchema, NetConnectByTokenSchema } from '../schema/schema';

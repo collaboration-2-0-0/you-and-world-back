@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { IUserNode } from '@shared/types';
+import { IUserNode } from '@root/shared/types/api';
 import { THandler } from '../../controller/types';
 import { UserNodeSchema } from '../schema/schema';
 

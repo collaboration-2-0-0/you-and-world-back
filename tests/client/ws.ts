@@ -1,6 +1,6 @@
 import { WebSocket } from 'ws';
 import { IWsResponse, TFetch } from '../client/types';
-import { TPromiseExecutor } from '../../src/shared/server/types';
+import { TPromiseExecutor } from '../../src/shared/types/api';
 import {
   CONNECTION_ATTEMPT_COUNT,
   CONNECTION_ATTEMPT_DELAY,
@@ -11,7 +11,7 @@ import { PING_INTERVAL } from '../../src/shared/server/constants';
 import { HttpResponseError } from '../client/errors';
 // eslint-disable-next-line max-len
 import { EventEmitter } from '../client/event-emitter/event.emitter';
-import { delay } from '../../src/shared/server/utils';
+import { delay } from '@shared/server/utils';
 import { createUnicCode } from '../../src/utils/crypto';
 
 class WsConnection extends EventEmitter {

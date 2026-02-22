@@ -1,4 +1,4 @@
-import { IEventMessage, INewEventsMessage } from '../../shared/server/types';
+import { IEventMessage, INewEventsMessage } from '../../shared/types/api';
 
 export interface IMeesageStream {
   user_id?: number;

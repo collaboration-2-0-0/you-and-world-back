@@ -1,4 +1,8 @@
-import { ILoginParams, IUserResponse, UserStatusKey } from '@shared/types';
+import {
+  ILoginParams,
+  IUserResponse,
+  UserStatusKey,
+} from '@root/shared/types/api';
 import { THandler } from '../../controller/types';
 import { LoginParamsSchema, UserResponseSchema } from '../schema/schema';
 

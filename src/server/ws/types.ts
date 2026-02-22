@@ -1,5 +1,5 @@
 import ws from 'ws';
-import { IMessage, MessageTypeKeys } from '../../shared/server/types';
+import { IMessage, MessageTypeKeys } from '../../shared/types/api';
 import {
   IOperation,
   TOperationResponse,

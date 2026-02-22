@@ -5,7 +5,7 @@ export const BACK_PATH = './src/shared';
 export const FRONT_PATH = '../you-and-world-ui/src/shared';
 export const BACK_STATIC_PATH = './public';
 export const FRONT_STATIC_PATH = '../you-and-world-ui/dist';
-export const FROM_BACK_TO_FRONT = ['server', 'server/types'].map((i) =>
+export const FROM_BACK_TO_FRONT = ['server', 'types', 'types/api'].map((i) =>
   join(BACK_PATH, i),
 );
 

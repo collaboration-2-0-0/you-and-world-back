@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { IUserNetDataResponse } from '@shared/types';
+import { IUserNetDataResponse } from '@root/shared/types/api';
 import { TJoiSchema } from '../../controller/types';
 import { JOI_NULL } from './common.schema';
 

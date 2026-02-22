@@ -1,6 +1,6 @@
 import { THandler } from '../../controller/types';
-import { INetCreateParams, INetResponse } from '@shared/types';
-import { MAX_NET_LEVEL } from '@shared/constants';
+import { INetCreateParams, INetResponse } from '@root/shared/types/api';
+import { MAX_NET_LEVEL } from '@shared/server/constants';
 import { NetResponseSchema, NetCreateParamsSchema } from '../schema/schema';
 
 const create: THandler<INetCreateParams, INetResponse> = async (

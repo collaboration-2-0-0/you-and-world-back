@@ -1,5 +1,5 @@
 import { Readable } from 'node:stream';
-import * as T from '../../shared/server/types';
+import * as T from '../../shared/types/api';
 import { IServices } from '../../controller/types';
 import { IConnectionService } from '../../server/types';
 import { ChatService } from '../chat/chat';

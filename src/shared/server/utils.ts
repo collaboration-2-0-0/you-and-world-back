@@ -1,4 +1,4 @@
-import { IMemberResponse, MemberStatusKeys } from './types';
+import { IMemberResponse, MemberStatusKeys } from '../types/api';
 
 export const getMemberStatus = (
   member: Pick<IMemberResponse, 'count_of_members' | 'confirmed' | 'token'>,

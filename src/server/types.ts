@@ -1,5 +1,5 @@
 import http from 'node:http';
-import { IMessage, MessageTypeKeys } from '../shared/server/types';
+import { IMessage, MessageTypeKeys } from '../shared/types/api';
 import { IOperation, TOperationResponse } from '../controller/operation.types';
 import { IHttpConfig, IHttpServer } from './http/types';
 import { IWsConfig, IWsServer } from './ws/types';

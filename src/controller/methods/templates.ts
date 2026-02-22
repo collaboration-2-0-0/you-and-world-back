@@ -1,7 +1,7 @@
 import { format } from 'node:util';
 
 export const tplGetApi = `/* eslint-disable max-len */
-import * as P from './types';
+import * as P from '../types/api';
 
 export type IClientApi = ReturnType<typeof getApi>;
 
