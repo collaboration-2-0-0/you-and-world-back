@@ -1,17 +1,27 @@
+import path from 'node:path';
+import { readFileSync } from 'node:fs';
 import { Bot, Context, InlineKeyboard } from 'grammy';
 import { MenuButton } from 'grammy/types';
-import envJson from '../../../.env.json';
+import { SyncCalc } from '@root/utils/calc';
 
-const TOKEN = envJson.TG_BOT_TOKEN;
-const ORIGIN = envJson.ORIGIN;
+const envPath = path.resolve(__dirname, '../../../.env.json');
+
+const env = new SyncCalc(envPath)
+  .next(readFileSync)
+  .next(String)
+  .next(JSON.parse)
+  .end() as Record<string, string>;
+
+const TOKEN = env.TG_BOT_TOKEN!;
+const ORIGIN = env.ORIGIN!;
 
 export class TgConnection {
-  private server;
+  public server;
 
   constructor() {
     this.server = new Bot(TOKEN);
     this.server.on('message', this.handleRequest.bind(this));
-    this.server.on('edit', this.handleRequest.bind(this));
+    this.server.on('edited_message', this.handleRequest.bind(this));
     this.server.on('callback_query', this.handleCallback.bind(this));
     this.server.catch(console.error);
   }
@@ -27,7 +37,10 @@ export class TgConnection {
   }
 
   sendNotification(chatId: number, text = '', other: Record<string, any> = {}) {
-    this.server.api.sendMessage(chatId, text, { parse_mode: 'HTML', ...other });
+    return this.server.api.sendMessage(chatId, text, {
+      parse_mode: 'HTML',
+      ...other,
+    });
   }
 
   setMenuButton() {
