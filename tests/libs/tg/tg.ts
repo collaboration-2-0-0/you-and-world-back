@@ -1,9 +1,19 @@
+import path from 'node:path';
+import { readFileSync } from 'node:fs';
 import { Bot, Context, InlineKeyboard } from 'grammy';
 import { MenuButton } from 'grammy/types';
-import envJson from '../../../.env.json';
+import { SyncCalc } from '@root/utils/calc';
 
-const TOKEN = envJson.TG_BOT_TOKEN;
-const ORIGIN = envJson.ORIGIN;
+const envPath = path.resolve(__dirname, '../../../.env.json');
+
+const env = new SyncCalc(envPath)
+  .next(readFileSync)
+  .next(String)
+  .next(JSON.parse)
+  .end() as Record<string, string>;
+
+const TOKEN = env.TG_BOT_TOKEN!;
+const ORIGIN = env.ORIGIN!;
 
 export class TgConnection {
   public server;
