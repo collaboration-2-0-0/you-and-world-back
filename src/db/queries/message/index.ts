@@ -4,9 +4,10 @@ import { TQuery } from '../../types/types';
 const INTERVAL = +(process.env.NOTIFICATION_INTERVAL || 0);
 
 export interface IQueriesMessage {
-  get: TQuery<[['subject', string]], ITableMessages>;
+  get: TQuery<[['net_id', number], ['subject', string]], ITableMessages>;
   update: TQuery<
     [
+      ['net_id', number],
       ['message_id', number],
       ['subject', string],
       ['content', string],
@@ -14,32 +15,35 @@ export interface IQueriesMessage {
     ],
     ITableMessages
   >;
-  remove: TQuery<[['subject', string]]>;
-  removeOld: TQuery<[]>;
+  remove: TQuery<[['net_id', number], ['subject', string]]>;
+  removeOld: TQuery<[['net_id', number]]>;
 }
 
 export const get = `
   SELECT *
   FROM messages m
   WHERE
-    m.subject = $1;
+    m.net_id = $1 AND
+    m.subject = $2;
 `;
 
 export const update = `
   INSERT INTO messages AS m (
+    net_id,
     message_id,
     subject,
     content,
     date
   )
-  VALUES ($1, $2, $3, $4)
+  VALUES ($1, $2, $3, $4, $5)
   ON CONFLICT (message_id)
     DO UPDATE
     SET
-      content = $3,
-      date = $4
+      content = $4,
+      date = $5
   WHERE
-    m.message_id = $1
+    m.net_id = $1 AND
+    m.message_id = $2
   RETURNING *;
 `;
 
@@ -47,10 +51,13 @@ export const remove = `
   DELETE
   FROM messages
   WHERE
-    subject = $1;
+    net_id = $1 AND
+    subject = $2;
 `;
 
 export const removeOld = `
   DELETE FROM messages
-  WHERE date + interval '${INTERVAL * 4} second'< now();
+  WHERE
+    net_id = $1 AND
+    date + interval '${INTERVAL * 4} second'< now();
 `;

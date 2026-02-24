@@ -127,6 +127,7 @@ Table users_roles {
 }
 
 Table messages {
+  "net_id" integer [not null, default: 0]
   "message_id" integer [primary key, not null]
   "subject" "character varying" [not null]
   "content" "character varying" [not null]

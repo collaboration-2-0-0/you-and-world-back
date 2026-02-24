@@ -118,7 +118,8 @@ CREATE TABLE public.messages (
     subject character varying NOT NULL,
     content character varying NOT NULL,
     message_id integer NOT NULL,
-    date timestamp with time zone NOT NULL
+    date timestamp with time zone NOT NULL,
+    net_id integer DEFAULT 0 NOT NULL
 );
 
 
@@ -413,7 +414,7 @@ COPY public.members_to_members (branch_id, from_member_id, to_member_id, dislike
 -- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: you_and_world
 --
 
-COPY public.messages (subject, content, message_id, date) FROM stdin;
+COPY public.messages (subject, content, message_id, date, net_id) FROM stdin;
 \.
 
 

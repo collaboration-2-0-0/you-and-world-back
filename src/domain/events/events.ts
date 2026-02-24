@@ -12,16 +12,17 @@ const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {
 export class Events {
   private notifService = notificationService;
 
-  async setMessage(message: Message) {
+  async setMessage(net_id: number, message: Message) {
     const { message_id, text: t = '', edit_date, date, chat } = message;
 
-    let text = t;
+    const text = t;
     if (!text) {
       throw new Error('Empty message');
     }
 
-    const [tag] = text!.split(/\s/);
-    const subject = tag && SUBJECT_BY_TEG[tag.toLocaleLowerCase()];
+    // const [tag] = text!.split(/\s/);
+    // const subject = tag && SUBJECT_BY_TEG[tag.toLocaleLowerCase()];
+    const subject = SUBJECT_BY_TEG['#news'];
 
     if (!subject) {
       if (chat.id) {
@@ -31,21 +32,22 @@ export class Events {
       throw new Error('No chat id');
     }
 
-    const [savedMessage] = await execQuery.message.get([subject]);
+    const [savedMessage] = await execQuery.message.get([net_id, subject]);
     if (savedMessage && savedMessage.message_id > message_id) {
       throw new Error('Message can not be updated');
     }
-    await execQuery.message.remove([subject]);
+    await execQuery.message.remove([net_id, subject]);
 
-    text = text.replace(RegExp(`^${tag}\\s`, 'i'), `${tag}\n`);
+    // text = text.replace(RegExp(`^${tag}\\s`, 'i'), `${tag}\n`);
     await execQuery.message.update([
+      net_id,
       message_id,
       subject,
       text,
       new Date((edit_date || date) * 1000),
     ]);
 
-    await this.sendMessage(subject);
+    await this.sendMessage(net_id, subject);
 
     return true;
   }
@@ -58,9 +60,9 @@ export class Events {
     this.notifService.sendForUsers([user], message);
   }
 
-  async sendMessage(subject: SubscriptionSubjectKeys) {
-    await execQuery.message.removeOld([]);
-    const [message] = await execQuery.message.get([subject]);
+  async sendMessage(net_id: number, subject: SubscriptionSubjectKeys) {
+    await execQuery.message.removeOld([net_id]);
+    const [message] = await execQuery.message.get([net_id, subject]);
     if (!message?.content) {
       return;
     }

@@ -1,0 +1,1 @@
+ALTER TABLE public.messages ADD net_id integer DEFAULT 0 NOT NULL;

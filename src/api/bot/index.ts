@@ -3,27 +3,27 @@ import { Message } from 'grammy/types';
 import { THandler } from '../../controller/types';
 import { InlineKeyboard } from 'grammy';
 
-const messagesBuffer = new Map<number, Record<string, string>>();
+const messagesBuffer = new Map<number, Message>();
 
 export const message: THandler<
   { chatId: number; netId?: string; message?: Record<string, string> },
   boolean
-> = async ({ isAdmin }, { chatId, netId, message }) => {
-  if (!isAdmin) {
-    return false;
-  }
-
-  if (!netId && !message) {
+> = async ({ isAdmin }, { chatId, netId, message: msg }) => {
+  const message = msg as unknown as Message;
+  if (!isAdmin || (!netId && !message)) {
+    messagesBuffer.delete(chatId);
     return false;
   }
 
   const [user] = await execQuery.user.findByChatId([chatId]);
   if (!user) {
+    messagesBuffer.delete(chatId);
     return false;
   }
 
   const nets = await execQuery.user.nets.getWhereIsAdmin([user!.user_id]);
   if (!nets.length) {
+    messagesBuffer.delete(chatId);
     return false;
   }
 
@@ -31,17 +31,19 @@ export const message: THandler<
     const message = messagesBuffer.get(chatId);
     const net = nets.find((v) => v.net_id === +netId);
     if (!message || !net) {
+      messagesBuffer.delete(chatId);
       return false;
     }
 
-    return new domain.events.Events().setMessage(message as unknown as Message);
+    return new domain.events.Events().setMessage(net.net_id, message);
   }
 
   if (nets.length === 1) {
-    return new domain.events.Events().setMessage(message as unknown as Message);
+    const [net] = nets;
+    return new domain.events.Events().setMessage(net!.net_id, message);
   }
 
-  messagesBuffer.set(chatId, message!);
+  messagesBuffer.set(chatId, message);
   /* send buttons to tg */
   const buttons = nets.map((net) => [
     {
@@ -50,7 +52,7 @@ export const message: THandler<
     },
   ]);
   const reply_markup = new InlineKeyboard(buttons);
-  await notificationService.sendToTelegram(user!, 'message', {
+  await notificationService.sendToTelegram(user!, 'Надіслати в спільноту:', {
     reply_markup,
   });
 
