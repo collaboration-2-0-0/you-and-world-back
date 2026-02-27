@@ -1,5 +1,4 @@
 import { Message } from 'grammy/types';
-import { ITableMessages, ITableUsers } from '../types/db.types';
 import { SubscriptionSubjectKeys } from '../types';
 
 const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {
@@ -12,65 +11,64 @@ const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {
 export class Events {
   private notifService = notificationService;
 
-  async setMessage(net_id: number, message: Message) {
-    const { message_id, text: t = '', edit_date, date, chat } = message;
+  async setMessage(netId: number, message: Message) {
+    const { message_id, text, edit_date, date, chat } = message;
 
-    const text = t;
     if (!text) {
       throw new Error('Empty message');
     }
 
     // const [tag] = text!.split(/\s/);
     // const subject = tag && SUBJECT_BY_TEG[tag.toLocaleLowerCase()];
-    const subject = SUBJECT_BY_TEG['#news'];
-
-    if (!subject) {
-      if (chat.id) {
-        this.echo(chat.id, text);
-        return true;
-      }
-      throw new Error('No chat id');
-    }
-
-    const [savedMessage] = await execQuery.message.get([net_id, subject]);
-    if (savedMessage && savedMessage.message_id > message_id) {
-      throw new Error('Message can not be updated');
-    }
-    await execQuery.message.remove([net_id, subject]);
-
     // text = text.replace(RegExp(`^${tag}\\s`, 'i'), `${tag}\n`);
+
+    const subject = SUBJECT_BY_TEG['#news'] || 'URGENT';
+
+    // if (!subject) {
+    //   if (chat.id) {
+    //     this.echo(chat.id, text);
+    //     return true;
+    //   }
+    //   throw new Error('No chat id');
+    // }
+
     await execQuery.message.update([
-      net_id,
+      netId,
       message_id,
       subject,
       text,
       new Date((edit_date || date) * 1000),
     ]);
 
-    await this.sendMessage(net_id, subject);
+    await this.sendMessage(netId, subject);
 
     return true;
   }
 
-  echo(chatId: number, text: string) {
-    let content = text.replace(/^#test\s/i, `#test\n`);
-    content = content.replace(/^#тест\s/i, `#тест\n`);
-    const user = { chat_id: chatId.toString() } as ITableUsers;
-    const message = { content } as ITableMessages;
-    this.notifService.sendForUsers([user], message);
-  }
+  // echo(chatId: number, text: string) {
+  //   let content = text.replace(/^#test\s/i, `#test\n`);
+  //   content = content.replace(/^#тест\s/i, `#тест\n`);
+  //   const user = { chat_id: chatId.toString() } as ITableUsers;
+  //   const message = { content } as ITableMessages;
+  //   this.notifService.sendForUsers([user], message);
+  // }
 
-  async sendMessage(net_id: number, subject: SubscriptionSubjectKeys) {
-    await execQuery.message.removeOld([net_id]);
-    const [message] = await execQuery.message.get([net_id, subject]);
-    if (!message?.content) {
-      return;
+  async sendMessage(netId: number, subject: SubscriptionSubjectKeys) {
+    const messages = await execQuery.message.get([netId, subject]);
+    for (let i = 0; i < messages.length; i++) {
+      const msg = messages[i]!;
+
+      const users = await execQuery.subscription.send.toUsers([
+        netId,
+        subject,
+        msg.date,
+      ]);
+
+      if (!users.length) {
+        await execQuery.message.removeById([msg.message_id]);
+      } else if (i === messages.length - 1) {
+        this.notifService.sendForUsers(users, msg);
+      }
     }
-
-    const users = await execQuery.subscription.send.toUsers([
-      subject,
-      message.date,
-    ]);
-    this.notifService.sendForUsers(users, message);
   }
 }

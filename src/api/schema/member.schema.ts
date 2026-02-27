@@ -7,9 +7,17 @@ import {
 import { TJoiSchema } from '../../controller/types';
 import { JOI_NULL } from './common.schema';
 
-export const MemberConfirmParamsSchema = {
+export const UserNodeSchema = {
   node_id: Joi.number().required(),
+};
+
+export const MemberNodeSchema = {
   member_id: Joi.number().required(),
+};
+
+export const MemberConfirmParamsSchema = {
+  ...UserNodeSchema,
+  ...MemberNodeSchema,
 } as Record<keyof IMemberConfirmParams, TJoiSchema>;
 
 export const MemberInviteParamsSchema = {

@@ -1,49 +1,77 @@
 import Joi from 'joi';
 import { Message } from 'grammy/types';
-import { THandler } from '../../controller/types';
 import { InlineKeyboard } from 'grammy';
+import { INet } from '@root/domain/types';
+import { THandler } from '../../controller/types';
 
 const messagesBuffer = new Map<number, Message>();
+const buttonsBuffer = new Map<number, number>();
+
+const clear = (chatId: number) => {
+  messagesBuffer.delete(chatId);
+  buttonsBuffer.delete(chatId);
+};
+/*
+  - on first request receive message
+  - on second request receive netId ofnet to send
+*/
+const setMessage = async (net: INet, message: Message) => {
+  await new domain.events.Events().setMessage(net.net_id, message);
+  clear(message.chat.id);
+  return { message: `Відправлено в\n<b>${net!.name}</b>` };
+};
 
 export const message: THandler<
-  { chatId: number; netId?: string; message?: Record<string, string> },
-  boolean
+  {
+    chatId: number;
+    netId?: number;
+    message?: Record<string, string>;
+  },
+  { message?: string } | boolean
 > = async ({ isAdmin }, { chatId, netId, message: msg }) => {
-  const message = msg as unknown as Message;
+  let message = msg as unknown as Message | undefined;
+
   if (!isAdmin || (!netId && !message)) {
-    messagesBuffer.delete(chatId);
-    return false;
+    clear(chatId);
+    throw Error('Uknown error');
   }
 
   const [user] = await execQuery.user.findByChatId([chatId]);
   if (!user) {
-    messagesBuffer.delete(chatId);
-    return false;
+    clear(chatId);
+    throw Error('Uknown error');
   }
 
   const nets = await execQuery.user.nets.getWhereIsAdmin([user!.user_id]);
   if (!nets.length) {
-    messagesBuffer.delete(chatId);
+    clear(chatId);
     return false;
   }
 
+  let net: INet | undefined;
+
   if (netId) {
-    const message = messagesBuffer.get(chatId);
-    const net = nets.find((v) => v.net_id === +netId);
-    if (!message || !net) {
-      messagesBuffer.delete(chatId);
-      return false;
+    net = nets.find((v) => v.net_id === netId);
+    if (!net) {
+      return { message: 'Невірна спільнота' };
     }
-
-    return new domain.events.Events().setMessage(net.net_id, message);
+    message = messagesBuffer.get(chatId);
+  } else if (nets.length === 1) {
+    [net] = nets;
   }
 
-  if (nets.length === 1) {
-    const [net] = nets;
-    return new domain.events.Events().setMessage(net!.net_id, message);
+  if (!message) {
+    clear(chatId);
+    throw Error('Uknown error');
   }
 
-  messagesBuffer.set(chatId, message);
+  if (net) {
+    message!.text = `<b>${net!.name}</b>\n${message!.text}`;
+    return setMessage(net, message);
+  } else {
+    messagesBuffer.set(chatId, message)!;
+  }
+
   /* send buttons to tg */
   const buttons = nets.map((net) => [
     {
@@ -51,11 +79,18 @@ export const message: THandler<
       callback_data: `/send_message_to:${net.net_id}`,
     },
   ]);
-  const reply_markup = new InlineKeyboard(buttons);
-  await notificationService.sendToTelegram(user!, 'Надіслати в спільноту:', {
-    reply_markup,
+
+  await notificationService.sendToTelegram(user!, 'Оберіть спільноту:', {
+    reply_markup: new InlineKeyboard(buttons),
+    onSuccess: (message: Message.TextMessage) =>
+      buttonsBuffer.set(chatId, message.message_id),
   });
 
   return true;
 };
-message.responseSchema = Joi.boolean();
+message.paramsSchema = {
+  chatId: Joi.number().required(),
+  netId: Joi.number(),
+  message: Joi.any(),
+};
+message.responseSchema = [{ message: Joi.string() }, Joi.boolean()];

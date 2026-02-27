@@ -13,7 +13,7 @@ const UserUpdateParamsSchema = {
   password: [Joi.string().empty(''), JOI_NULL],
   user_id: Joi.number(),
   email: [Joi.string(), JOI_NULL],
-  chat_id: [Joi.string(), JOI_NULL],
+  chat_id: [Joi.number(), JOI_NULL],
   confirmed: Joi.boolean(),
   username: Joi.string(), // .required(),
   photo_url: Joi.string(),

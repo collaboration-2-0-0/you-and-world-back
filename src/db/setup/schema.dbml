@@ -1,6 +1,6 @@
 // https://dbdiagram.io/
 
-Table "nets" {
+Table nets {
   "net_id" bigint [primary key, not null]
   "net_level" integer [not null, default: 0]
   "parent_net_id" bigint [default: NULL]
@@ -8,7 +8,7 @@ Table "nets" {
   "count_of_nets" integer [not null, default: 1]
 }
 
-Table "nets_data" {
+Table nets_data {
   "net_id" bigint [primary key, not null]
   "name" "character varying(50)" [not null]
   "goal" text [default: NULL]
@@ -16,7 +16,7 @@ Table "nets_data" {
   "resource_name" "character varying(50)" [default: NULL]
 }
 
-Table "nets_guests" {
+Table nets_guests {
   "net_id" bigint [not null]
   "user_id" bigint [not NULL]
   "comment" text [default: NULL]
@@ -27,7 +27,7 @@ Table "nets_guests" {
   }
 }
 
-Table "nodes" {
+Table nodes {
   "node_id" bigint [primary key, not null]
   "node_level" integer [not null, default: 0]
   "parent_node_id" bigint [default: NULL]
@@ -40,14 +40,14 @@ Table "nodes" {
   }
 }
 
-Table "users" {
+Table users {
   "user_id" integer [primary key, not null]
   "email" "character varying(50)" [default: NULL]
   "name" "character varying(50)" [default: NULL]
   "mobile" "character varying(50)" [default: NULL]
   "password" "character varying(255)" [default: NULL]
   "confirmed" boolean [not null, default: false]
-  "chat_id" "character varying(50)" [default: NULL]
+  "chat_id" bigint [default: NULL]
   "username" "character varying(50)" [default: NULL]
   "photo_url" "character varying(100)" [default: NULL]
   Indexes {
@@ -56,7 +56,7 @@ Table "users" {
   }
 }
 
-Table "members" {
+Table members {
   "member_id" bigint [primary key, not null]
   "user_id" bigint [default: NULL]
   "email_show" boolean [not null, default: false]
@@ -70,7 +70,7 @@ Table "members" {
   }
 }
 
-Table "users_tokens" {
+Table users_tokens {
   "user_id" integer [primary key, not null]
   "token" "character varying(255)" [not null]
   Indexes {
@@ -78,7 +78,7 @@ Table "users_tokens" {
   }
 }
 
-Table "members_invites" {
+Table members_invites {
   "member_id" bigint [not null]
   "node_id" bigint [primary key, not null]
   "member_name" "character varying(50)" [not null]
@@ -89,7 +89,7 @@ Table "members_invites" {
   }
 }
 
-Table "members_to_members" {
+Table members_to_members {
   "branch_id" bigint [not null]
   "from_member_id" bigint [not null]
   "to_member_id" bigint [not null]
@@ -102,7 +102,7 @@ Table "members_to_members" {
   }
 }
 
-Table "sessions" {
+Table sessions {
   "session_id" integer [primary key, not null]
   "user_id" integer [not null]
   "session_key" "character varying(255)" [not null]
@@ -127,25 +127,25 @@ Table users_roles {
 }
 
 Table messages {
-  "net_id" integer [not null, default: 0]
+  "net_id" integer [not null]
   "message_id" integer [primary key, not null]
   "subject" "character varying" [not null]
   "content" "character varying" [not null]
   "date" timestamp [not null]
 }
 
-Table "subscriptions" {
-  "user_id" integer [primary key, not null]
-  "type" "character varying" [not null]
-  "date" timestamp [not null, default: 'now()']
+Table subscriptions {
+  "member_id" integer [not null]
   "subject" "character varying" [not null]
+  "type" "character varying" [not null]
   "message_date" timestamp [not null, default: 'now()']
+  "sent_date" timestamp [not null, default: 'now()']
   Indexes {
-    (user_id, subject) [pk, name: "pk_subscriptions"]
+    (member_id, subject) [pk, name: "pk_subscriptions"]
   }
 }
 
-Table "events" {
+Table events {
   "event_id" bigint [primary key, not null]
   "from_node_id" bigint [default: NULL]
   "user_id" bigint [not null]
@@ -162,7 +162,7 @@ Table "events" {
   }
 }
 
-Table "users_events" {
+Table users_events {
   "user_id" bigint [primary key, not null]
   "notification_date" timestamp [not null, default: 'now()']
 }
@@ -171,7 +171,8 @@ Ref "fk_users_tokens_user":"users"."user_id" < "users_tokens"."user_id" [delete:
 Ref "fk_sessions_user":"users"."user_id" < "sessions"."user_id" [delete: cascade]
 Ref "fk_users_roles_user":"users"."user_id" < "users_roles"."user_id" [delete: cascade]
 Ref "fk_users_roles_role":"roles"."role_id" < "users_roles"."role_id" [delete: cascade]
-Ref "fk_subscriptions_user":"users"."user_id" < "subscriptions"."user_id" [delete: cascade]
+Ref "fk_subscriptions_member":"members"."member_id" < "subscriptions"."member_id" [delete: cascade]
+Ref "fk_messages_net":"nets"."net_id" < "messages"."net_id" [delete: cascade]
 //
 Ref "fk_nodes_net":"nets"."net_id" < "nodes"."net_id"
 Ref "fk_nets_data_net":"nets"."net_id" - "nets_data"."net_id" [delete: cascade]

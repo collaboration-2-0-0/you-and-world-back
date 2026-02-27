@@ -11,6 +11,7 @@ export PGPASSWORD=postgres
 psql -f create.sql -U postgres
 
 export PGPASSWORD=you_and_world
-psql -d $DATABASE -f '../../../.local/net_init_1.sql' -U $USER
+psql -d $DATABASE -f '../../../.local/net_init_2.sql' -U $USER
+# psql -d $DATABASE -f './structure.sql' -U $USER
 
 echo 'end'

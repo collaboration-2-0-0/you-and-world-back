@@ -20,4 +20,5 @@ export const FILES_TO_COPY_FROM_BACK_TO_FRONT: [string, string][] = [
   ['src/domain/types/member.types.ts', 'local/member.types.ts'],
   ['src/domain/types/user.types.ts', 'local/user.types.ts'],
   ['src/domain/types/event.types.ts', 'local/event.types.ts'],
+  ['src/domain/types/subscription.types.ts', 'local/subscription.types.ts'],
 ].map(([i, j]) => [resolve(i!), join(FRONT_PATH, j!)]);

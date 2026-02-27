@@ -1,7 +1,7 @@
 import { TQuery } from '../../types/types';
 
 export interface IQueriesUserMessenger {
-  connect: TQuery<[['user_id', number], ['chatId', string]]>;
+  connect: TQuery<[['user_id', number], ['chatId', number]]>;
 }
 
 export const connect = `

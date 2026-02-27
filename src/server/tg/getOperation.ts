@@ -9,7 +9,7 @@ const getUrlFromArg = (origin: string, token: string) => {
 
 export const getOparation = (ctx: Context, origin: string) => {
   const { chat, message, editedMessage } = ctx;
-  const chatId = chat?.id.toString();
+  const chatId = chat?.id;
   if (!chatId) return;
   const { text } = message || editedMessage || {};
   if (!text) return;

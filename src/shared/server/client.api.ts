@@ -36,7 +36,8 @@ export const getApi = (
     },
   },
   'bot': {
-    'message': () => fetch<boolean>('/bot/message'),
+    'message': (options: P.TBotMessage) =>
+      fetch<P.TBotMessageResponse>('/bot/message', options),
 
   },
   'chat': {
@@ -127,12 +128,13 @@ export const getApi = (
     },
   },
   'subscription': {
-    'get': () => fetch<P.IGetSubscription>('/subscription/get'),
+    'get': (options: P.IUserNode) =>
+      fetch<P.IGetSubscription>('/subscription/get', options),
 
     'update': (options: P.IUpdateSubscription) =>
       fetch<boolean>('/subscription/update', options),
 
-    'remove': (options: P.TSubscriptionRemove) =>
+    'remove': (options: P.IRemoveSubscription) =>
       fetch<boolean>('/subscription/remove', options),
 
     'sending': () => fetch<boolean>('/subscription/sending'),

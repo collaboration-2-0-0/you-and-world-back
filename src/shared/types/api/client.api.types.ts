@@ -4,6 +4,14 @@ export type TAccountLogin_tg = {
 export type TAccountSignup_tg = {
   initData: string;
 };
+export type TBotMessage = {
+  chatId: number;
+  netId?: number;
+  message?: undefined;
+};
+export type TBotMessageResponse = {
+  message?: string;
+} | boolean;
 export type TEventsRead = {
   event_id?: number;
 };
@@ -17,6 +25,3 @@ export type TNetInvite = {
   user_id: number;
 };
 export type TNetInviteResponse = string | null;
-export type TSubscriptionRemove = {
-  subject: string | null;
-};

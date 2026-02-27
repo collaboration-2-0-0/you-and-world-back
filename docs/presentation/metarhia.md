@@ -24,7 +24,7 @@ Open source project
 Готовий прототип (MVP): back (Node) + front (React, Telegram WebView), який
 можна взяти за основу для нового проекту 'з нуля' (шо я і планую), або дописувати (рефакторти) існуючий
 
-- ## [модель](https://github.com/collaboration-2-0-0/you-and-world-back/blob/main/docs/presentation/collaboration.pdf)
+- ## [модель](https://github.com/collaboration-2-0-0/you-and-world-back/blob/main/docs/users/collaboration.pdf)
 - ## [readme](https://github.com/collaboration-2-0-0/you-and-world-back/blob/main/README.md)
 - ## [додаток (dev)](https://t.me/u_n_w_dev_bot)
 - ## [код](https://github.com/orgs/collaboration-2-0-0/repositories)

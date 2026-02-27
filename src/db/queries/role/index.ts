@@ -4,9 +4,9 @@ import { TQuery } from '../../types/types';
 export interface IQueriesRole {
   setAdmin: TQuery<[['user_id', number]]>;
   removeAdmin: TQuery;
-  getByChatId: TQuery<[['chat_id', string]], ITableRoles>;
+  getByChatId: TQuery<[['chat_id', number]], ITableRoles>;
   getByChatIdAndRole: TQuery<
-    [['chat_id', string], ['name', string]],
+    [['chat_id', number], ['name', string]],
     ITableRoles
   >;
 }

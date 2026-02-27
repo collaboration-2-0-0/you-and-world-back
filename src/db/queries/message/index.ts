@@ -1,7 +1,7 @@
 import { ITableMessages } from '@domain/types';
 import { TQuery } from '../../types/types';
 
-const INTERVAL = +(process.env.NOTIFICATION_INTERVAL || 0);
+// const INTERVAL = +(process.env.NOTIFICATION_INTERVAL || 0);
 
 export interface IQueriesMessage {
   get: TQuery<[['net_id', number], ['subject', string]], ITableMessages>;
@@ -15,16 +15,18 @@ export interface IQueriesMessage {
     ],
     ITableMessages
   >;
-  remove: TQuery<[['net_id', number], ['subject', string]]>;
-  removeOld: TQuery<[['net_id', number]]>;
+  removeById: TQuery<[['message_id', number]]>;
+  // remove: TQuery<[['net_id', number], ['subject', string]]>;
+  // removeOld: TQuery<[['net_id', number]]>;
 }
 
 export const get = `
   SELECT *
-  FROM messages m
+  FROM messages
   WHERE
-    m.net_id = $1 AND
-    m.subject = $2;
+    net_id = $1 AND
+    subject = $2
+  ORDER BY date;
 `;
 
 export const update = `
@@ -42,22 +44,27 @@ export const update = `
       content = $4,
       date = $5
   WHERE
-    m.net_id = $1 AND
     m.message_id = $2
   RETURNING *;
 `;
 
-export const remove = `
+export const removeById = `
   DELETE
   FROM messages
-  WHERE
-    net_id = $1 AND
-    subject = $2;
+  WHERE message_id = $1;
 `;
 
-export const removeOld = `
-  DELETE FROM messages
-  WHERE
-    net_id = $1 AND
-    date + interval '${INTERVAL * 4} second'< now();
-`;
+// export const remove = `
+//   DELETE
+//   FROM messages
+//   WHERE
+//     net_id = $1 AND
+//     subject = $2;
+// `;
+
+// export const removeOld = `
+//   DELETE FROM messages
+//   WHERE
+//     net_id = $1 AND
+//     date + interval '${INTERVAL * 4} second'< now();
+// `;

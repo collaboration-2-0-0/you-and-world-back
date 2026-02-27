@@ -1,4 +1,5 @@
 import http from 'node:http';
+import { Message } from 'grammy/types';
 import { IMessage, MessageTypeKeys } from '../shared/types/api';
 import { IOperation, TOperationResponse } from '../controller/operation.types';
 import { IHttpConfig, IHttpServer } from './http/types';
@@ -32,8 +33,8 @@ export interface IConnectionService {
     connectionIds?: Set<number>,
   ) => Promise<boolean>;
   sendNotification: (
-    chatId: string,
+    chatId: number,
     message?: string,
     other?: Record<string, any>,
-  ) => Promise<boolean>;
+  ) => Promise<Message.TextMessage | boolean>;
 }

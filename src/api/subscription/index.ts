@@ -2,45 +2,51 @@ import Joi from 'joi';
 import { THandler } from '../../controller/types';
 import {
   IGetSubscription,
+  IRemoveSubscription,
   IUpdateSubscription,
-  SubscriptionSubjectKeys,
+  IUserNode,
 } from '@root/shared/types/api';
 import {
   GetSubscriptionSchema,
   UpdateSubscriptionSchema,
-  JOI_NULL,
+  RemoveSubscriptionSchema,
+  UserNodeSchema,
 } from '../schema/schema';
 
 /* read */
-export const get: THandler<never, IGetSubscription> = async ({ session }) => {
-  const user_id = session.read('user_id')!;
-  const subscriptions = await execQuery.subscription.get([user_id]);
+export const get: THandler<IUserNode, IGetSubscription> = async ({
+  member,
+}) => {
+  const { member_id } = member!.get();
+  const subscriptions = await execQuery.subscription.get([member_id]);
   return subscriptions as IGetSubscription;
 };
+get.paramsSchema = UserNodeSchema;
 get.responseSchema = GetSubscriptionSchema;
+get.checkNet = true;
 
 /* create / update */
 export const update: THandler<IUpdateSubscription, boolean> = async (
-  { session },
+  { member },
   { type, subject },
 ) => {
-  const user_id = session.read('user_id')!;
-  await execQuery.subscription.update([user_id, type, subject]);
+  const { member_id } = member!.get();
+  await execQuery.subscription.update([member_id, type, subject]);
   return true;
 };
 update.paramsSchema = UpdateSubscriptionSchema;
 update.responseSchema = Joi.boolean();
+update.checkNet = true;
 
 /* delete */
-export const remove: THandler<
-  { subject: SubscriptionSubjectKeys | null },
-  boolean
-> = async ({ session }, { subject }) => {
-  const user_id = session.read('user_id')!;
-  await execQuery.subscription.remove([user_id, subject]);
+export const remove: THandler<IRemoveSubscription, boolean> = async (
+  { member },
+  { subject },
+) => {
+  const { member_id } = member!.get();
+  await execQuery.subscription.remove([member_id, subject]);
   return true;
 };
-remove.paramsSchema = {
-  subject: [Joi.string(), JOI_NULL],
-};
+remove.paramsSchema = RemoveSubscriptionSchema;
 remove.responseSchema = Joi.boolean();
+remove.checkNet = true;

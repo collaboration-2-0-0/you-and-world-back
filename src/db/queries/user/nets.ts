@@ -83,14 +83,14 @@ export const getWhereIsAdmin = `
     nets_data.*
   FROM members
   INNER JOIN nodes ON
-    nodes.node_id = members.member_id
+    nodes.node_id = members.member_id AND
+    nodes.parent_node_id ISNULL
   INNER JOIN nets ON
-    nets.net_id = nodes.net_id
+    nets.net_id = nodes.net_id AND
+    nets.net_level = 0
   INNER JOIN nets_data ON
     nets_data.net_id = nets.net_id
   WHERE
-    members.user_id = $1 AND
-    nodes.parent_node_id ISNULL AND
-    nets.net_level = 0
-  ORDER BY nets.name
+    members.user_id = $1
+  ORDER BY nets_data.name
 `;

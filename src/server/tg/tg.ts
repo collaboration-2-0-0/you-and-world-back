@@ -1,5 +1,6 @@
 import { env } from 'node:process';
 import { Bot, BotError, Context, InlineKeyboard } from 'grammy';
+import { Message } from 'grammy/types';
 import { IOperation, THandleOperation } from '../../controller/operation.types';
 import { IInputConnection } from '../types';
 import { ITgConfig, ITgServer } from './types';
@@ -88,7 +89,11 @@ class TgConnection implements IInputConnection {
 
     try {
       const result = await this.exec!(operation);
-      if (!result) {
+      if (result) {
+        typeof result === 'object' &&
+          'message' in result &&
+          ctx.reply(`${result.message}`, { parse_mode: 'HTML' });
+      } else {
         forbidden(ctx);
       }
     } catch (e) {
@@ -97,18 +102,14 @@ class TgConnection implements IInputConnection {
   }
 
   handleCallback(ctx: Context) {
-    const { chat, callbackQuery } = ctx;
-    const chatId = chat?.id;
-    const { data = '' } = callbackQuery || {};
     ctx.answerCallbackQuery();
 
-    console.log({ chatId, data });
+    const { chat, callbackQuery } = ctx;
+    const chatId = chat!.id;
+    const { data = '' } = callbackQuery || {};
 
-    const [, netId] = data.split(':');
-
-    if (!chatId || !netId) {
-      return ctx.reply('Сталася помилка!');
-    }
+    const [, strNetId] = data.split(':');
+    const netId = Number(strNetId);
 
     const operation = {
       options: {
@@ -129,35 +130,16 @@ class TgConnection implements IInputConnection {
   }
 
   private async sendNotification(
-    chatId: string,
+    chatId: number,
     text = '',
     other: Record<string, any> = {},
-  ) {
-    if (text || Object.keys(other).length) {
-      try {
-        await this.server.api.sendMessage(chatId, text, {
-          parse_mode: 'HTML',
-          ...other,
-        });
-        return true;
-      } catch (e) {
-        logger.warn(e);
-        return false;
-      }
-    }
+  ): Promise<Message.TextMessage> {
+    const result = await this.server.api.sendMessage(chatId, text, {
+      parse_mode: 'HTML',
+      ...other,
+    });
 
-    // const appName = 'You & World';
-    // const message = `На сайті ${appName} нові події`;
-    // const inlineKyeboard = new InlineKeyboard().url(appName, this.origin);
-    // try {
-    //   await this.server.api.sendMessage(chatId, message, {
-    //     reply_markup: inlineKyeboard,
-    //   });
-    //   return true;
-    // } catch (e) {
-    //   logger.warn(e);
-    return false;
-    // }
+    return result;
   }
 
   private handleError(error: BotError) {

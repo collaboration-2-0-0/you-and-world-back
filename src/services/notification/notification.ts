@@ -68,12 +68,19 @@ export class NotificationService {
       const { user_id, chat_id } = user;
       // logger.warn('SEND TO TELEGRAM', user_id);
       const date = new Date().toUTCString();
-      const success = await this.tg!.sendNotification(chat_id!, message, other);
-      if (success) {
+      try {
+        const result = await this.tg!.sendNotification(
+          +chat_id!,
+          message,
+          other,
+        );
+        other?.onSuccess(result);
         await execQuery.user.events
           .write([user_id, date])
           .catch(logger.error.bind(logger));
-      } else {
+      } catch (e) {
+        other?.onError(e);
+        logger.warn(e);
         logger.warn("CANT'T SEND TO TELEGRAM", user_id);
         // this.sendToEmail(user).catch(logger.error.bind(logger));
       }
@@ -90,16 +97,18 @@ export class NotificationService {
       }
 
       // logger.warn('SEND TO TELEGRAM', user, content);
-      const success = await this.tg!.sendNotification(chat_id!, content);
+      try {
+        await this.tg!.sendNotification(+chat_id!, content);
 
-      if (success) {
         if (!user_id) {
           continue;
         }
+
         await execQuery.subscription.send
           .register([subject, user_id, message_date])
           .catch(logger.error.bind(logger));
-      } else {
+      } catch (e) {
+        logger.warn(e);
         logger.warn("CANT'T SEND TO TELEGRAM", user_id);
       }
     }
