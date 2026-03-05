@@ -31,7 +31,7 @@ export class TaskRunnerService {
 
     const job = this.createJob(task);
 
-    this.cron.schedule(cronString, job, {});
+    this.cron.schedule(cronString, job, {}).start();
   }
 
   private createJob(task: ITask) {

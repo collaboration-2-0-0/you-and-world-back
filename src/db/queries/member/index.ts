@@ -95,7 +95,7 @@ export const getConnected = `
 
 export const updateDate = `
   UPDATE members
-  SET active_date = now() at time zone 'UTC'
+  SET active_date = now()
   WHERE member_id = $1
 `;
 

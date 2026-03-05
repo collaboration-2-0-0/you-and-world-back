@@ -92,7 +92,17 @@ const config: IConfig = {
       {
         path: 'subscription/sending',
         params: {},
-        cronString: '0 * * * *',
+        cronString: '0 3 * * *',
+      },
+      {
+        path: 'admin/disconnectUnactive',
+        params: { monthAgo: 2 },
+        cronString: '0 3 * * *',
+      },
+      {
+        path: 'admin/disconnectNotVote',
+        params: { monthAgo: 2 },
+        cronString: '0 3 * * *',
       },
     ],
     excludeEndpoints,

@@ -24,7 +24,7 @@ export interface IQueriesNode {
   >;
   changeLevel: TQuery<[['node_id', number]]>;
   changeLevelAll: TQuery<[['net_id', number]]>;
-  findFreeByDate: TQuery<[['strDate', string]], ITableNodes>;
+  findFreeByDate: TQuery<[['strDate', Date]], ITableNodes>;
   tree: IQueriesNodeTree;
 }
 
@@ -45,19 +45,19 @@ export const updateCountOfMembers = `
   UPDATE nodes
   SET
     count_of_members = count_of_members + $2,
-    updated = now() at time zone 'UTC'
+    updated = now()
   WHERE node_id = $1
   RETURNING *
 `;
 
 export const getIfEmpty = `
-  SELECT nodes.*
+  SELECT *
   FROM nodes
   LEFT JOIN members ON
     members.member_id = nodes.node_id
   WHERE
-    nodes.node_id = $1 AND
-    members.user_id ISNULL
+    members.member_id ISNULL AND
+    nodes.node_id = $1
 `;
 
 export const getChild = `
@@ -91,14 +91,12 @@ export const changeLevelAll = `
 `;
 
 export const findFreeByDate = `
-  SELECT
-    nodes.*,
-    nodes.net_id::int
+  SELECT *
   FROM nodes
   LEFT JOIN members ON
     members.member_id = nodes.node_id
   WHERE
-    members.user_id ISNULL AND
+    members.member_id ISNULL AND
     nodes.count_of_members > 0 AND
     nodes.updated < $1
 `;

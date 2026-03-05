@@ -16,14 +16,18 @@ export const read = `
 
 export const create = `
   INSERT INTO sessions (
-    user_id, session_key, session_value
+    user_id,
+    session_key,
+    session_value
   )
   VALUES ($1, $2, $3)
 `;
 
 export const update = `
   UPDATE sessions
-  SET session_value = $2, updated = now() at time zone 'UTC'
+  SET
+    session_value = $2,
+    updated = now()
   WHERE session_key = $1
 `;
 

@@ -52,13 +52,18 @@ export class Session<T extends IObject = IObject> implements ISession<T> {
   }
 
   async persist() {
-    if (!this.session && this.persisted) {
-      await execQuery.session.remove([this.sessionKey]);
+    if (!this.session) {
+      if (this.persisted) {
+        await execQuery.session.remove([this.sessionKey]);
+      }
       return;
     }
-    if (!this.session) return;
-    const sessionValue = this.serialize();
     const userId = this.session.user_id as number;
+    if (!userId) {
+      return;
+    }
+
+    const sessionValue = this.serialize();
     if (this.persisted)
       await execQuery.session.update([this.sessionKey, sessionValue]);
     else
@@ -72,10 +77,13 @@ export const getService = <T extends IObject = IObject>() => {
   const clearSession = async (sessionKey: string) => {
     const [sessionPromise, count = 0] = activeSessions.get(sessionKey) || [];
     if (!sessionPromise) return;
-    if (count > 1) activeSessions.set(sessionKey, [sessionPromise, count - 1]);
-    else {
-      activeSessions.delete(sessionKey);
+    activeSessions.set(sessionKey, [sessionPromise, count - 1]);
+    if (count < 2) {
       await sessionPromise.then((session) => session.persist());
+    }
+    const [, countAgain = 0] = activeSessions.get(sessionKey) || [];
+    if (countAgain < 1) {
+      activeSessions.delete(sessionKey);
     }
   };
 

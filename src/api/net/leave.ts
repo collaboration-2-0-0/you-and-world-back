@@ -8,9 +8,9 @@ const leave: THandler<IUserNode> = async ({ member: m }) => {
   const { confirmed } = member;
   const event_type = confirmed ? 'LEAVE' : 'LEAVE_CONNECTED';
   const remove = domain.net.NetArrange.removeMemberFromNet;
-  const { netRemoved, parent_net_id } = await remove(event_type, member);
+  const { parent_net_id, netRemoved } = await remove(event_type, member);
 
-  if (netRemoved && parent_net_id) {
+  if (parent_net_id && netRemoved) {
     await domain.net.updateCountOfNets(parent_net_id, -netRemoved);
   }
 
