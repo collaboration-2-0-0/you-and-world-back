@@ -1,10 +1,13 @@
-import { IControllerContext } from './types';
 import { IConfig } from '@root/config/types';
-import { IOperation } from '../controller/operation.types';
+
+import { loadModule } from '../loader/require';
 import { ILogger } from '../logger/types';
-import { IDatabase } from '../db/types/types';
 import { IController } from '../controller/types';
+import { IOperation } from '../controller/operation.types';
+import { IDatabase } from '../db/types/types';
 import { IInputConnection } from '../server/types';
+import { TaskRunnerService } from '../services/task-runner/task.runner';
+import { IControllerContext } from './types';
 import {
   AppError,
   handleAppInitError,
@@ -13,7 +16,6 @@ import {
 } from './errors';
 import { setToGlobal } from './methods/utils';
 import { createSetInputConnection } from './methods/set.input.connection';
-import { loadModule } from '../loader/require';
 
 export default class App {
   protected config: IConfig;
@@ -110,6 +112,9 @@ export default class App {
     };
     const Controller = loadModule(__dirname, controller.path, context);
     this.controller = await new Controller(controller).init();
+
+    new TaskRunnerService(controller, this.controller!).init();
+
     return this;
   }
 

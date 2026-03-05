@@ -113,7 +113,7 @@ class TgConnection implements IInputConnection {
 
     const operation = {
       options: {
-        sessionKey: 'messenger',
+        sessionKey: 'admin:messenger',
         origin: 'https://t.me',
         isAdmin: true,
       },

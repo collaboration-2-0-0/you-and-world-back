@@ -37,8 +37,7 @@ export interface IControllerConfig {
 export interface ITask {
   path: string;
   params: IOperation['data']['params'];
-  time?: number;
-  interval?: number;
+  cronString: string;
 }
 
 export interface IController {

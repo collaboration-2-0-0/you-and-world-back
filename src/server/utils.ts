@@ -8,6 +8,10 @@ export const getSessionKey = (req: IRequest, res?: IResponse) => {
   if (cookie) {
     const regExp = /sessionKey=([^\s]*)\s*;?/;
     [, result] = cookie.match(regExp) || [];
+    /* admin:**** reserved for internal calls */
+    if (result?.startsWith('admin')) {
+      result = undefined;
+    }
   }
   const sessionKey = result || createUnicCode(15);
   res &&

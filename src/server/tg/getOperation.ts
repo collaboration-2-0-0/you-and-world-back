@@ -25,7 +25,7 @@ export const getOparation = (ctx: Context, origin: string) => {
     }
 
     const operation = {
-      options: { sessionKey: 'messenger', origin: 'https://t.me' },
+      options: { sessionKey: 'admin:messenger', origin: 'https://t.me' },
       names: 'account/messenger/link/connect'.split('/'),
       data: { params: { chatId, token: startParam } },
     };
@@ -34,7 +34,11 @@ export const getOparation = (ctx: Context, origin: string) => {
   }
 
   const operation = {
-    options: { sessionKey: 'messenger', origin: 'https://t.me', isAdmin: true },
+    options: {
+      sessionKey: 'admin:messenger',
+      origin: 'https://t.me',
+      isAdmin: true,
+    },
     names: 'bot/message'.split('/'),
     data: {
       params: {

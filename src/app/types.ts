@@ -1,3 +1,4 @@
+import { NodeCron } from 'node-cron';
 import { IConfig } from '@root/config/types';
 import { ILogger } from '../logger/types';
 import { IDatabase, IDatabaseQueries } from '../db/types/types';
@@ -6,6 +7,7 @@ import { IInputConnection, IConnectionService } from '../server/types';
 import { IMailService } from '../services/mail/types';
 import { ChatService } from '../services/chat/chat';
 import { NotificationService } from '../services/notification/notification';
+import { TaskRunnerService } from '../services/task-runner/task.runner';
 import { IDomain } from '../domain';
 import App from './app';
 
@@ -38,6 +40,8 @@ export interface IGlobalMixins {
   cryptoService: typeof import('../utils/crypto');
   mailService: IMailService;
   chatService: ChatService;
+  notificationService: NotificationService;
+  taskRunnerService: TaskRunnerService;
   env: IConfig['env'];
   domain: IDomain;
 }
@@ -52,6 +56,8 @@ declare global {
   const mailService: IMailService;
   const chatService: ChatService;
   const notificationService: NotificationService;
+  // const taskRunnerService: TaskRunnerService;
+  const cron: NodeCron;
   const env: IConfig['env'];
   const domain: IDomain;
 }

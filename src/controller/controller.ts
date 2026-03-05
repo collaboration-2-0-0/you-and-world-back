@@ -1,4 +1,3 @@
-import { setTimeout, setInterval } from 'node:timers';
 import {
   THandler,
   IEndpoints,
@@ -7,7 +6,6 @@ import {
   TOutputModule,
   IController,
   IControllerConfig,
-  ITask,
 } from './types';
 import { IOperation, TOperationResponse } from './operation.types';
 import { ControllerError } from './errors';
@@ -18,7 +16,6 @@ import { createInputModules, createOutputModules } from './methods/modules';
 import { getServices } from './methods/services';
 import { createRoutes } from './methods/create.endpoints';
 import { setToGlobal } from '../app/methods/utils';
-import { pathToArray } from '../utils/utils';
 import * as cryptoService from '../utils/crypto';
 import * as domain from '../domain';
 
@@ -58,37 +55,8 @@ class Controller implements IController {
       throw new ControllerError('ENDPOINTS_CREATE_ERROR');
     }
 
-    try {
-      const { tasks = [] } = this.config;
-      for (const task of tasks) await this.execTask(task);
-    } catch (e: any) {
-      logger.error(e);
-      throw new ControllerError('TASK_ERROR');
-    }
-
     this.inited = true;
     return this;
-  }
-
-  private async execTask(task: ITask) {
-    const { time, interval = 0, params, path } = task;
-    const operation = {
-      options: {
-        sessionKey: 'scheduler',
-        origin: 'http://example.com',
-        isAdmin: true,
-      },
-      names: pathToArray(path),
-      data: { params },
-    };
-    setTimeout(() => {
-      time !== undefined && this.exec(operation).catch((e) => logger.error(e));
-      if (!interval) return;
-      setInterval(
-        () => this.exec(operation).catch((e) => logger.error(e)),
-        interval,
-      ).unref();
-    }, time || 0).unref();
   }
 
   async exec(operation: IOperation): Promise<TOperationResponse> {

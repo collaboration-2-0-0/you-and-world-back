@@ -89,12 +89,11 @@ const config: IConfig = {
       mailService: mailConfig,
     },
     tasks: [
-      // {
-      //   path: 'subscription/sending',
-      //   params: {},
-      //   interval: (restEnv.NOTIFICATION_INTERVAL / 2) * 1000,
-      //   time: 0,
-      // },
+      {
+        path: 'subscription/sending',
+        params: {},
+        cronString: '0 * * * *',
+      },
     ],
     excludeEndpoints,
   },
