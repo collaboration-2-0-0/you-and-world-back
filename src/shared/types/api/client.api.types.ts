@@ -4,8 +4,6 @@ export type TAccountLogin_tg = {
 export type TAccountSignup_tg = {
   initData: string;
 };
-export type TAdminNetGetResponse = {
-};
 export type TBotMessage = {
   chatId: number;
   netId?: number;
