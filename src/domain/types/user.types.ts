@@ -1,3 +1,3 @@
-import { ITableUsers } from './db.types';
+import { ITableUsers } from '@types-db/db.types';
 
 export type IUser = Omit<ITableUsers, 'password'>;

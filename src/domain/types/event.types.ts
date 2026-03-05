@@ -1,4 +1,4 @@
-import { ITableEvents } from './db.types';
+import { ITableEvents } from '@types-db/db.types';
 import { NetViewKeys } from './net.types';
 
 export const NET_EVENT_MAP = {

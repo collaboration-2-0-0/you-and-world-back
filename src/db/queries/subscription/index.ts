@@ -1,5 +1,5 @@
-import { ITableSubscriptions } from '@domain/types';
-import { TQuery } from '../../types/types';
+import { TQuery } from '@types-db/types';
+import { ITableSubscriptions } from '@types-db/db.types';
 import { IQueriesSubscriptionSend } from './send';
 
 export interface IQueriesSubscription {

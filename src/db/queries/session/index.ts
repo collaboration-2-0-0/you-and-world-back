@@ -1,5 +1,5 @@
-import { ITableSessions } from '@domain/types';
-import { TQuery } from '../../types/types';
+import { TQuery } from '@types-db/types';
+import { ITableSessions } from '@types-db/db.types';
 
 export interface IQueriesSession {
   read: TQuery<[['key', string]], ITableSessions>;

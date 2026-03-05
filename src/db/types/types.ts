@@ -1,4 +1,3 @@
-import { GetParamsTypes } from '../../types/types';
 import { IQueriesUser } from '../queries/user';
 import { IQueriesSession } from '../queries/session';
 import { IQueriesSubscription } from '../queries/subscription';
@@ -67,6 +66,10 @@ export interface IDatabaseQueries {
 export interface IQueries {
   [key: string]: TQuery | IQueries;
 }
+
+export type GetParamsTypes<T extends [string, any][]> = {
+  [key in keyof T]: T[key][1];
+};
 
 export type TQuery<
   T extends [string, any][] = [string, any][],

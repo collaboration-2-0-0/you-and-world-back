@@ -10,7 +10,3 @@ export interface IObject {
     | IObject[]
     | Readable;
 }
-
-export type GetParamsTypes<T extends [string, any][]> = {
-  [key in keyof T]: T[key][1];
-};

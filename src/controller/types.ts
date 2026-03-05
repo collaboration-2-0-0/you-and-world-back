@@ -1,7 +1,7 @@
 import Joi, { ObjectSchema } from 'joi';
 import { IObject } from '../types/types';
 import { IOperation, TOperationResponse, IParams } from './operation.types';
-import { ITableUsers } from '@domain/types';
+import { ITableUsers } from '@types-db/db.types';
 import { UserStatusKey } from '../shared/types/api';
 import { IMailService } from '../services/mail/types';
 import { ChatService } from '../services/chat/chat';

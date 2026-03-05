@@ -1,6 +1,7 @@
 import { INetResponse, OmitNull } from '../../../shared/types/api';
-import { ITableNets, INet } from '@domain/types';
-import { TQuery } from '../../types/types';
+import { TQuery } from '@types-db/types';
+import { ITableNets } from '@types-db/db.types';
+import { INet } from '@domain/types';
 import { IQueriesNetData } from './data';
 import { IQueriesNetCircle } from './circle';
 import { IQueriesNetTree } from './tree';

@@ -27,7 +27,7 @@ exports.EXCLUDE_STATIC = [].map((i) =>
 );
 exports.FILES_TO_COPY_FROM_BACK_TO_FRONT = [
   ['src/domain/types/util.types.ts', 'local/util.types.ts'],
-  ['src/domain/types/db.types.ts', 'local/db.types.ts'],
+  ['src/db/types/db.types.ts', 'types/db/db.types.ts'],
   ['src/domain/types/net.types.ts', 'local/net.types.ts'],
   ['src/domain/types/member.types.ts', 'local/member.types.ts'],
   ['src/domain/types/user.types.ts', 'local/user.types.ts'],

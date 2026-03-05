@@ -1,6 +1,6 @@
 import { INetWaiting } from '../../../shared/types/api';
-import { ITableNets } from '@domain/types';
-import { TQuery } from '../../types/types';
+import { TQuery } from '@types-db/types';
+import { ITableNets } from '@types-db/db.types';
 
 export interface IQueriesNetWait {
   get: TQuery<[['net_id', number]], INetWaiting>;

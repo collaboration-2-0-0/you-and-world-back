@@ -1,5 +1,5 @@
-import { ITableRoles } from '@domain/types';
-import { TQuery } from '../../types/types';
+import { TQuery } from '@types-db/types';
+import { ITableRoles } from '@types-db/db.types';
 
 export interface IQueriesRole {
   setAdmin: TQuery<[['user_id', number]]>;

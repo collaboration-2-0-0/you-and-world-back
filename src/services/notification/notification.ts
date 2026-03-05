@@ -3,7 +3,8 @@ import * as T from '../../shared/types/api';
 import { IServices } from '../../controller/types';
 import { IConnectionService } from '../../server/types';
 import { ChatService } from '../chat/chat';
-import { ITableMessages, ITableUsers, INet } from '@domain/types';
+import { ITableMessages, ITableUsers } from '@types-db/db.types';
+import { INet } from '@domain/types';
 import { IMeesageStream } from './notifications.types';
 
 type IInstantEvent = Omit<T.IEventMessage, 'type' | 'event_id' | 'date'>;

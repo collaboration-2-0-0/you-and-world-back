@@ -1,5 +1,5 @@
-import { ITableMessages } from '@domain/types';
-import { TQuery } from '../../types/types';
+import { TQuery } from '@types-db/types';
+import { ITableMessages } from '@types-db/db.types';
 
 // const INTERVAL = +(process.env.NOTIFICATION_INTERVAL || 0);
 
