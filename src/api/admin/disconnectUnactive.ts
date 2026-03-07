@@ -1,6 +1,6 @@
 import Joi from 'joi';
+import { IMember } from '@shared/types/db';
 import { THandler } from '@root/controller/types';
-import { IMember } from '@domain/types';
 
 const disconnectUnactive: THandler<{ monthAgo: number }, boolean> = async (
   { isAdmin },

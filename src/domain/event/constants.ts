@@ -1,4 +1,5 @@
-import { INetEventTo, NetEventKeys } from '../types';
+import { NetEventKeys } from '@shared/types/db';
+import { INetEventTo } from '../types';
 
 export const NET_MESSAGES_MAP = {} as Record<NetEventKeys, INetEventTo>;
 const map = NET_MESSAGES_MAP;

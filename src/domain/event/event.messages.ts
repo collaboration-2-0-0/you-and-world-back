@@ -1,6 +1,7 @@
 import { format } from 'node:util';
+import { IMember } from '@shared/types/db';
 import { ITransaction } from '@db/types';
-import { IEventRecord, INetEventTo, IMember } from '../types';
+import { IEventRecord, INetEventTo } from '../types';
 import { INSTANT_EVENTS, NET_MESSAGES_MAP, SET_NET_ID_FOR } from './constants';
 import { NetEvent } from './event';
 

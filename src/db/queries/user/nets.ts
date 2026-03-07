@@ -1,5 +1,6 @@
+import { IMember } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { INet, IUserNet, IMember } from '@domain/types';
+import { INet, IUserNet } from '@domain/types';
 
 export interface IQueriesUserNets {
   getAll: TQuery<[['user_id', number]], IUserNet>;

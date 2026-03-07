@@ -9,3 +9,5 @@ export type IEventMessage = {
 export interface INewEventsMessage {
   type: Extract<MessageTypeKeys, 'NEW_EVENTS'>;
 }
+
+export type { IEvents } from '../../local/imports';

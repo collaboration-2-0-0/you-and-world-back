@@ -1,6 +1,6 @@
-import { ITableNets, ITableNodes } from '@shared/types/db';
+import { ITableNets, ITableNodes, INodeMember } from '@shared/types/db';
 import { ITransaction } from '@db/types';
-import { INetMember, INetNode } from '../types';
+import { INetNode } from '../types';
 import { MAX_NODE_LEVEL } from './constants';
 import { NetArrange } from './net.arrange';
 
@@ -96,7 +96,7 @@ export const showNet = (netNode: INetNode) => {
   tree?.forEach(showNet);
 };
 
-export const getNetNode = async (member: INetMember) => {
+export const getNetNode = async (member: INodeMember) => {
   const { node_id, user_id } = member;
   const connections = user_id && chatService.getUserConnections(user_id);
   const connection = Boolean(connections);

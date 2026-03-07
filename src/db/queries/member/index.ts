@@ -1,6 +1,5 @@
-import { ITableMembers } from '@shared/types/db';
+import { ITableMembers, IMember } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { IMember } from '@domain/types';
 import { IQueriesMemberData } from './data';
 import { IQueriesMemberInvite } from './invite';
 import { IQueriesMemberFind } from './find';

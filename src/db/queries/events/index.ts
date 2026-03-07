@@ -1,5 +1,5 @@
+import { ITableEvents, NetEventKeys, NetViewKeys } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { IEvent, NetEventKeys, NetViewKeys } from '@domain/types';
 
 export interface IQueriesEvents {
   create: TQuery<
@@ -12,8 +12,8 @@ export interface IQueriesEvents {
       ['message', string],
     ]
   >;
-  readAll: TQuery<[], IEvent>;
-  read: TQuery<[['user_id', number], ['event_id', number]], IEvent>;
+  readAll: TQuery<[], ITableEvents>;
+  read: TQuery<[['user_id', number], ['event_id', number]], ITableEvents>;
   confirm: TQuery<[['user_id', number], ['event_id', number]]>;
   removeFromNet: TQuery<[['user_id', number], ['net_id', number | null]]>;
 }

@@ -1,6 +1,6 @@
 import assert from 'node:assert';
+import { delay } from '@shared/server/utils';
 import { IOperationData, TMockFunction } from '../types/types';
-import { delay } from '../../src/shared/server/utils';
 import { TFetch } from '../client/types';
 
 export const assertDb = async (operation: IOperationData) => {

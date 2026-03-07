@@ -1,15 +1,15 @@
+import { IMember, IMemberInvites } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { IMember, IMemberWithInvites } from '@domain/types';
 
 export interface IQueriesMemberFind {
   unactive: TQuery<[['date', Date]], IMember>;
   inTree: TQuery<
     [['user_node_id', number], ['member_node_id', number]],
-    IMemberWithInvites
+    IMemberInvites
   >;
   inCircle: TQuery<
     [['parent_node_id', number], ['member_node_id', number]],
-    IMemberWithInvites
+    IMemberInvites
   >;
   getByChatId: TQuery<[['chat_id', number]], IMember>;
 }

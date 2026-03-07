@@ -1,4 +1,5 @@
-import { IMember, INet } from '../types';
+import { IMember } from '@shared/types/db';
+import { INet } from '../types';
 import { DomainError } from '../errors';
 
 export class Member {

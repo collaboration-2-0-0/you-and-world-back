@@ -1,21 +1,9 @@
-import * as T from '@shared/types/db';
-import { OuterJoin } from './util.types';
+import { ITableNodes } from '@shared/types/db';
 
-export type IMember = T.ITableMembers & T.ITableUsers & T.ITableNodes;
-export type IMemberWithInvites = IMember & T.ITableMembersInvites;
-
-export type IBranchDislikes = Pick<T.ITableNodes, 'node_id'> & {
+export type IBranchDislikes = Pick<ITableNodes, 'node_id'> & {
   dislike_count: number;
 };
 
-export type IBranchVotes = Pick<T.ITableNodes, 'node_id'> & {
+export type IBranchVotes = Pick<ITableNodes, 'node_id'> & {
   vote_count: number;
 };
-
-/* net structure */
-export type INetMember = T.ITableNodes &
-  OuterJoin<T.ITableMembers> & {
-    invite: boolean;
-    dislikes: number;
-    votes: number;
-  };

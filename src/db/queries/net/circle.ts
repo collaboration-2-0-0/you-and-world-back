@@ -1,5 +1,5 @@
+import { IMember } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { IMember } from '@domain/types';
 import { IMemberResponse } from '../../../shared/types/api';
 
 export interface IQueriesNetCircle {

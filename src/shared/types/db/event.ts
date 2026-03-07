@@ -1,0 +1,22 @@
+export const NET_EVENT_MAP = {
+  LEAVE: 'leave',
+  LEAVE_CONNECTED: 'leave_connected',
+  CONNECT: 'connect',
+  CONFIRM: 'confirm',
+  CONNECT_AND_CONFIRM: 'connect_and_confirm',
+  REFUSE: 'refuse',
+  DISLIKE: 'dislike',
+  DISLIKE_DISCONNECT: 'dislike_disconnect',
+  VOTE: 'vote',
+  LEAVE_VOTE: 'leave_vote',
+  LEAVE_DISVOTE: 'leave_disvote',
+  CONNECT_VOTE: 'connect_vote',
+  CONNECT_DISVOTE: 'connect_disvote',
+  UNACTIVE_DISCONNECT: 'unactive_disconnect',
+  NOT_VOTE: 'not_vote',
+  NOT_VOTE_DISCONNECT: 'not_vote_disconnect',
+  BOARD_MESSAGE: 'board_message',
+  TIGHTEN: 'tighten',
+  WAIT: 'wait',
+};
+export type NetEventKeys = keyof typeof NET_EVENT_MAP;

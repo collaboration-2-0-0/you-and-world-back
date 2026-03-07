@@ -6,8 +6,10 @@ import {
   ITableNodes,
   ITableNetsGuests,
   ITableUsers,
+  NetViewKeys,
+  OuterJoin,
 } from '../db';
-import { OuterJoin, NetViewKeys, INet } from '../../local/imports';
+import { INet } from '../../local/imports';
 import { IMemberResponse, IUserNode, Nullable } from './index';
 
 export type INetCreateParams = Pick<ITableNetsData, 'name'> & {

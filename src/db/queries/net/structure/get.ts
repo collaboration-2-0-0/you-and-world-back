@@ -1,9 +1,9 @@
+import { INodeMember } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { INetMember } from '@domain/types';
 
 export interface IQueriesNetStructure {
-  root: TQuery<[['net_id', number]], INetMember>;
-  tree: TQuery<[['node_id', number]], INetMember>;
+  root: TQuery<[['net_id', number]], INodeMember>;
+  tree: TQuery<[['node_id', number]], INodeMember>;
 }
 
 export const root = `
