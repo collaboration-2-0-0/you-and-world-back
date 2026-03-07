@@ -1,11 +1,8 @@
 import { mock } from 'node:test';
-import { TFetch } from '../client/types';
-import { TTransport } from '../../src/server/types';
+import { TRpc } from '@shared/client/connection/types';
 import { IConfig } from '@root/config/types';
-import {
-  IParams,
-  TOperationResponse,
-} from '../../src/controller/operation.types';
+import { TTransport } from '@root/server/types';
+import { IParams, TOperationResponse } from '@root/controller/operation.types';
 
 export interface ITestCase {
   title: string;
@@ -37,7 +34,7 @@ export interface IOperationData {
 
 export interface ITestRunnerData {
   title: string;
-  connections: TFetch[];
+  connections: TRpc[];
   onMessage: TMockFunction[];
   testUnits: [TTestUnit, number][];
 }

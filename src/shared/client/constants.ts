@@ -1,5 +1,5 @@
-import { MEMBER_STATUS } from '../../src/shared/types/api';
-import { createEnumFromArray } from '@shared/server/transform.utils';
+import { MEMBER_STATUS } from '@shared/types/api';
+import { createEnumFromArray } from '../server/transform.utils';
 
 export enum AppStatus {
   INITING = 'initing',

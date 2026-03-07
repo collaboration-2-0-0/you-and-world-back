@@ -1,6 +1,7 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
-exports.FILES_TO_COPY_FROM_BACK_TO_FRONT =
+exports.FILES_TO_COPY_FROM_FRONT_TO_BACK =
+  exports.FILES_TO_COPY_FROM_BACK_TO_FRONT =
   exports.EXCLUDE_STATIC =
   exports.EXCLUDE_FROM_BACK =
   exports.FROM_BACK_TO_FRONT =
@@ -36,4 +37,12 @@ exports.FILES_TO_COPY_FROM_BACK_TO_FRONT = [
   (0, node_path_1.resolve)(i),
   (0, node_path_1.join)(exports.FRONT_PATH, j),
 ]);
-//# sourceMappingURL=constants.js.map
+exports.FILES_TO_COPY_FROM_FRONT_TO_BACK = [
+  ['client/constants.ts', 'client/constants.ts'],
+  ['client/connection/errors.ts', 'client/connection/errors.ts'],
+  ['client/connection/types.ts', 'client/connection/types.ts'],
+  ['client/lib/event-emitter/event.emitter.ts', 'client/lib/event.emitter.ts'],
+].map(([i, j]) => [
+  (0, node_path_1.join)(exports.FRONT_PATH, i),
+  (0, node_path_1.join)(exports.BACK_PATH, j),
+]);

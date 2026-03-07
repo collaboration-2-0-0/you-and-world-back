@@ -1,4 +1,4 @@
-import LinkConnection from '../../src/server/link/link';
+import LinkConnection from '@root/server/link/link';
 
 export const getLinkConnection = () =>
   // url: string,

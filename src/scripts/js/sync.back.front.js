@@ -13,6 +13,8 @@ const runSync = async () => {
   );
   console.log('\n[-- copy FILES from BACK to FRONT --]\n');
   await (0, utils_1.copyFiles)(constants_1.FILES_TO_COPY_FROM_BACK_TO_FRONT);
+  console.log('\n[-- copy FILES from FRONT to BACK --]\n');
+  await (0, utils_1.copyFiles)(constants_1.FILES_TO_COPY_FROM_FRONT_TO_BACK);
   console.log('\n[-- copy STATIC from FRONT to BACK --]');
   (0, utils_1.logFromTo)(constants_1.BACK_PATH, constants_1.FRONT_PATH);
   await (0, utils_1.copyDir)(
@@ -23,4 +25,3 @@ const runSync = async () => {
   );
 };
 runSync();
-//# sourceMappingURL=sync.back.front.js.map

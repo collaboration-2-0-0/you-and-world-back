@@ -1,10 +1,10 @@
 import { mock } from 'node:test';
-import { IConfig } from '@root/config/types';
-import { TTransport } from '../../src/server/types';
-import { TFetch } from '../client/types';
+import { TRpc } from '@shared/client/connection/types';
 import originConfig from '@root/config';
-import App from '../../src/app/app';
-import { setToGlobal } from '../../src/app/methods/utils';
+import { IConfig } from '@root/config/types';
+import { TTransport } from '@root/server/types';
+import App from '@root/app/app';
+import { setToGlobal } from '@root/app/methods/utils';
 import { ITestCase, ITestRunnerData } from '../types/types';
 import { getHttpConnection as http } from '../client/http';
 import { getWsConnection as ws } from '../client/ws';
@@ -89,7 +89,7 @@ export const prepareTest = async (testCase: ITestCase) => {
     }, 0) + 1;
 
   /* connections */
-  const connections: TFetch[] = [];
+  const connections: TRpc[] = [];
   const closeConnections: (() => void)[] = [];
   const onMessage: ((data: any) => void)[] = [];
   for (let i = 0; i < connCount; i++) {

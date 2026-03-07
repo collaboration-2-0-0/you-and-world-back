@@ -1,18 +1,16 @@
 import { WebSocket } from 'ws';
-import { IWsResponse, TFetch } from '../client/types';
-import { TPromiseExecutor } from '../../src/shared/types/api';
+import { TPromiseExecutor } from '@shared/types';
+import { PING_INTERVAL } from '@shared/server/constants';
+import { delay } from '@shared/server/utils';
 import {
   CONNECTION_ATTEMPT_COUNT,
   CONNECTION_ATTEMPT_DELAY,
   CONNECTION_TIMEOUT,
-} from '../client/constants';
-import { PING_INTERVAL } from '../../src/shared/server/constants';
-// eslint-disable-next-line max-len
-import { HttpResponseError } from '../client/errors';
-// eslint-disable-next-line max-len
-import { EventEmitter } from '../client/event-emitter/event.emitter';
-import { delay } from '@shared/server/utils';
-import { createUnicCode } from '../../src/utils/crypto';
+} from '@shared/client/constants';
+import { EventEmitter } from '@shared/client/lib/event.emitter';
+import { IWsResponse, TRpc } from '@shared/client/connection/types';
+import { HttpResponseError } from '@shared/client/connection/errors';
+import { createUnicCode } from '@root/utils/crypto';
 
 class WsConnection extends EventEmitter {
   private socket!: WebSocket;
@@ -163,7 +161,7 @@ export const getWsConnection = (
   baseUrl: string,
   onConnection: () => void,
   onMessage: (data: any) => void,
-): [TFetch, () => void] => {
+): [TRpc, () => void] => {
   const connection = new WsConnection(baseUrl);
   connection.on('connection', onConnection);
   connection.on('message', onMessage);

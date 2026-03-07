@@ -24,3 +24,10 @@ export const FILES_TO_COPY_FROM_BACK_TO_FRONT: [string, string][] = [
   ['src/domain/types/event.types.ts', 'local/event.types.ts'],
   ['src/domain/types/subscription.types.ts', 'local/subscription.types.ts'],
 ].map(([i, j]) => [resolve(i!), join(FRONT_PATH, j!)]);
+
+export const FILES_TO_COPY_FROM_FRONT_TO_BACK: [string, string][] = [
+  ['client/constants.ts', 'client/constants.ts'],
+  ['client/connection/errors.ts', 'client/connection/errors.ts'],
+  ['client/connection/types.ts', 'client/connection/types.ts'],
+  ['client/lib/event-emitter/event.emitter.ts', 'client/lib/event.emitter.ts'],
+].map(([i, j]) => [join(FRONT_PATH, i!), join(BACK_PATH, j!)]);

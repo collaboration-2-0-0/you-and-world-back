@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { Writable } from 'node:stream';
-import { TPromiseExecutor } from '@shared/types/api';
+import { TPromiseExecutor } from '@shared/types';
 import { ITestUnits, TTestUnit } from '../types/types';
 import { ITestConfig } from '../config';
 import * as tpl from './templates';

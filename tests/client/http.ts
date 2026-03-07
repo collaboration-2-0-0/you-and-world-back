@@ -1,7 +1,7 @@
-import { TFetch } from './types';
-import { createUnicCode } from '../../src/utils/crypto';
+import { TRpc } from '@shared/client/connection/types';
+import { createUnicCode } from '@root/utils/crypto';
 
-const getConnection = (baseUrl: string): TFetch => {
+const getConnection = (baseUrl: string): TRpc => {
   const sessionKey = createUnicCode(10);
   const Cookie = `sessionKey=${sessionKey}`;
 

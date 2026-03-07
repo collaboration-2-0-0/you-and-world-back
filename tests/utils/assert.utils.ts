@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { delay } from '@shared/server/utils';
+import { TRpc } from '@shared/client/connection/types';
 import { IOperationData, TMockFunction } from '../types/types';
-import { TFetch } from '../client/types';
 
 export const assertDb = async (operation: IOperationData) => {
   const { query, expectedQueryResult: expected } = operation;
@@ -25,7 +25,7 @@ export const assertMessage = async (
 
 export const assertResponse = async (
   operation: IOperationData,
-  connection: TFetch,
+  connection: TRpc,
 ) => {
   const { name, params, setToState, expected } = operation;
   const data = typeof params === 'function' ? params() : params;
