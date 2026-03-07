@@ -1,7 +1,10 @@
 import http from 'node:http';
 import { Message } from 'grammy/types';
+import {
+  IOperation,
+  TOperationResponse,
+} from '@root/controller/operation.types';
 import { IMessage, MessageTypeKeys } from '../shared/types/api';
-import { IOperation, TOperationResponse } from '../controller/operation.types';
 import { IHttpConfig, IHttpServer } from './http/types';
 import { IWsConfig, IWsServer } from './ws/types';
 import { ILinkConfig } from './link/types';

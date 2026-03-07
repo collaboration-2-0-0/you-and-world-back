@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import { IUserResponse } from '@root/shared/types/api';
-import { THandler } from '../../controller/types';
-import { UserResponseSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { IUserResponse } from '@shared/types/api';
+import { UserResponseSchema } from '../schema';
 
 const signup_tg: THandler<{ initData: string }, IUserResponse> = async (
   { session },

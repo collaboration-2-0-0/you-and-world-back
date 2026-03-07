@@ -1,4 +1,4 @@
-import { TQuery } from '../../types/types';
+import { TQuery } from '@db/types';
 import { IBranchDislikes, IBranchVotes } from '@domain/types';
 
 export interface IQueriesNetBranch {

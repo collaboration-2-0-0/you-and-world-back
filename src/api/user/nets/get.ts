@@ -1,6 +1,6 @@
-import { IWaitNets, INetsResponse } from '@root/shared/types/api';
-import { THandler } from '../../../controller/types';
-import { NetsResponseSchema, WaitNetsSchema } from '../../schema/schema';
+import { THandler } from '@root/controller/types';
+import { IWaitNets, INetsResponse } from '@shared/types/api';
+import { NetsResponseSchema, WaitNetsSchema } from '../../schema';
 
 export const all: THandler<never, INetsResponse> = async ({ session }) => {
   const user_id = session.read('user_id');

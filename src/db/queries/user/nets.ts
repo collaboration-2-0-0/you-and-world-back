@@ -1,4 +1,4 @@
-import { TQuery } from '../../types/types';
+import { TQuery } from '@db/types';
 import { INet, IUserNet, IMember } from '@domain/types';
 
 export interface IQueriesUserNets {

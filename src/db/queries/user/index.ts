@@ -1,5 +1,5 @@
-import { ITableUsers } from '@types-db/db.types';
-import { TQuery } from '../../types/types';
+import { ITableUsers } from '@shared/types/db';
+import { TQuery } from '@db/types';
 import { IQueriesUserToken } from './token';
 import { IQueriesUserMessenger } from './messenger';
 import { IQueriesUserNets } from './nets';

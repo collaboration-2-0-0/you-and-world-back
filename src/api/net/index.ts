@@ -1,6 +1,6 @@
-import { INetViewResponse, IUserNode } from '@root/shared/types/api';
-import { THandler } from '../../controller/types';
-import { UserNodeSchema, NetViewResponseSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { INetViewResponse, IUserNode } from '@shared/types/api';
+import { UserNodeSchema, NetViewResponseSchema } from '../schema';
 
 export const getCircle: THandler<IUserNode, INetViewResponse> = async (
   { member },

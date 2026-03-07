@@ -1,4 +1,4 @@
-import { ITransaction } from '../../db/types/types';
+import { ITransaction } from '@db/types';
 import { NetEventKeys, INet, IMember } from '../types';
 import { EventMessages } from './event.messages';
 

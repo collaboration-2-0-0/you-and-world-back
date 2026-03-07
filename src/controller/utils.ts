@@ -1,6 +1,6 @@
 import { Writable } from 'node:stream';
 import Joi from 'joi';
-import { JOI_NULL } from '../api/schema/schema';
+import { JOI_NULL } from '../api/schema';
 import { IEndpoints, TJoiSchema, THandler, THandlerSchema } from './types';
 import { SIMPLE_TYPES } from './constants';
 import * as tpl from './methods/templates';

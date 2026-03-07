@@ -1,6 +1,6 @@
-import { THandler } from '../../controller/types';
-import { INetEnterParams } from '@root/shared/types/api';
-import { NetEnterParamsSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { INetEnterParams } from '@shared/types/api';
+import { NetEnterParamsSchema } from '../schema';
 
 export const get: THandler<INetEnterParams, any> = async (_, { net_id }) => {
   const [rootMember] = await execQuery.net.structure.get.root([net_id]);

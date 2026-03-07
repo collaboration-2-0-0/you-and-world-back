@@ -1,10 +1,10 @@
 import Joi from 'joi';
+import { TJoiSchema } from '@root/controller/types';
 import {
   IMemberConfirmParams,
   IMemberInviteParams,
   IMemberResponse,
-} from '@root/shared/types/api';
-import { TJoiSchema } from '../../controller/types';
+} from '@shared/types/api';
 import { JOI_NULL } from './common.schema';
 
 export const UserNodeSchema = {

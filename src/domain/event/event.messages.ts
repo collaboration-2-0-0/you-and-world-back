@@ -1,5 +1,5 @@
 import { format } from 'node:util';
-import { ITransaction } from '../../db/types/types';
+import { ITransaction } from '@db/types';
 import { IEventRecord, INetEventTo, IMember } from '../types';
 import { INSTANT_EVENTS, NET_MESSAGES_MAP, SET_NET_ID_FOR } from './constants';
 import { NetEvent } from './event';

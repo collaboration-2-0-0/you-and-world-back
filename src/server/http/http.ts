@@ -1,10 +1,10 @@
 import { createServer } from 'node:http';
 import { Readable } from 'node:stream';
-import { TPromiseExecutor } from '../../shared/types/api';
 import {
   IOperation,
   TOperationResponse,
-} from '../../controller/operation.types';
+} from '@root/controller/operation.types';
+import { TPromiseExecutor } from '../../shared/types/api';
 import { IInputConnection, IRequest } from '../types';
 import {
   IResponse,

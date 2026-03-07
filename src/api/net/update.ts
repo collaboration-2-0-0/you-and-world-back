@@ -1,6 +1,6 @@
-import { THandler } from '../../controller/types';
-import { INetUpdateParams, INetResponse } from '@root/shared/types/api';
-import { NetResponseSchema, NetUpdateParamsSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { INetUpdateParams, INetResponse } from '@shared/types/api';
+import { NetResponseSchema, NetUpdateParamsSchema } from '../schema';
 
 const update: THandler<INetUpdateParams, INetResponse> = async (
   { member },

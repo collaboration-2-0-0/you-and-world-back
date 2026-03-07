@@ -1,3 +1,3 @@
-import { ITableUsers } from '@types-db/db.types';
+import { ITableUsers } from '@shared/types/db';
 
 export type IUser = Omit<ITableUsers, 'password'>;

@@ -1,5 +1,5 @@
-import { ITransaction } from '@types-db/types';
-import { ITableNets, ITableNodes } from '@types-db/db.types';
+import { ITableNets, ITableNodes } from '@shared/types/db';
+import { ITransaction } from '@db/types';
 import { INetMember, INetNode } from '../types';
 import { MAX_NODE_LEVEL } from './constants';
 import { NetArrange } from './net.arrange';

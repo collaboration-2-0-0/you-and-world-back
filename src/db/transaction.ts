@@ -3,7 +3,7 @@ import {
   IDatabaseQueries,
   ITransaction,
   ITransactionConnection,
-} from './types/types';
+} from './types';
 
 export class Transaction implements ITransaction {
   constructor(

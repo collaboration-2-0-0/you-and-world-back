@@ -1,9 +1,9 @@
 import Joi from 'joi';
-import { THandler } from '../../../controller/types';
-import { IMemberConfirmParams } from '@root/shared/types/api';
+import { THandler } from '@root/controller/types';
+import { IMemberConfirmParams } from '@shared/types/api';
 import { getMemberStatus } from '@shared/server/utils';
 import { NetEvent } from '@domain/event/event';
-import { MemberConfirmParamsSchema, JOI_NULL } from '../../schema/schema';
+import { MemberConfirmParamsSchema, JOI_NULL } from '../../schema';
 
 export const set: THandler<IMemberConfirmParams, boolean | null> = async (
   { member: m },

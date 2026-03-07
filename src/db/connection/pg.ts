@@ -3,7 +3,7 @@ import {
   ITransactionConnection,
   IDatabaseConfig,
   IDatabaseConnection,
-} from '../types/types';
+} from '../types';
 
 class Connection implements IDatabaseConnection {
   private pool;

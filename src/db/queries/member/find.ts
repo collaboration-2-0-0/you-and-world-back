@@ -1,5 +1,5 @@
+import { TQuery } from '@db/types';
 import { IMember, IMemberWithInvites } from '@domain/types';
-import { TQuery } from '../../types/types';
 
 export interface IQueriesMemberFind {
   unactive: TQuery<[['date', Date]], IMember>;

@@ -1,4 +1,4 @@
-import * as T from '@types-db/db.types';
+import * as T from '@shared/types/db';
 import { INetMember } from './member.types';
 
 export type INet = T.ITableNets & T.ITableNetsData;

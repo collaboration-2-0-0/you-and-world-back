@@ -1,6 +1,6 @@
+import { IControllerConfig } from '@root/controller/types';
+import { IDatabaseConfig } from '@db/types';
 import { ILoggerConfig } from '../logger/types';
-import { IDatabaseConfig } from '../db/types/types';
-import { IControllerConfig } from '../controller/types';
 import { IInputConnectionConfig, TTransport } from '../server/types';
 
 export interface IConfig {

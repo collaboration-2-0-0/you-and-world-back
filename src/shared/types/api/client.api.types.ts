@@ -4,14 +4,6 @@ export type TAccountLogin_tg = {
 export type TAccountSignup_tg = {
   initData: string;
 };
-export type TAdminDisconnectNotVote = {
-  monthAgo: number;
-};
-export type TAdminDisconnectUnactive = {
-  monthAgo: number;
-};
-export type TAdminNetGetResponse = {
-};
 export type TBotMessage = {
   chatId: number;
   netId?: number;

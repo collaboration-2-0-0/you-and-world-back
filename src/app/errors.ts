@@ -1,10 +1,10 @@
 import { IAppThis } from './types';
-import { DatabaseError } from '../db/errors';
+import { DatabaseError } from '@db/errors';
 import {
   ControllerError,
   ControllerErrorCode,
   TControllerErrorDetails,
-} from '../controller/errors';
+} from '@root/controller/errors';
 import { ServerError } from '../server/errors';
 
 export const AppErrorMap = {

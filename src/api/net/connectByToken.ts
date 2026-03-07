@@ -1,8 +1,8 @@
-import { THandler } from '../../controller/types';
-import { INetConnectByToken, IToken } from '@root/shared/types/api';
-import type { IMember } from '@domain/types';
+import { THandler } from '@root/controller/types';
+import { INetConnectByToken, IToken } from '@shared/types/api';
+import { IMember } from '@domain/types';
 import { NetEvent } from '@domain/event/event';
-import { TokenSchema, NetConnectByTokenSchema } from '../schema/schema';
+import { TokenSchema, NetConnectByTokenSchema } from '../schema';
 
 const connectByToken: THandler<IToken, INetConnectByToken> = async (
   { session },

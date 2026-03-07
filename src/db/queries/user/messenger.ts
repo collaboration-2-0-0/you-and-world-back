@@ -1,4 +1,4 @@
-import { TQuery } from '../../types/types';
+import { TQuery } from '@db/types';
 
 export interface IQueriesUserMessenger {
   connect: TQuery<[['user_id', number], ['chatId', number]]>;

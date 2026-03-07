@@ -1,5 +1,5 @@
-import { TQuery } from '@types-db/types';
-import { ITableUsersEvents } from '@types-db/db.types';
+import { ITableUsersEvents } from '@shared/types/db';
+import { TQuery } from '@db/types';
 
 export interface IQueriesUserEvents {
   write: TQuery<[['user_id', number], ['notification_date', string]]>;

@@ -1,15 +1,13 @@
 import {
   ITableMembers,
   ITableMembersToMembers,
-  INet,
   ITableNets,
   ITableNetsData,
   ITableNodes,
   ITableNetsGuests,
   ITableUsers,
-  OuterJoin,
-  NetViewKeys,
-} from '../../local/imports';
+} from '../db';
+import { OuterJoin, NetViewKeys, INet } from '../../local/imports';
 import { IMemberResponse, IUserNode, Nullable } from './index';
 
 export type INetCreateParams = Pick<ITableNetsData, 'name'> & {

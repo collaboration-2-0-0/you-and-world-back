@@ -1,18 +1,18 @@
 import Joi, { ObjectSchema } from 'joi';
-import { IObject } from '../types/types';
-import { IOperation, TOperationResponse, IParams } from './operation.types';
-import { ITableUsers } from '@types-db/db.types';
+import { ITableUsers } from '@shared/types/db';
+import { Member } from '@domain/member/member';
 import { UserStatusKey } from '../shared/types/api';
+import { IObject } from '../types/types';
 import { IMailService } from '../services/mail/types';
 import { ChatService } from '../services/chat/chat';
 import { NotificationService } from '../services/notification/notification';
 import { Session } from '../services/session/session';
+import { IOperation, TOperationResponse, IParams } from './operation.types';
 import {
   TInputModulesKeys,
   TOutputModulesKeys,
   TServicesKeys,
 } from './constants';
-import { Member } from '@domain/member/member';
 
 export interface IControllerConfig {
   path: string;

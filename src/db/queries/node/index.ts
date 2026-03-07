@@ -1,5 +1,5 @@
-import { TQuery } from '@types-db/types';
-import { ITableNodes } from '@types-db/db.types';
+import { ITableNodes } from '@shared/types/db';
+import { TQuery } from '@db/types';
 import { IQueriesNodeTree } from './tree';
 
 export interface IQueriesNode {

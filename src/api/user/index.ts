@@ -1,6 +1,6 @@
-import { THandler } from '../../controller/types';
-import { IUserResponse, IUserUpdate } from '@root/shared/types/api';
-import { UserResponseSchema, UserUpdateSchema } from '../schema/account.schema';
+import { THandler } from '@root/controller/types';
+import { IUserResponse, IUserUpdate } from '@shared/types/api';
+import { UserResponseSchema, UserUpdateSchema } from '../schema';
 
 export const read: THandler<never, IUserResponse> = async ({ session }) => {
   const user_id = session.read('user_id');

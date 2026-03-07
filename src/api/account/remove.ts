@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { THandler } from '../../controller/types';
+import { THandler } from '@root/controller/types';
 
 const remove: THandler<never, boolean> = async ({ session }) => {
   const user_id = session.read('user_id')!;

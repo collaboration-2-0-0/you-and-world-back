@@ -1,4 +1,4 @@
-import { ITransaction } from '../../db/types/types';
+import { ITransaction } from '@db/types';
 
 export const exeWithNetLock = async <T>(
   net_id: number | null,

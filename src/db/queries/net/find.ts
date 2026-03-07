@@ -1,6 +1,6 @@
+import { ITableNets, ITableNetsData } from '@shared/types/db';
+import { TQuery } from '@db/types';
 import { INetData, INetResponse, OmitNull } from '../../../shared/types/api';
-import { TQuery } from '@types-db/types';
-import { ITableNets, ITableNetsData } from '@types-db/db.types';
 
 export interface IQueriesNetFind {
   byToken: TQuery<[['token', string]], INetData>;

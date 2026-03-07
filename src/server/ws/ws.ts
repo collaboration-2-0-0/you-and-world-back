@@ -1,19 +1,19 @@
 import { Server } from 'ws';
-import { IInputConnection, IRequest } from '../types';
-import { IWsConfig, IWsConnection, IWsServer, TWsResModule } from './types';
+import { PING_INTERVAL } from '@shared/server/constants';
+import { delay, excludeNullUndefined } from '@shared/server/utils';
 import {
   IOperation,
   TOperationResponse,
-} from '../../controller/operation.types';
-import { IHttpServer } from '../http/types';
+} from '@root/controller/operation.types';
 import { IMessage, MessageTypeKeys } from '../../shared/types/api';
-import { PING_INTERVAL } from '../../shared/server/constants';
 import { MAX_CHAT_INDEX } from '../../constants/constants';
+import { IHttpServer } from '../http/types';
+import { IInputConnection, IRequest } from '../types';
 import { ServerError } from '../errors';
+import { getSessionKey } from '../utils';
+import { IWsConfig, IWsConnection, IWsServer, TWsResModule } from './types';
 import { handleError } from './methods/handle.error';
 import { applyResModules } from './methods/utils';
-import { getSessionKey } from '../utils';
-import { delay, excludeNullUndefined } from '../../shared/server/utils';
 
 class WsConnection implements IInputConnection {
   private config: IWsConfig;

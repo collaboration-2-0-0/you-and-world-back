@@ -1,6 +1,6 @@
-import { THandler } from '../../controller/types';
-import { IToken, IUserResponse, UserStatusKey } from '@root/shared/types/api';
-import { TokenSchema, UserResponseSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { IToken, IUserResponse, UserStatusKey } from '@shared/types/api';
+import { TokenSchema, UserResponseSchema } from '../schema';
 
 const confirm: THandler<IToken, IUserResponse> = async (
   { session },

@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import { IEvents } from '@root/shared/types/api';
-import { THandler } from '../../controller/types';
-import { EventsSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { IEvents } from '@shared/types/api';
+import { EventsSchema } from '../schema';
 
 export const read: THandler<{ event_id?: number }, IEvents> = async (
   { session },

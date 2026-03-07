@@ -1,5 +1,5 @@
-import { TQuery } from '@types-db/types';
-import { ITableUsers } from '@types-db/db.types';
+import { ITableUsers } from '@shared/types/db';
+import { TQuery } from '@db/types';
 
 export interface IQueriesNetUsers {
   toSendNewEvents: TQuery<

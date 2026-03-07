@@ -1,6 +1,6 @@
 import Joi from 'joi';
-import { IUserNetDataResponse } from '@root/shared/types/api';
-import { TJoiSchema } from '../../controller/types';
+import { TJoiSchema } from '@root/controller/types';
+import { IUserNetDataResponse } from '@shared/types/api';
 import { JOI_NULL } from './common.schema';
 
 export const UserNetDataResponseSchema = {

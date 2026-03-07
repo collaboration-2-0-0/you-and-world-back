@@ -1,5 +1,5 @@
 import { WebSocket } from 'ws';
-import { IOperation } from '../../../controller/operation.types';
+import { IOperation } from '@root/controller/operation.types';
 import { ServerError, ServerErrorMap } from '../../errors';
 import { getLog } from './utils';
 

@@ -2,9 +2,8 @@ import {
   ITableMembersInvites,
   ITableMembersToMembers,
   ITableNodes,
-  OuterJoin,
-  IMember,
-} from '../../local/imports';
+} from '../db';
+import { OuterJoin, IMember } from '../../local/imports';
 
 export type IUserNode = { node_id: number };
 

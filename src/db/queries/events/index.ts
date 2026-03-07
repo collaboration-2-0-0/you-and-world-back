@@ -1,5 +1,5 @@
+import { TQuery } from '@db/types';
 import { IEvent, NetEventKeys, NetViewKeys } from '@domain/types';
-import { TQuery } from '../../types/types';
 
 export interface IQueriesEvents {
   create: TQuery<

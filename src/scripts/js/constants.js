@@ -16,8 +16,8 @@ exports.BACK_PATH = './src/shared';
 exports.FRONT_PATH = '../you-and-world-ui/src/shared';
 exports.BACK_STATIC_PATH = './public';
 exports.FRONT_STATIC_PATH = '../you-and-world-ui/dist';
-exports.FROM_BACK_TO_FRONT = ['server', 'types', 'types/api'].map((i) =>
-  (0, node_path_1.join)(exports.BACK_PATH, i),
+exports.FROM_BACK_TO_FRONT = ['server', 'types', 'types/api', 'types/db'].map(
+  (i) => (0, node_path_1.join)(exports.BACK_PATH, i),
 );
 exports.EXCLUDE_FROM_BACK = ['local'].map((i) =>
   (0, node_path_1.join)(exports.BACK_PATH, i),
@@ -27,7 +27,6 @@ exports.EXCLUDE_STATIC = [].map((i) =>
 );
 exports.FILES_TO_COPY_FROM_BACK_TO_FRONT = [
   ['src/domain/types/util.types.ts', 'local/util.types.ts'],
-  ['src/db/types/db.types.ts', 'types/db/db.types.ts'],
   ['src/domain/types/net.types.ts', 'local/net.types.ts'],
   ['src/domain/types/member.types.ts', 'local/member.types.ts'],
   ['src/domain/types/user.types.ts', 'local/user.types.ts'],

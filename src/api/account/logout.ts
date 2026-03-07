@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { THandler } from '../../controller/types';
+import { THandler } from '@root/controller/types';
 
 const logout: THandler<never, boolean> = async ({ session, connectionId }) => {
   await session.clear();

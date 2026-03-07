@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { TJoiSchema } from '@root/controller/types';
 import {
   INetCreateParams,
   INetResponse,
@@ -7,11 +8,10 @@ import {
   INetWaiting,
   IWaitNets,
   OmitNull,
-} from '@root/shared/types/api';
-import { TJoiSchema } from '../../controller/types';
+} from '@shared/types/api';
 import { JOI_NULL } from './common.schema';
-import { NodeSchema } from './node.schema';
 import { MemberResponseSchema } from './member.schema';
+import { NodeSchema } from './node.schema';
 
 export const NetCreateParamsSchema = {
   node_id: [Joi.number(), JOI_NULL],

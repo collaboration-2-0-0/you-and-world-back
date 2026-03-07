@@ -1,14 +1,15 @@
 import { NodeCron } from 'node-cron';
 import { IConfig } from '@root/config/types';
+import { IController } from '@root/controller/types';
+import { IDatabase, IDatabaseQueries } from '@db/types';
+import { IDomain } from '@domain/index';
 import { ILogger } from '../logger/types';
-import { IDatabase, IDatabaseQueries } from '../db/types/types';
-import { IController } from '../controller/types';
+
 import { IInputConnection, IConnectionService } from '../server/types';
 import { IMailService } from '../services/mail/types';
 import { ChatService } from '../services/chat/chat';
 import { NotificationService } from '../services/notification/notification';
 import { TaskRunnerService } from '../services/task-runner/task.runner';
-import { IDomain } from '../domain';
 import App from './app';
 
 export type IAppThis = App & {

@@ -1,10 +1,6 @@
-import {
-  ILoginParams,
-  IUserResponse,
-  UserStatusKey,
-} from '@root/shared/types/api';
-import { THandler } from '../../controller/types';
-import { LoginParamsSchema, UserResponseSchema } from '../schema/schema';
+import { ILoginParams, IUserResponse, UserStatusKey } from '@shared/types/api';
+import { THandler } from '@root/controller/types';
+import { LoginParamsSchema, UserResponseSchema } from '../schema';
 
 const login: THandler<ILoginParams, IUserResponse> = async (
   { session },

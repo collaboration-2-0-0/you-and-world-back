@@ -1,4 +1,4 @@
-import { TQuery } from '../../../types/types';
+import { TQuery } from '@db/types';
 import { INetMember } from '@domain/types';
 
 export interface IQueriesNetStructure {

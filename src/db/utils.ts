@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fsp from 'node:fs/promises';
-import { IQueries, TQueriesModule, TQuery } from './types/types';
+import { IQueries, TQueriesModule, TQuery } from './types';
 
 const createQueries = (
   filePath: string,

@@ -1,9 +1,9 @@
 import { Readable } from 'node:stream';
+import { ITableMessages, ITableUsers } from '@shared/types/db';
+import { IServices } from '@root/controller/types';
 import * as T from '../../shared/types/api';
-import { IServices } from '../../controller/types';
 import { IConnectionService } from '../../server/types';
 import { ChatService } from '../chat/chat';
-import { ITableMessages, ITableUsers } from '@types-db/db.types';
 import { INet } from '@domain/types';
 import { IMeesageStream } from './notifications.types';
 

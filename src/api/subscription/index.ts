@@ -1,17 +1,17 @@
 import Joi from 'joi';
-import { THandler } from '../../controller/types';
+import { THandler } from '@root/controller/types';
 import {
   IGetSubscription,
   IRemoveSubscription,
   IUpdateSubscription,
   IUserNode,
-} from '@root/shared/types/api';
+} from '@shared/types/api';
 import {
   GetSubscriptionSchema,
   UpdateSubscriptionSchema,
   RemoveSubscriptionSchema,
   UserNodeSchema,
-} from '../schema/schema';
+} from '../schema';
 
 /* read */
 export const get: THandler<IUserNode, IGetSubscription> = async ({

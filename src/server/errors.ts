@@ -1,4 +1,4 @@
-import { TOperationResponse } from '../controller/operation.types';
+import { TOperationResponse } from '@root/controller/operation.types';
 
 export const ServerErrorMap = {
   REDIRECT: 'Redirect',

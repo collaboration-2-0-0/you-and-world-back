@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { JOI_NULL, JOI_REQUIRED } from '../../src/api/schema/common.schema';
+import { JOI_NULL, JOI_REQUIRED } from '@root/api/schema';
 
 const options = {
   // allowUnknown: true,

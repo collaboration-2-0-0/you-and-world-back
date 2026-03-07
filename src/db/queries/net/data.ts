@@ -1,5 +1,5 @@
-import { TQuery } from '@types-db/types';
-import { ITableNetsData } from '@types-db/db.types';
+import { ITableNetsData } from '@shared/types/db';
+import { TQuery } from '@db/types';
 
 export interface IQueriesNetData {
   get: TQuery<[['net_id', number]], ITableNetsData>;

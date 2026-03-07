@@ -1,12 +1,12 @@
 import Joi from 'joi';
-import { THandler } from '../../controller/types';
+import { THandler } from '@root/controller/types';
 import {
   INetConnectByLink,
   INetEnterParams,
   INetWaitingResponse,
   IUserNode,
   IWaitCreateParams,
-} from '@root/shared/types/api';
+} from '@shared/types/api';
 import { NetEvent } from '@domain/event/event';
 import {
   NetConnectByTokenSchema,
@@ -14,7 +14,7 @@ import {
   UserNodeSchema,
   NetWaitingResponseSchema,
   WaitCreateParamsSchema,
-} from '../schema/schema';
+} from '../schema';
 
 export const create: THandler<IWaitCreateParams, INetConnectByLink> = async (
   { session },

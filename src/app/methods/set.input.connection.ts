@@ -1,4 +1,4 @@
-import { IOperation } from '../../controller/operation.types';
+import { IOperation } from '@root/controller/operation.types';
 import { IAppThis } from '../types';
 import { handleOperationError } from '../errors';
 import { ServerError } from '../../server/errors';

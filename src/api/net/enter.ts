@@ -1,7 +1,7 @@
-import { THandler } from '../../controller/types';
-import { INetEnterParams, INetResponse } from '@root/shared/types/api';
-import { HandlerError } from '../../controller/errors';
-import { NetResponseSchema, NetEnterParamsSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { HandlerError } from '@root/controller/errors';
+import { INetEnterParams, INetResponse } from '@shared/types/api';
+import { NetResponseSchema, NetEnterParamsSchema } from '../schema';
 
 const enter: THandler<INetEnterParams, INetResponse> = async (
   { session },

@@ -1,4 +1,4 @@
-import { TQuery } from '../../types/types';
+import { TQuery } from '@db/types';
 
 export interface IQueriesMemberData {
   setDislike: TQuery<

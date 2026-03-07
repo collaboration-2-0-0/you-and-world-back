@@ -1,8 +1,8 @@
 import Joi from 'joi';
-import { IMemberConfirmParams } from '@root/shared/types/api';
-import { THandler } from '../../../controller/types';
-import { MemberConfirmParamsSchema } from '../../schema/schema';
+import { THandler } from '@root/controller/types';
+import { IMemberConfirmParams } from '@shared/types/api';
 import { getMemberStatus } from '@shared/server/utils';
+import { MemberConfirmParamsSchema } from '../../schema';
 
 const cancel: THandler<IMemberConfirmParams, boolean> = async (
   _,

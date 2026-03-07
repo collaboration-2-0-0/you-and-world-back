@@ -1,10 +1,7 @@
-import { INetEnterParams, IUserNetDataResponse } from '@root/shared/types/api';
-import { THandler } from '../../../controller/types';
-import { HandlerError } from '../../../controller/errors';
-import {
-  NetEnterParamsSchema,
-  UserNetDataResponseSchema,
-} from '../../schema/schema';
+import { THandler } from '@root/controller/types';
+import { HandlerError } from '@root/controller/errors';
+import { INetEnterParams, IUserNetDataResponse } from '@shared/types/api';
+import { NetEnterParamsSchema, UserNetDataResponseSchema } from '../../schema';
 
 export const getData: THandler<INetEnterParams, IUserNetDataResponse> = async (
   { session },

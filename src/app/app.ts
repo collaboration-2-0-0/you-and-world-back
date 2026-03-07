@@ -2,9 +2,9 @@ import { IConfig } from '@root/config/types';
 
 import { loadModule } from '../loader/require';
 import { ILogger } from '../logger/types';
-import { IController } from '../controller/types';
-import { IOperation } from '../controller/operation.types';
-import { IDatabase } from '../db/types/types';
+import { IController } from '@root/controller/types';
+import { IOperation } from '@root/controller/operation.types';
+import { IDatabase } from '@db/types';
 import { IInputConnection } from '../server/types';
 import { TaskRunnerService } from '../services/task-runner/task.runner';
 import { IControllerContext } from './types';

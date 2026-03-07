@@ -1,10 +1,6 @@
-import {
-  ISignupParams,
-  IUserResponse,
-  UserStatusKey,
-} from '@root/shared/types/api';
-import { THandler } from '../../controller/types';
-import { SignupParamsSchema, UserResponseSchema } from '../schema/schema';
+import { THandler } from '@root/controller/types';
+import { ISignupParams, IUserResponse, UserStatusKey } from '@shared/types/api';
+import { SignupParamsSchema, UserResponseSchema } from '../schema';
 
 const signup: THandler<ISignupParams, IUserResponse> = async (
   { session },

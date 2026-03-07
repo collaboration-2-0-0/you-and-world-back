@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream';
+import { TOperationResponse } from '@root/controller/operation.types';
 import { REQ_MIME_TYPES_ENUM } from '../constants';
-import { TOperationResponse } from '../../../controller/operation.types';
 import { IResponse, THttpResModule } from '../types';
 
 export const sendResponse: THttpResModule = () =>

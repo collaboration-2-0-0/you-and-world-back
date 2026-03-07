@@ -1,5 +1,5 @@
-import { TQuery } from '@types-db/types';
-import { ITableRoles } from '@types-db/db.types';
+import { ITableRoles } from '@shared/types/db';
+import { TQuery } from '@db/types';
 
 export interface IQueriesRole {
   setAdmin: TQuery<[['user_id', number]]>;

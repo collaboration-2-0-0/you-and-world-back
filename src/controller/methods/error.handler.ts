@@ -1,4 +1,4 @@
-import { DatabaseError } from '../../db/errors';
+import { DatabaseError } from '@db/errors';
 import { DomainError, DomainErrorCode } from '@domain/errors';
 import {
   HandlerError,

@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { THandler } from '../../controller/types';
+import { THandler } from '@root/controller/types';
 // import {
 //   IChatSendMessage,
 //   IChatGetMessages,
@@ -9,7 +9,7 @@ import { THandler } from '../../controller/types';
 //   ChatGetMessagesResponseSchema,
 //   ChatGetMessagesSchema,
 //   ChatSendMessageSchema,
-// } from '../schema/chat.schema';
+// } from '../schema';
 
 // error handle ?
 // sendMessage return value ?

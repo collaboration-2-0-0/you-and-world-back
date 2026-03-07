@@ -5,7 +5,7 @@ import {
   IDatabaseQueries,
   ITransaction,
   TQuery,
-} from './types/types';
+} from './types';
 import { DatabaseError } from './errors';
 import { readQueries } from './utils';
 import { Transaction } from './transaction';

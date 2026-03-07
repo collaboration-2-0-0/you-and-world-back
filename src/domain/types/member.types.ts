@@ -1,4 +1,4 @@
-import * as T from '@types-db/db.types';
+import * as T from '@shared/types/db';
 import { OuterJoin } from './util.types';
 
 export type IMember = T.ITableMembers & T.ITableUsers & T.ITableNodes;
