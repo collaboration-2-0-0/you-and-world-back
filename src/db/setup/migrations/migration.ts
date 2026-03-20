@@ -6,6 +6,9 @@ const connection = new Connection({
   database: 'you_and_world',
   user: 'you_and_world',
   password: 'you_and_world',
+  /* heroku */
+  ssl: { rejectUnauthorized: false },
+  connectionString: '',
 });
 
 const exec = async () => {
@@ -18,20 +21,19 @@ const exec = async () => {
   for (const node of result) {
     for (let i = 6; i < 12; i++) {
       const sql = `
-    insert into nodes (
-      node_level,
-      parent_node_id,
-      net_id,
-      node_position
-    )
-    values (
-      ${node.node_level + 1},
-      ${node.node_id},
-      ${node.net_id},
-      ${i}
-    );
-  `;
-
+      insert into nodes (
+        node_level,
+        parent_node_id,
+        net_id,
+        node_position
+      )
+      values (
+        ${node.node_level + 1},
+        ${node.node_id},
+        ${node.net_id},
+        ${i}
+      );
+    `;
       await connection.query(sql);
     }
   }
