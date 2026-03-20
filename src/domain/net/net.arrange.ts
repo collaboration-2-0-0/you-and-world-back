@@ -1,4 +1,5 @@
 import { NetEventKeys, IMember } from '@shared/types/db';
+import { TREE_MEMBERS_COUNT } from '@shared/server/constants';
 import { ITransaction } from '@db/types';
 import { NetEvent } from '../event/event';
 import { Member } from '../member/member';
@@ -177,7 +178,11 @@ export class NetArrange {
   async changeLevelFromNode(nodeId: number) {
     const [node] = await this.t.execQuery.node.changeLevel([nodeId]);
     if (!node!.count_of_members) return;
-    for (let node_position = 0; node_position < 6; node_position++) {
+    for (
+      let node_position = 0;
+      node_position < TREE_MEMBERS_COUNT;
+      node_position++
+    ) {
       const [childNode] = await this.t.execQuery.node.getChild([
         nodeId,
         node_position,

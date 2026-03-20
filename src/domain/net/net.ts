@@ -3,11 +3,25 @@ import { ITransaction } from '@db/types';
 import { INetNode } from '../types';
 import { MAX_NODE_LEVEL } from './constants';
 import { NetArrange } from './net.arrange';
+import { TREE_MEMBERS_COUNT } from '@root/shared/server/constants';
 
 export const createTree = async (t: ITransaction, node: ITableNodes) => {
   const { node_level, node_id, net_id } = node;
-  if (node_level >= MAX_NODE_LEVEL) return;
-  await t.execQuery.node.tree.create([node_level + 1, node_id, net_id]);
+  if (node_level >= MAX_NODE_LEVEL) {
+    return;
+  }
+  for (
+    let node_position = 0;
+    node_position < TREE_MEMBERS_COUNT;
+    node_position++
+  ) {
+    await t.execQuery.node.tree.create([
+      node_level + 1,
+      node_id,
+      net_id,
+      node_position,
+    ]);
+  }
 };
 
 export const updateCountOfNets = async (
