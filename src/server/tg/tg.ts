@@ -14,7 +14,7 @@ class TgConnection implements IInputConnection {
   private origin = env.ORIGIN || 'https://example.com';
 
   constructor(private config: ITgConfig) {
-    this.server = new Bot(this.config.token);
+    this.server = new Bot(env.TG_BOT_TOKEN!);
     this.server.on('message', this.handleRequest.bind(this));
     this.server.on('edit', this.handleRequest.bind(this));
     this.server.on('callback_query', this.handleCallback.bind(this));

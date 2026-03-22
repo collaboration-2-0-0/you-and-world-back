@@ -76,7 +76,12 @@ const config: IConfig = {
     modulesPath: resolvePath('controller/modules'),
     clientApiPath: resolve('src/shared/server/client.api.ts'),
     clientApiTypesPath: resolve('src/shared/types/api/client.api.types.ts'),
-    services: ['mailService', 'chatService', 'notificationService'],
+    services: [
+      'mailService',
+      'chatService',
+      'notificationService',
+      'tgService',
+    ],
     inputModules: [
       'setSession',
       'checkAuthorized',
@@ -129,7 +134,6 @@ const config: IConfig = {
     },
     tg: {
       path: resolvePath('server/tg/tg'),
-      token: restEnv.TG_BOT_TOKEN,
     },
   },
 };

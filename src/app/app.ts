@@ -1,12 +1,12 @@
 import { IConfig } from '@root/config/types';
-
-import { loadModule } from '../loader/require';
-import { ILogger } from '../logger/types';
+import { loadModule } from '@root/loader/require';
+import { ILogger } from '@root/logger/types';
 import { IController } from '@root/controller/types';
 import { IOperation } from '@root/controller/operation.types';
 import { IDatabase } from '@db/types';
-import { IInputConnection } from '../server/types';
-import { TaskRunnerService } from '../services/task-runner/task.runner';
+import { setToGlobal } from '@root/utils/utils';
+import { IInputConnection } from '@root/server/types';
+import { TaskRunnerService } from '@root/services/task-runner/task.runner';
 import { IControllerContext } from './types';
 import {
   AppError,
@@ -14,8 +14,7 @@ import {
   handleOperationError,
   setUncaughtErrorHandlers,
 } from './errors';
-import { setToGlobal } from './methods/utils';
-import { createSetInputConnection } from './methods/set.input.connection';
+import { createSetInputConnection } from './set.input.connection';
 
 export default class App {
   protected config: IConfig;

@@ -1,12 +1,15 @@
 import Joi, { ObjectSchema } from 'joi';
-import { ITableUsers } from '@shared/types/db';
+import { IObject } from '@root/types';
+import { IUser } from '@domain/types';
 import { Member } from '@domain/member/member';
-import { UserStatusKey } from '../shared/types/api';
-import { IObject } from '../types/types';
-import { IMailService } from '../services/mail/types';
-import { ChatService } from '../services/chat/chat';
-import { NotificationService } from '../services/notification/notification';
-import { Session } from '../services/session/session';
+import { UserStatusKey } from '@shared/types/api';
+import {
+  TgService,
+  IMailService,
+  ChatService,
+  NotificationService,
+  Session,
+} from '@root/services';
 import { IOperation, TOperationResponse, IParams } from './operation.types';
 import {
   TInputModulesKeys,
@@ -82,7 +85,7 @@ export type IContext = {
 };
 
 export type ISessionContent = Partial<{
-  user_id: ITableUsers['user_id'];
+  user_id: IUser['user_id'];
   user_status: UserStatusKey;
 }>;
 
@@ -90,6 +93,7 @@ export interface IServices {
   mailService?: IMailService;
   chatService?: ChatService;
   notificationService?: NotificationService;
+  tgService?: TgService;
 }
 
 export type TInputModule<T = any> = (

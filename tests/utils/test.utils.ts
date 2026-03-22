@@ -4,7 +4,7 @@ import originConfig from '@root/config';
 import { IConfig } from '@root/config/types';
 import { TTransport } from '@root/server/types';
 import App from '@root/app/app';
-import { setToGlobal } from '@root/app/methods/utils';
+import { setToGlobal } from '@root/utils/utils';
 import { ITestCase, ITestRunnerData } from '../types/types';
 import { getHttpConnection as http } from '../client/http';
 import { getWsConnection as ws } from '../client/ws';

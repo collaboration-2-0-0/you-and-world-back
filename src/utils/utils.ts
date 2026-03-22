@@ -2,6 +2,11 @@
 import { resolve } from 'node:path';
 import { setTimeout } from 'node:timers/promises';
 
+export const setToGlobal = (key: string, obj?: Record<string, any>) => {
+  Object.freeze(obj);
+  Object.assign(globalThis, { [key]: obj });
+};
+
 export const createPathResolve = (basePath: string) => (path: string) =>
   resolve(basePath, path);
 

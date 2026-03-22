@@ -1,15 +1,12 @@
-import { NodeCron } from 'node-cron';
 import { IConfig } from '@root/config/types';
 import { IController } from '@root/controller/types';
 import { IDatabase, IDatabaseQueries } from '@db/types';
 import { IDomain } from '@domain/index';
 import { ILogger } from '../logger/types';
-
 import { IInputConnection, IConnectionService } from '../server/types';
 import { IMailService } from '../services/mail/types';
 import { ChatService } from '../services/chat/chat';
 import { NotificationService } from '../services/notification/notification';
-import { TaskRunnerService } from '../services/task-runner/task.runner';
 import App from './app';
 
 export type IAppThis = App & {
@@ -32,21 +29,6 @@ export interface IControllerContext {
   env?: IConfig['env'];
 }
 
-export interface IGlobalMixins {
-  execQuery: IDatabaseQueries;
-  startTransaction: IDatabase['startTransaction'];
-  logger: ILogger;
-  connectionService: IConnectionService;
-  messengerService: IConnectionService;
-  cryptoService: typeof import('../utils/crypto');
-  mailService: IMailService;
-  chatService: ChatService;
-  notificationService: NotificationService;
-  taskRunnerService: TaskRunnerService;
-  env: IConfig['env'];
-  domain: IDomain;
-}
-
 declare global {
   const execQuery: IDatabaseQueries;
   const startTransaction: IDatabase['startTransaction'];
@@ -57,8 +39,6 @@ declare global {
   const mailService: IMailService;
   const chatService: ChatService;
   const notificationService: NotificationService;
-  // const taskRunnerService: TaskRunnerService;
-  const cron: NodeCron;
   const env: IConfig['env'];
   const domain: IDomain;
 }

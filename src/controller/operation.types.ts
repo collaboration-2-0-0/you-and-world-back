@@ -1,5 +1,5 @@
 import { Readable } from 'node:stream';
-import { IObject, TPrimitiv } from '../types/types';
+import { IObject, TPrimitiv } from '../types';
 import { ReqMimeTypesKeys } from '../server/http/constants';
 
 export interface IOperation {

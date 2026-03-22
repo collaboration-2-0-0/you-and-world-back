@@ -17,6 +17,7 @@ export const SERVICES_MAP = {
   mailService: 'mail/mail.js',
   chatService: 'chat/chat.js',
   notificationService: 'notification/notification.js',
+  tgService: 'tg/tg.js',
 };
 export type TServicesKeys = keyof typeof SERVICES_MAP;
 

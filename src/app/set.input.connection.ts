@@ -1,7 +1,7 @@
 import { IOperation } from '@root/controller/operation.types';
-import { IAppThis } from '../types';
-import { handleOperationError } from '../errors';
-import { ServerError } from '../../server/errors';
+import { ServerError } from '../server/errors';
+import { IAppThis } from './types';
+import { handleOperationError } from './errors';
 
 export const createSetInputConnection = (parent: IAppThis) => () => {
   const { env } = parent.config;

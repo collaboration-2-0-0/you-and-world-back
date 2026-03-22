@@ -1,3 +1,6 @@
+import * as domain from '@domain/index';
+import * as cryptoService from '@root/utils/crypto';
+import { setToGlobal } from '@root/utils/utils';
 import {
   THandler,
   IEndpoints,
@@ -11,13 +14,10 @@ import { IOperation, TOperationResponse } from './operation.types';
 import { ControllerError } from './errors';
 import { isHandler } from './utils';
 import { errorHandler } from './methods/error.handler';
-import { createClientApi } from './methods/create.client.api';
 import { createInputModules, createOutputModules } from './methods/modules';
-import { getServices } from './methods/services';
+import { createClientApi } from './methods/create.client.api';
 import { createRoutes } from './methods/create.endpoints';
-import { setToGlobal } from '../app/methods/utils';
-import * as cryptoService from '../utils/crypto';
-import * as domain from '../domain';
+import { getServices } from './methods/services';
 
 class Controller implements IController {
   private endpoints?: IEndpoints;
@@ -30,6 +30,9 @@ class Controller implements IController {
   async init() {
     try {
       const services = getServices(this.config);
+      for (const service of Object.values(services)) {
+        await service.init?.();
+      }
       Object.assign(globalThis, services);
       setToGlobal('cryptoService', cryptoService);
       setToGlobal('domain', domain);
