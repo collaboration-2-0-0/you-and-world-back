@@ -53,6 +53,7 @@ export const getData = `
     members.user_id,
     members.confirmed,
     users.name,
+    users.photo_url,
     member_name,
     token,
     members_to_members.dislike,
