@@ -92,6 +92,7 @@ export type ITableNetsData = {
   net_id: number;
   name: string;
   goal: string | null;
+  rules: string | null;
   resource_name: string | null;
   net_link: string | null;
 };

@@ -1,30 +1,24 @@
 import {
-  ITableMembers,
-  ITableMembersToMembers,
-  ITableNets,
-  ITableNetsData,
-  ITableNodes,
   ITableNetsGuests,
   ITableUsers,
   NetViewKeys,
-  OuterJoin,
+  INetData,
+  INet,
+  INetDataExtended,
+  IUserNetData,
 } from '../db';
-import { INet } from '../../local/imports';
-import { IMemberResponse, IUserNode, Nullable } from './index';
+import { IMemberResponse, INetCreate, IUserNode, Nullable } from './index';
 
-export type INetCreateParams = Pick<ITableNetsData, 'name'> & {
+export type INetCreateParams = Pick<INetCreate, 'name'> & {
   node_id: number | null;
 };
 
 export type INetEnterParams = { net_id: number };
 
-export type INetUpdateParams = IUserNode & { goal: string };
+export type INetUpdateParams = IUserNode &
+  Partial<{ goal: string; rules: string }>;
 
-export type INetData = ITableNets & ITableNetsData & ITableNodes;
-
-export type INetResponse = Nullable<
-  INetData & { total_count_of_members: number }
->;
+export type INetResponse = Nullable<INetDataExtended>;
 export type INetsResponse = INetData[];
 
 export type INetViewResponse = IMemberResponse[];
@@ -32,11 +26,14 @@ export type INetViewResponse = IMemberResponse[];
 export type NetViewEnum = Exclude<NetViewKeys, 'net'>;
 
 export type IUserNetDataResponse = Pick<
-  ITableNodes,
-  'node_id' | 'parent_node_id' | 'count_of_members'
-> &
-  Pick<ITableMembers, 'confirmed'> &
-  OuterJoin<Pick<ITableMembersToMembers, 'vote'>> & { vote_count: number };
+  IUserNetData,
+  | 'node_id'
+  | 'parent_node_id'
+  | 'count_of_members'
+  | 'confirmed'
+  | 'vote'
+  | 'vote_count'
+>;
 
 export type INetConnectByToken = {
   net_id: number;

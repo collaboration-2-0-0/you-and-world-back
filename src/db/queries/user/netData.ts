@@ -1,10 +1,9 @@
-import { IMember } from '@shared/types/db';
+import { IMember, IUserNetData } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { IUserNetDataResponse } from '../../../shared/types/api';
 
 export interface IQueriesUserNetData {
   findByNode: TQuery<[['user_id', number], ['node_id', number]], IMember>;
-  get: TQuery<[['user_id', number], ['net_id', number]], IUserNetDataResponse>;
+  get: TQuery<[['user_id', number], ['net_id', number]], IUserNetData>;
 }
 
 export const findByNode = `

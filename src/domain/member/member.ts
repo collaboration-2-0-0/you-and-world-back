@@ -1,5 +1,4 @@
-import { IMember } from '@shared/types/db';
-import { INet } from '../types';
+import { IMember, INet } from '@shared/types/db';
 import { DomainError } from '../errors';
 
 export class Member {
@@ -43,7 +42,7 @@ export class Member {
 
   private async setNet() {
     const { net_id } = this.get();
-    const [net] = await execQuery.net.getData([net_id]);
+    const [net] = await execQuery.net.get([net_id]);
     this.net = net!;
   }
 }

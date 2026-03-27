@@ -4,10 +4,17 @@ import { TQuery } from '@db/types';
 export interface IQueriesNetData {
   get: TQuery<[['net_id', number]], ITableNetsData>;
   create: TQuery<
-    [['net_id', number], ['name', string], ['token', string]],
+    [
+      ['net_id', number],
+      ['name', string],
+      ['rules', string | null],
+      ['token', string],
+    ],
     ITableNetsData
   >;
-  update: TQuery<[['net_id', number], ['goal', string]]>;
+  update: TQuery<
+    [['net_id', number], ['goal', string | null], ['rules', string | null]]
+  >;
 }
 
 export const get = `
@@ -18,14 +25,14 @@ export const get = `
 
 export const create = `
   INSERT INTO nets_data (
-    net_id, name, net_link
+    net_id, name, rules, net_link
   )
-  VALUES ($1, $2, $3)
+  VALUES ($1, $2, $3, $4)
   RETURNING *
 `;
 
 export const update = `
   UPDATE nets_data
-  SET goal = $2
+  SET goal = $2, rules = $3
   WHERE net_id = $1
 `;

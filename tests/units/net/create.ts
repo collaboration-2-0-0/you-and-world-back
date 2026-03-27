@@ -25,7 +25,7 @@ export const root2: TTestUnit = (state: any) => ({
     },
     {
       name: 'query net',
-      query: () => execQuery.net.get([state.net.net_id]),
+      query: () => execQuery.net.find.byNode([state.net.node_id]),
       expectedQueryResult: () => [
         {
           goal: null,
@@ -79,7 +79,7 @@ export const first: TTestUnit = (state: any) => ({
     },
     {
       name: 'query net',
-      query: () => execQuery.net.get([state.net.net_id]),
+      query: () => execQuery.net.find.byNode([state.net.node_id]),
       expectedQueryResult: () => [
         {
           goal: null,

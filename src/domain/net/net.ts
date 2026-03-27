@@ -1,9 +1,14 @@
-import { ITableNets, ITableNodes, INodeMember } from '@shared/types/db';
+import {
+  ITableNets,
+  ITableNodes,
+  INodeMember,
+  INetDataExtended,
+} from '@shared/types/db';
+import { TREE_MEMBERS_COUNT } from '@root/shared/server/constants';
 import { ITransaction } from '@db/types';
-import { INetNode } from '../types';
+import { INetCreate, INetNode } from '../types';
 import { MAX_NODE_LEVEL } from './constants';
 import { NetArrange } from './net.arrange';
-import { TREE_MEMBERS_COUNT } from '@root/shared/server/constants';
 
 export const createTree = async (t: ITransaction, node: ITableNodes) => {
   const { node_level, node_id, net_id } = node;
@@ -41,9 +46,9 @@ export const updateCountOfNets = async (
 export const createNet = async (
   user_id: number,
   parentNetId: number | null,
-  name: string,
   t: ITransaction,
-) => {
+  data: INetCreate,
+): Promise<INetDataExtended> => {
   /* create net */
   let net: ITableNets | undefined;
   if (parentNetId) {
@@ -65,7 +70,12 @@ export const createNet = async (
 
   /* create net data */
   const token = cryptoService.createUnicCode(15);
-  const [netData] = await t.execQuery.net.data.create([net_id, name, token]);
+  const [netData] = await t.execQuery.net.data.create([
+    net_id,
+    data.name,
+    data.rules,
+    token,
+  ]);
 
   /* create first member */
   await t.execQuery.member.create([node_id, user_id]);

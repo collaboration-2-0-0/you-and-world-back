@@ -1,15 +1,20 @@
-import { ITableNets, ITableNetsData } from '@shared/types/db';
+import {
+  INet,
+  INetData,
+  INetDataExtended,
+  ITableNetsGuests,
+} from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { INetData, INetResponse, OmitNull } from '../../../shared/types/api';
 
 export interface IQueriesNetFind {
   byToken: TQuery<[['token', string]], INetData>;
-  byUser: TQuery<
+  byUser: TQuery<[['node_id', number], ['user_id', number]], INetDataExtended>;
+  byNode: TQuery<[['node_id', number]], INetDataExtended>;
+  byNetLink: TQuery<[['token', string]], INet>;
+  byWaitingUser: TQuery<
     [['net_id', number], ['user_id', number]],
-    OmitNull<INetResponse>
+    ITableNetsGuests
   >;
-  byNetLink: TQuery<[['token', string]], ITableNets & ITableNetsData>;
-  byWaitingUser: TQuery<[['net_id', number], ['user_id', number]], ITableNets>;
 }
 
 export const byToken = `
@@ -47,6 +52,24 @@ export const byUser = `
   WHERE
     nets.net_id = $1 AND
     members.user_id = $2
+`;
+
+export const byNode = `
+  SELECT
+    nets.*,
+    nets_data.*,
+    nodes.*,
+    root_node.count_of_members AS total_count_of_members
+  FROM nodes
+  INNER JOIN nets ON
+    nets.net_id = nodes.net_id
+  INNER JOIN nets_data ON
+    nets_data.net_id = nets.net_id
+  INNER JOIN nodes AS root_node ON
+    root_node.net_id = nets.net_id AND
+    root_node.parent_node_id ISNULL
+  WHERE
+    nodes.node_id = $1
 `;
 
 export const byNetLink = `

@@ -4,6 +4,5 @@ export * from './client.api.types';
 export * from './common.types';
 export * from './events.types';
 export * from './member.types';
-export * from './messages.types';
 export * from './net.types';
 export * from './subscription.types';

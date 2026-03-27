@@ -1,6 +1,7 @@
 import { MAX_NET_LEVEL } from '@shared/server/constants';
 import { INetCreateParams, INetResponse } from '@shared/types/api';
 import { THandler } from '@root/controller/types';
+import { RULES_DEFAULT } from '@root/constants/rules.md';
 import { NetResponseSchema, NetCreateParamsSchema } from '../schema';
 
 const create: THandler<INetCreateParams, INetResponse> = async (
@@ -17,7 +18,10 @@ const create: THandler<INetCreateParams, INetResponse> = async (
       if (net_level >= MAX_NET_LEVEL) return null;
     }
 
-    return domain.net.createNet(user_id, parentNetId, name, t);
+    return domain.net.createNet(user_id, parentNetId, t, {
+      name,
+      rules: RULES_DEFAULT,
+    });
   });
 };
 create.paramsSchema = NetCreateParamsSchema;

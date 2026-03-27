@@ -1,6 +1,5 @@
-import { NetEventKeys, IMember } from '@shared/types/db';
+import { NetEventKeys, IMember, INet } from '@shared/types/db';
 import { ITransaction } from '@db/types';
-import { INet } from '../types';
 import { EventMessages } from './event.messages';
 
 export class NetEvent {

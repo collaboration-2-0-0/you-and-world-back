@@ -1,13 +1,10 @@
+import { IMessage, MessageTypeKeys } from '@domain/types';
 import { THandleOperation } from '@root/controller/operation.types';
+import { createUnicCode } from '@root/utils/crypto';
 import { excludeNullUndefined } from '@shared/server/utils';
-import {
-  IMessage,
-  MessageTypeKeys,
-} from '../../shared/types/api/messages.types';
 import { IInputConnection, IServer } from '../types';
-import { ILinkConnection } from './types';
 // import { MAX_CHAT_INDEX } from '../../constants/constants';
-import { createUnicCode } from '../../utils/crypto';
+import { ILinkConnection } from './types';
 
 class LinkConnection implements IInputConnection {
   private static exec?: THandleOperation;

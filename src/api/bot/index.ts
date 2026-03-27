@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import { Message } from 'grammy/types';
 import { InlineKeyboard } from 'grammy';
+import { INet } from '@root/shared/types/db';
 import { THandler } from '@root/controller/types';
-import { INet } from '@domain/types';
 
 const messagesBuffer = new Map<number, Message>();
 const buttonsBuffer = new Map<number, number>();

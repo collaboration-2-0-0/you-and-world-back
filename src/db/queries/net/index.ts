@@ -1,13 +1,10 @@
-import { ITableNets } from '@shared/types/db';
+import { INet, ITableNets } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { INet } from '@domain/types';
-import { INetResponse, OmitNull } from '../../../shared/types/api';
 import { IQueriesNetData } from './data';
 import { IQueriesNetCircle } from './circle';
 import { IQueriesNetTree } from './tree';
 import { IQueriesNetBranch } from './branch';
 import { IQueriesNetFind } from './find';
-// import { IQueriesNetBoard } from './boardMessages';
 import { IQueriesNetUsers } from './users';
 import { IQueriesNetStructure } from './structure/get';
 import { IQueriesNetWait } from './wait';
@@ -21,15 +18,13 @@ export interface IQueriesNet {
     ITableNets
   >;
   remove: TQuery<[['net_id', number]]>;
-  get: TQuery<[['net_id', number]], OmitNull<INetResponse>>;
-  getData: TQuery<[['net_id', number]], INet>;
+  get: TQuery<[['net_id', number]], INet>;
   lock: TQuery<[['net_id', number]]>;
   data: IQueriesNetData;
   circle: IQueriesNetCircle;
   tree: IQueriesNetTree;
   branch: IQueriesNetBranch;
   find: IQueriesNetFind;
-  // boardMessages: IQueriesNetBoard;
   users: IQueriesNetUsers;
   structure: { get: IQueriesNetStructure };
   wait: IQueriesNetWait;
@@ -71,33 +66,7 @@ export const remove = `
 `;
 
 export const get = `
-  SELECT
-    nodes.node_id::int,
-    nodes.parent_node_id::int,
-    nets.net_id,
-    nets.net_level,
-    nets.parent_net_id,
-    nets_data.name,
-    nets_data.goal,
-    nets_data.net_link,
-    root_node.count_of_members AS total_count_of_members
-  FROM members
-  INNER JOIN nodes ON
-    nodes.node_id = members.member_id
-  INNER JOIN nets ON
-    nets.net_id = nodes.net_id
-  INNER JOIN nets_data ON
-    nets_data.net_id = nets.net_id
-  INNER JOIN nodes AS root_node ON
-    root_node.net_id = nets.net_id AND
-    root_node.parent_node_id ISNULL
-  WHERE nodes.net_id = $1
-`;
-
-export const getData = `
-  SELECT
-    nets.*,
-    nets_data.*
+  SELECT *
   FROM nets
   INNER JOIN nets_data ON
     nets_data.net_id = nets.net_id

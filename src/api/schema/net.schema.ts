@@ -1,13 +1,12 @@
 import Joi from 'joi';
 import { TJoiSchema } from '@root/controller/types';
+import { INetDataExtended } from '@root/shared/types/db';
 import {
   INetCreateParams,
-  INetResponse,
   INetsResponse,
   INetUpdateParams,
   INetWaiting,
   IWaitNets,
-  OmitNull,
 } from '@shared/types/api';
 import { JOI_NULL } from './common.schema';
 import { MemberResponseSchema } from './member.schema';
@@ -22,7 +21,8 @@ export const NetEnterParamsSchema = { net_id: Joi.number().required() };
 
 export const NetUpdateParamsSchema = {
   node_id: Joi.number(),
-  goal: Joi.string(),
+  goal: Joi.string().min(0),
+  rules: Joi.string().min(0),
 } as Record<keyof INetUpdateParams, TJoiSchema>;
 
 export const NetSchema = {
@@ -38,6 +38,7 @@ export const NetDataSchema = {
   net_id: Joi.number(),
   name: Joi.string(),
   goal: [Joi.string(), JOI_NULL],
+  rules: [Joi.string(), JOI_NULL],
   resource_name: [Joi.string(), JOI_NULL],
   net_link: [Joi.string(), JOI_NULL],
 };
@@ -49,7 +50,7 @@ export const NetResponseSchema = [
     ...NetDataSchema,
     ...NodeSchema,
     total_count_of_members: Joi.number(),
-  } as Record<keyof OmitNull<INetResponse>, TJoiSchema>,
+  } as Record<keyof INetDataExtended, TJoiSchema>,
 ];
 
 export const NetsResponseSchema = NetResponseSchema[1] as Record<

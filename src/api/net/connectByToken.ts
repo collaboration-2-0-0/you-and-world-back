@@ -9,13 +9,13 @@ const connectByToken: THandler<IToken, INetConnectByToken> = async (
   { token },
 ) => {
   const user_id = session.read('user_id')!;
-  const [node] = await execQuery.net.find.byToken([token]);
-  if (!node) return null;
+  const [net] = await execQuery.net.find.byToken([token]);
+  if (!net) return null;
   let event!: NetEvent;
-  const result = (await domain.utils.exeWithNetLock(node.net_id, async (t) => {
-    const [node] = await execQuery.net.find.byToken([token]);
-    if (!node) return null;
-    const { parent_net_id, net_id, parent_node_id, node_id } = node;
+  const result = (await domain.utils.exeWithNetLock(net.net_id, async (t) => {
+    const [net] = await execQuery.net.find.byToken([token]);
+    if (!net) return null;
+    const { parent_net_id, net_id, parent_node_id, node_id } = net;
     const [user_exists] = await execQuery.net.find.byUser([net_id, user_id]);
     if (user_exists) return { net_id, error: 'already connected' };
 
@@ -36,9 +36,9 @@ const connectByToken: THandler<IToken, INetConnectByToken> = async (
     const confirmed = !env.INVITE_CONFIRM;
     await t.execQuery.member.connect([node_id, user_id, confirmed]);
     if (confirmed) {
-      const net = new domain.net.NetArrange(t);
-      await net.updateCountOfMembers(node_id);
-      await domain.net.createTree(t, node);
+      const netArrange = new domain.net.NetArrange(t);
+      await netArrange.updateCountOfMembers(node_id);
+      await domain.net.createTree(t, net);
     }
 
     /* create messages */
@@ -48,7 +48,7 @@ const connectByToken: THandler<IToken, INetConnectByToken> = async (
       confirmed,
     } as IMember;
     const eventType = confirmed ? 'CONNECT_AND_CONFIRM' : 'CONNECT';
-    event = new domain.event.NetEvent(node, eventType, newMember);
+    event = new domain.event.NetEvent(net, eventType, newMember);
     await event.messages.create(t);
     await event.commit(t);
 

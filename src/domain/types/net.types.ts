@@ -1,11 +1,6 @@
 import * as T from '@shared/types/db';
 
-export type INet = T.ITableNets & T.ITableNetsData;
-
-export type IUserNet = T.ITableNets &
-  T.ITableNetsData &
-  T.ITableNodes &
-  T.ITableMembers;
+export type INetCreate = Pick<T.ITableNetsData, 'name' | 'rules'>;
 
 /* net structure */
 export type INetNode = {

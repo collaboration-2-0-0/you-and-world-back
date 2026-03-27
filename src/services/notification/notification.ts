@@ -1,13 +1,10 @@
 import { Readable } from 'node:stream';
-import { ITableMessages, ITableUsers } from '@shared/types/db';
+import { INet, ITableMessages, ITableUsers } from '@shared/types/db';
+import { IEventMessage, INewEventsMessage } from '@domain/types';
+import { IConnectionService } from '@root/server/types';
 import { IServices } from '@root/controller/types';
-import * as T from '../../shared/types/api';
-import { IConnectionService } from '../../server/types';
 import { ChatService } from '../chat/chat';
-import { INet } from '@domain/types';
-import { IMeesageStream } from './notifications.types';
-
-type IInstantEvent = Omit<T.IEventMessage, 'type' | 'event_id' | 'date'>;
+import { IInstantEvent, IMeesageStream } from './notifications.types';
 
 export class NotificationService {
   private connection: IConnectionService;
@@ -145,7 +142,7 @@ export class NotificationService {
   async sendEventOrNotif(user_id: number, message: string, netName = '') {
     const connectionIds = this.chat.getUserConnections(user_id);
     if (connectionIds) {
-      const message: T.INewEventsMessage = {
+      const message: INewEventsMessage = {
         type: 'NEW_EVENTS',
       };
       this.messageStream.push({ user_id, connectionIds, message });
@@ -207,7 +204,7 @@ export class NotificationService {
       new Date().toUTCString(),
     ]);
 
-    const newEventsMessage: T.INewEventsMessage = { type: 'NEW_EVENTS' };
+    const newEventsMessage: INewEventsMessage = { type: 'NEW_EVENTS' };
     for (const user of users) {
       const { user_id } = user!;
       const connectionIds = this.chat.getUserConnections(user_id);
@@ -237,7 +234,7 @@ export class NotificationService {
       prevNotifDateStr,
     ]);
 
-    const message: T.INewEventsMessage = { type: 'NEW_EVENTS' };
+    const message: INewEventsMessage = { type: 'NEW_EVENTS' };
     for (const user of users) {
       const { user_id } = user!;
       const connectionIds = this.chat.getUserConnections(user_id);
@@ -260,7 +257,7 @@ export class NotificationService {
     }
     if (!connectionIds) return;
 
-    const message: T.IEventMessage = {
+    const message: IEventMessage = {
       type: 'EVENT',
       event_id: 0,
       date: '',

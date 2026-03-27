@@ -140,6 +140,7 @@ CREATE TABLE public.nets_data (
     net_id integer NOT NULL,
     name character varying(50) NOT NULL,
     goal text DEFAULT NULL::character varying,
+    rules text DEFAULT NULL::character varying,
     resource_name character varying(50) DEFAULT NULL::character varying,
     net_link character varying(255) DEFAULT NULL::character varying
 );
@@ -396,7 +397,7 @@ COPY public.nets (net_id, net_level, parent_net_id, root_net_id, count_of_nets) 
 -- Data for Name: nets_data; Type: TABLE DATA; Schema: public; Owner: you_and_world
 --
 
-COPY public.nets_data (net_id, name, goal, resource_name, net_link) FROM stdin;
+COPY public.nets_data (net_id, name, goal, rules, resource_name, net_link) FROM stdin;
 \.
 
 

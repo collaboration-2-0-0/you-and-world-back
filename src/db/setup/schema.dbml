@@ -12,6 +12,7 @@ Table nets_data {
   "net_id" bigint [primary key, not null]
   "name" "character varying(50)" [not null]
   "goal" text [default: NULL]
+  "rules" text [default: NULL]
   "net_link" "character varying(255)" [default: NULL]
   "resource_name" "character varying(50)" [default: NULL]
 }

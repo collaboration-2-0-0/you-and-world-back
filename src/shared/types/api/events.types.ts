@@ -1,13 +1,3 @@
-/* eslint-disable import/no-cycle */
-import { IEvent } from '../../local/imports';
-import { MessageTypeKeys } from './messages.types';
+import { IEvent } from '@shared/local/imports';
 
-export type IEventMessage = {
-  type: Extract<MessageTypeKeys, 'EVENT'>;
-} & IEvent;
-
-export interface INewEventsMessage {
-  type: Extract<MessageTypeKeys, 'NEW_EVENTS'>;
-}
-
-export type { IEvents } from '../../local/imports';
+export type IEvents = IEvent[];

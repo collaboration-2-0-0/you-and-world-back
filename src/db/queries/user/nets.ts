@@ -1,9 +1,8 @@
-import { IMember } from '@shared/types/db';
+import { IMember, INet, INetData } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { INet, IUserNet } from '@domain/types';
 
 export interface IQueriesUserNets {
-  getAll: TQuery<[['user_id', number]], IUserNet>;
+  getAll: TQuery<[['user_id', number]], INetData>;
   getWait: TQuery<[['user_id', number]], INet>;
   getTop: TQuery<[['user_id', number]], IMember>;
   getChildOne: TQuery<
@@ -15,11 +14,9 @@ export interface IQueriesUserNets {
 
 export const getAll = `
   SELECT
-    nets.*,
     nodes.*,
-    nets_data.*,
-    members.user_id,
-    members.confirmed
+    nets.*,
+    nets_data.*
   FROM members
   INNER JOIN nodes ON
     nodes.node_id = members.member_id

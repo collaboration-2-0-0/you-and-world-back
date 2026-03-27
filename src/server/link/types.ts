@@ -1,7 +1,4 @@
-import {
-  IMessage,
-  MessageTypeKeys,
-} from '../../shared/types/api/messages.types';
+import { IMessage, MessageTypeKeys } from '@domain/types';
 
 export interface ILinkConfig {
   path: string;
