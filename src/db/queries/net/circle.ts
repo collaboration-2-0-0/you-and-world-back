@@ -20,6 +20,7 @@ export const getData = `
     members.user_id,
     members.confirmed,
     users.name,
+    users.photo_url,
     null AS member_name,
     null AS token,
     members_to_members.dislike,

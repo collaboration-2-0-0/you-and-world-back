@@ -16,6 +16,7 @@ export const getData = `
     members.user_id,
     members.confirmed,
     users.name,
+    users.photo_url,
     members_invites.member_name,
     members_invites.token,
     members_to_members.dislike,

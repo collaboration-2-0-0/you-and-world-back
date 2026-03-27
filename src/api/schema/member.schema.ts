@@ -30,6 +30,7 @@ export const MemberResponseSchema = {
   count_of_members: Joi.number(),
   user_id: [Joi.number(), JOI_NULL],
   name: [Joi.string(), JOI_NULL],
+  photo_url: [Joi.string(), JOI_NULL],
   confirmed: [Joi.boolean(), JOI_NULL],
   token: [Joi.string(), JOI_NULL],
   member_name: [Joi.string(), JOI_NULL],
