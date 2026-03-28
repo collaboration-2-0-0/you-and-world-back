@@ -1,4 +1,5 @@
 import { Message } from 'grammy/types';
+import { ITableMessages, ITableUsers } from '@root/shared/types/db';
 import { SubscriptionSubjectKeys } from '../types';
 
 const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {
@@ -67,8 +68,20 @@ export class Events {
       if (!users.length) {
         await execQuery.message.removeById([msg.message_id]);
       } else if (i === messages.length - 1) {
-        this.notifService.sendForUsers(users, msg);
+        this.notifService.sendForUsers(
+          users,
+          msg,
+          this.onMessageSent.bind(this),
+        );
       }
     }
+  }
+
+  private onMessageSent(user: ITableUsers, message: ITableMessages) {
+    const { subject, date } = message;
+
+    execQuery.subscription.send
+      .register([subject, user.user_id, date])
+      .catch(logger.error.bind(logger));
   }
 }

@@ -76,8 +76,11 @@ export class NetEvent {
   }
 
   send() {
-    for (const child of this.children) child.send();
-    /* send events */
+    for (const child of this.children) {
+      child.send();
+    }
+
+    /* send instant events */
     for (const record of this.messages.instantRecords) {
       this.notifService.sendEvent({
         net_id: this.net && this.net.net_id,
@@ -85,18 +88,19 @@ export class NetEvent {
         ...record,
       });
     }
+
     /* send events or notifications */
     for (const record of this.messages.records) {
       const { user_id, from_node_id } = record;
       if (user_id) {
-        // for user
+        /* for user */
         this.notifService.sendEventOrNotif(
           user_id,
           record.message,
           record.netName,
         );
       } else if (this.net) {
-        // for users in net
+        /* for users in net */
         this.notifService.sendNetEventOrNotif(
           this.net,
           from_node_id,

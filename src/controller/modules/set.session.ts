@@ -1,6 +1,6 @@
 /* eslint-disable indent */
+import { getService } from '@root/services';
 import { ISessionContent, TInputModule } from '../types';
-import { getService } from '../../services/session/session';
 
 export class SessionError extends Error {
   constructor() {

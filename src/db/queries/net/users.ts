@@ -102,7 +102,8 @@ export const toNotifyOnEmail = `
     members.confirmed = true
   INNER JOIN users ON
     users.user_id = members.user_id AND
-    users.chat_id ISNULL
+    users.chat_id ISNULL AND
+    users.email IS NOT NULL
   LEFT JOIN users_events ON
     users_events.user_id = users.user_id
   WHERE

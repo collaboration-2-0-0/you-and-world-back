@@ -2,11 +2,10 @@ import { IConfig } from '@root/config/types';
 import { IController } from '@root/controller/types';
 import { IDatabase, IDatabaseQueries } from '@db/types';
 import { IDomain } from '@domain/index';
-import { ILogger } from '../logger/types';
-import { IInputConnection, IConnectionService } from '../server/types';
-import { IMailService } from '../services/mail/types';
-import { ChatService } from '../services/chat/chat';
-import { NotificationService } from '../services/notification/notification';
+import { ILogger } from '@root/logger/types';
+import { IInputConnection, IConnectionService } from '@root/server/types';
+import { IMailService } from '@root/services/types';
+import { ChatService, NotificationService } from '@root/services';
 import App from './app';
 
 export type IAppThis = App & {

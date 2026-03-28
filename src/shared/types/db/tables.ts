@@ -136,7 +136,7 @@ export type ITableEvents = {
   from_node_id: number | null;
   event_type: NetEventKeys;
   message: string;
-  date: string;
+  date: Date;
 };
 
 export type ITableUsersEvents = {

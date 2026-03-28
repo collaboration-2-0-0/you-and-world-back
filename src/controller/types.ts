@@ -3,9 +3,9 @@ import { IObject } from '@root/types';
 import { IUser } from '@domain/types';
 import { Member } from '@domain/member/member';
 import { UserStatusKey } from '@shared/types/api';
+import { IMailService } from '@root/services/types';
 import {
   TgService,
-  IMailService,
   ChatService,
   NotificationService,
   Session,

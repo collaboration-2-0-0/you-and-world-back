@@ -6,6 +6,7 @@ export interface IObject {
   [key: string | number | symbol]:
     | TPrimitiv
     | IObject
+    | Date
     | TPrimitiv[]
     | IObject[]
     | Readable;

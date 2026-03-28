@@ -2,7 +2,7 @@ import { ITableUsersEvents } from '@shared/types/db';
 import { TQuery } from '@db/types';
 
 export interface IQueriesUserEvents {
-  write: TQuery<[['user_id', number], ['notification_date', string]]>;
+  write: TQuery<[['user_id', number], ['notification_date', Date]]>;
   clear: TQuery<[['user_id', number]]>;
   get: TQuery<[['user_id', number]], ITableUsersEvents>;
 }

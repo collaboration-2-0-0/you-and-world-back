@@ -1,12 +1,12 @@
 import { IConfig } from '@root/config/types';
-import { loadModule } from '@root/loader/require';
+import { IDatabase } from '@db/types';
 import { ILogger } from '@root/logger/types';
 import { IController } from '@root/controller/types';
 import { IOperation } from '@root/controller/operation.types';
-import { IDatabase } from '@db/types';
-import { setToGlobal } from '@root/utils/utils';
 import { IInputConnection } from '@root/server/types';
-import { TaskRunnerService } from '@root/services/task-runner/task.runner';
+import { loadModule } from '@root/loader/require';
+import { setToGlobal } from '@root/utils/utils';
+import { TaskRunnerService } from '@root/services';
 import { IControllerContext } from './types';
 import {
   AppError,
