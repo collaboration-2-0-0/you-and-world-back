@@ -9,9 +9,6 @@ export type TBotMessage = {
   netId?: number;
   message?: undefined;
 };
-export type TBotMessageResponse = {
-  message?: string;
-} | boolean;
 export type TEventsRead = {
   event_id?: number;
 };

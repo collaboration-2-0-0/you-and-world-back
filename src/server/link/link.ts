@@ -1,3 +1,4 @@
+import { Message } from 'grammy/types';
 import { IMessage, MessageTypeKeys } from '@domain/types';
 import { THandleOperation } from '@root/controller/operation.types';
 import { createUnicCode } from '@root/utils/crypto';
@@ -85,7 +86,7 @@ class LinkConnection implements IInputConnection {
   getConnectionService() {
     return {
       sendMessage: LinkConnection.sendMessage,
-      sendNotification: () => Promise.resolve(false),
+      sendNotification: () => Promise.resolve({} as Message.TextMessage),
     };
   }
 }

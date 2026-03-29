@@ -1,11 +1,11 @@
 import { IConfig } from '@root/config/types';
-import { IController } from '@root/controller/types';
+import { ILogger } from '@root/logger/types';
 import { IDatabase, IDatabaseQueries } from '@db/types';
 import { IDomain } from '@domain/index';
-import { ILogger } from '@root/logger/types';
+import { IController } from '@root/controller/types';
 import { IInputConnection, IConnectionService } from '@root/server/types';
 import { IMailService } from '@root/services/types';
-import { ChatService, NotificationService } from '@root/services';
+import { ChatService, NotificationService, TgService } from '@root/services';
 import App from './app';
 
 export type IAppThis = App & {
@@ -38,6 +38,7 @@ declare global {
   const mailService: IMailService;
   const chatService: ChatService;
   const notificationService: NotificationService;
+  const tgService: TgService;
   const env: IConfig['env'];
   const domain: IDomain;
 }

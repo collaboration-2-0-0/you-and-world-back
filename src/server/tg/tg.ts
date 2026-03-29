@@ -1,17 +1,18 @@
 import { env } from 'node:process';
 import { Bot, BotError, Context, InlineKeyboard } from 'grammy';
 import { Message } from 'grammy/types';
+import { IObject } from '@root/types';
 import { IOperation, THandleOperation } from '@root/controller/operation.types';
 import { IInputConnection } from '../types';
 import { ServerError } from '../errors';
 import { ITgConfig, ITgServer } from './types';
-import { getOparation } from './getOperation';
-import { greeting, forbidden } from './reply';
+import { getUrlFromArg } from './utils';
+import { greeting } from './reply';
 
 class TgConnection implements IInputConnection {
   private exec?: THandleOperation;
   private server: ITgServer;
-  private origin = env.ORIGIN || 'https://example.com';
+  private origin = env.ORIGIN!;
 
   constructor(private config: ITgConfig) {
     this.server = new Bot(env.TG_BOT_TOKEN!);
@@ -48,18 +49,6 @@ class TgConnection implements IInputConnection {
       logger.error(e);
       throw new ServerError('LISTEN_ERROR');
     }
-
-    // logger.info('SET MENU BUTTON');
-    // await this.server.api
-    //   .setChatMenuButton({
-    //     // menu_button: { type: 'default' },
-    //     menu_button: {
-    //       type: 'web_app',
-    //       text: 'OPEN',
-    //       web_app: { url: this.origin },
-    //     },
-    //   })
-    //   .catch(logger.error);
   }
 
   async stop() {
@@ -67,34 +56,76 @@ class TgConnection implements IInputConnection {
   }
 
   private async handleRequest(ctx: Context) {
-    const { operation, url } = getOparation(ctx, this.origin) || {};
+    const { url, operation } = this.getOparation(ctx, this.origin) || {};
 
     if (url) {
-      const inlineKyeboard = new InlineKeyboard([
-        [{ text: 'ПЕРЕЙТИ', web_app: { url } }],
-      ]);
-      return ctx.reply('Для продовження натисність Перейти', {
-        reply_markup: inlineKyeboard,
-      });
+      const webAppButton = { text: 'ПЕРЕЙТИ', web_app: { url } };
+      const reply_markup = new InlineKeyboard([[webAppButton]]);
+      return ctx.reply('Для продовження натисність Перейти', { reply_markup });
+    }
+
+    if (!operation) {
+      return greeting(ctx);
     }
 
     return this.execOperation(ctx, operation);
   }
 
-  async execOperation(ctx: Context, operation?: IOperation) {
-    if (!operation) {
-      greeting(ctx);
+  getOparation(ctx: Context, origin: string) {
+    const { chat, message, editedMessage } = ctx;
+    const chatId = chat?.id;
+    const { text } = message || editedMessage || {};
+
+    if (!chatId || !text) {
       return;
     }
 
+    /* /start */
+    if (/^\/start$/.test(text)) {
+      return;
+    }
+
+    /* /start base64-token_or_pathname */
+    const startParam = text.match(/^\/start (.+)$/)?.[1];
+    if (startParam) {
+      const url = getUrlFromArg(origin, startParam);
+
+      if (url) {
+        return { url };
+      }
+
+      const operation = {
+        options: { sessionKey: 'admin:tg', origin: 'https://t.me' },
+        names: 'account/messenger/link/connect'.split('/'),
+        data: { params: { chatId, token: startParam } },
+      };
+
+      return { operation };
+    }
+
+    const operation = {
+      options: {
+        sessionKey: 'admin:tg',
+        origin: 'https://t.me',
+        isAdmin: true,
+      },
+      names: 'bot/message'.split('/'),
+      data: {
+        params: {
+          chatId,
+          message: (message || editedMessage) as unknown as IObject,
+        },
+      },
+    };
+
+    return { operation };
+  }
+
+  async execOperation(ctx: Context, operation: IOperation) {
     try {
       const result = await this.exec!(operation);
       if (result) {
-        typeof result === 'object' &&
-          'message' in result &&
-          ctx.reply(`${result.message}`, { parse_mode: 'HTML' });
-      } else {
-        forbidden(ctx);
+        ctx.reply(`${result}`, { parse_mode: 'HTML' });
       }
     } catch (e) {
       ctx.reply('Сталася помилка!');
@@ -130,7 +161,7 @@ class TgConnection implements IInputConnection {
   }
 
   private async sendNotification(
-    chatId: number,
+    chatId: number | string,
     text = '',
     other: Record<string, any> = {},
   ): Promise<Message.TextMessage> {
@@ -143,9 +174,8 @@ class TgConnection implements IInputConnection {
   }
 
   private handleError(error: BotError) {
-    const details = (error.error as any)?.message || {};
+    const details = (error.error as any).message || {};
     logger.warn(details);
-    // throw new ServerError('SERVER_ERROR', details);
   }
 
   getConnectionService() {

@@ -1,5 +1,6 @@
 import { createServer } from 'node:http';
 import { Readable } from 'node:stream';
+import { Message } from 'grammy/types';
 import { TPromiseExecutor } from '@shared/types';
 import {
   IOperation,
@@ -104,7 +105,7 @@ class HttpConnection implements IInputConnection {
   getConnectionService() {
     return {
       sendMessage: () => Promise.resolve(false),
-      sendNotification: () => Promise.resolve(false),
+      sendNotification: () => Promise.resolve({} as Message.TextMessage),
     };
   }
 }

@@ -37,7 +37,7 @@ export const getApi = (
   },
   'bot': {
     'message': (options: P.TBotMessage) =>
-      fetch<P.TBotMessageResponse>('/bot/message', options),
+      fetch<string>('/bot/message', options),
 
   },
   'chat': {

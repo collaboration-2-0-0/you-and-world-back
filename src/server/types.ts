@@ -36,8 +36,8 @@ export interface IConnectionService {
     connectionIds?: Set<number>,
   ) => Promise<boolean>;
   sendNotification: (
-    chatId: number,
+    chatId: number | string,
     message?: string,
     other?: Record<string, any>,
-  ) => Promise<Message.TextMessage | boolean>;
+  ) => Promise<Message.TextMessage>;
 }

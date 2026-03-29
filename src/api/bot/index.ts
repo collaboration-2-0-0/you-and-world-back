@@ -11,14 +11,16 @@ const clear = (chatId: number) => {
   messagesBuffer.delete(chatId);
   buttonsBuffer.delete(chatId);
 };
+
 /*
   - on first request receive message
-  - on second request receive netId ofnet to send
+  - on second request receive netId of net to send
 */
+
 const setMessage = async (net: INet, message: Message) => {
   await new domain.events.Events().setMessage(net.net_id, message);
   clear(message.chat.id);
-  return { message: `Відправлено в\n<b>${net!.name}</b>` };
+  return `Відправлено в\n<b>${net!.name}</b>`;
 };
 
 export const message: THandler<
@@ -27,9 +29,9 @@ export const message: THandler<
     netId?: number;
     message?: Record<string, string>;
   },
-  { message?: string } | boolean
+  string
 > = async ({ isAdmin }, { chatId, netId, message: msg }) => {
-  let message = msg as unknown as Message | undefined;
+  let message = msg as Message | undefined;
 
   if (!isAdmin || (!netId && !message)) {
     clear(chatId);
@@ -45,7 +47,8 @@ export const message: THandler<
   const nets = await execQuery.user.nets.getWhereIsAdmin([user!.user_id]);
   if (!nets.length) {
     clear(chatId);
-    return false;
+    tgService.sendForbidden(chatId);
+    return '';
   }
 
   let net: INet | undefined;
@@ -53,7 +56,7 @@ export const message: THandler<
   if (netId) {
     net = nets.find((v) => v.net_id === netId);
     if (!net) {
-      return { message: 'Невірна спільнота' };
+      return 'Невірна спільнота';
     }
     message = messagesBuffer.get(chatId);
   } else if (nets.length === 1) {
@@ -80,17 +83,17 @@ export const message: THandler<
     },
   ]);
 
-  await notificationService.sendToTelegram(user!, 'Оберіть спільноту:', {
+  await tgService.send(chatId, 'Оберіть спільноту:', {
     reply_markup: new InlineKeyboard(buttons),
     onSuccess: (message: Message.TextMessage) =>
       buttonsBuffer.set(chatId, message.message_id),
   });
 
-  return true;
+  return '';
 };
 message.paramsSchema = {
   chatId: Joi.number().required(),
   netId: Joi.number(),
   message: Joi.any(),
 };
-message.responseSchema = [{ message: Joi.string() }, Joi.boolean()];
+message.responseSchema = Joi.string();

@@ -4,11 +4,12 @@ import { IEventMessage, INewEventsMessage } from '@domain/types';
 import { IConnectionService } from '@root/server/types';
 import { IServices } from '@root/controller/types';
 import { ChatService } from '../chat/chat';
+import { TgService } from '../tg/tg';
 import { IInstantEvent, IMeesageStream } from './notifications.types';
 
 export class NotificationService {
   private connection: IConnectionService;
-  private tg: IConnectionService;
+  private tg: TgService;
   private chat: ChatService;
   private emailInterval: number;
   private messageStream: Readable & AsyncIterable<IMeesageStream>;
@@ -17,25 +18,17 @@ export class NotificationService {
       user: ITableUsers;
       other?: Record<string, any>;
     }>;
-  private tgStream: Readable &
-    AsyncIterable<{
-      user: ITableUsers;
-      message: string;
-      other?: Record<string, any>;
-    }>;
 
   constructor(services: IServices) {
     const { chatService } = services;
     this.connection = connectionService;
-    this.tg = messengerService;
+    this.tg = services.tgService!;
     this.chat = chatService!;
     this.emailInterval = Number(env.NOTIFICATION_INTERVAL);
     this.messageStream = new Readable({ read: () => true, objectMode: true });
-    this.tgStream = new Readable({ read: () => true, objectMode: true });
     this.mailStream = new Readable({ read: () => true, objectMode: true });
     this.sendingToClient();
     this.sendingToEmail();
-    this.sendingToTelegram();
   }
 
   private async sendingToClient() {
@@ -47,31 +40,6 @@ export class NotificationService {
         continue;
       } else {
         logger.warn("CANT'T SEND TO CLIENT", user_id);
-      }
-    }
-  }
-
-  private async sendingToTelegram() {
-    for await (const { user, message, other } of this.tgStream) {
-      const { user_id, chat_id } = user;
-
-      if (!chat_id || !message) {
-        continue;
-      }
-
-      try {
-        const result = await this.tg!.sendNotification(
-          +chat_id!,
-          message,
-          other,
-        );
-
-        other?.onSuccess(result);
-      } catch (e) {
-        other?.onError(e);
-        logger.warn(e);
-        logger.warn("CANT'T SEND TO TELEGRAM", user_id);
-        this.mailStream.push({ user, other });
       }
     }
   }
@@ -106,12 +74,8 @@ export class NotificationService {
     onMessageSent: (users: ITableUsers, message: ITableMessages) => void,
   ) {
     for (const user of users) {
-      this.tgStream.push({
-        user,
-        message: message.content,
-        other: {
-          onSuccess: () => onMessageSent(user, message),
-        },
+      this.tg.send(user.chat_id, message.content, {
+        onSuccess: () => onMessageSent(user, message),
       });
     }
   }
@@ -141,15 +105,19 @@ export class NotificationService {
         .write([user_id, new Date()])
         .catch(logger.error.bind(logger));
 
+    const onError = () => {
+      this.sendToEmail(user, { onSuccess });
+    };
+
     if (user.chat_id) {
-      this.sendToTelegram(user, message, { onSuccess });
+      this.sendToTelegram(user, message, { onSuccess, onError });
     } else {
       this.sendToEmail(user, { onSuccess });
     }
   }
 
   async sendToTelegram(
-    user: Pick<ITableUsers, 'user_id' | 'chat_id'>,
+    user: ITableUsers,
     message: string,
     other?: Record<string, any>,
   ) {
@@ -158,10 +126,13 @@ export class NotificationService {
     // const prevNotifDate = new Date(prevNotifDateStr).getTime();
     // const curDate = new Date().getTime();
     // if (prevNotifDate < curDate - this.tgInterval) return;
-    this.tgStream.push({ user, message, other });
+    this.tg.send(user.chat_id, message, other);
   }
 
   private async sendToEmail(user: ITableUsers, other: Record<string, any>) {
+    if (!user.email) {
+      return;
+    }
     const [userEvents] = await execQuery.user.events.get([user.user_id]);
     const prevNotifDateStr = userEvents?.notification_date || 0;
     const prevNotifDate = new Date(prevNotifDateStr).getTime();
@@ -214,7 +185,7 @@ export class NotificationService {
       }
 
       // todo add web_app button with defined pathname, e.g. origin/net/waiting
-      this.tgStream.push({ user, message: messageText, other: { onSuccess } });
+      this.tg.send(user.chat_id, messageText, { onSuccess });
     }
   }
 

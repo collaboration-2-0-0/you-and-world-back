@@ -1,12 +1,13 @@
 import { Server } from 'ws';
+import { Message } from 'grammy/types';
+import { IMessage, MessageTypeKeys } from '@shared/types/api';
 import { PING_INTERVAL } from '@shared/server/constants';
 import { delay, excludeNullUndefined } from '@shared/server/utils';
 import {
   IOperation,
   TOperationResponse,
 } from '@root/controller/operation.types';
-import { IMessage, MessageTypeKeys } from '../../shared/types/api';
-import { MAX_CHAT_INDEX } from '../../constants/constants';
+import { MAX_CHAT_INDEX } from '@root/constants/constants';
 import { IHttpServer } from '../http/types';
 import { IInputConnection, IRequest } from '../types';
 import { ServerError } from '../errors';
@@ -196,7 +197,7 @@ class WsConnection implements IInputConnection {
   getConnectionService() {
     return {
       sendMessage: this.sendMessage.bind(this),
-      sendNotification: () => Promise.resolve(false),
+      sendNotification: () => Promise.resolve({} as Message.TextMessage),
     };
   }
 }
