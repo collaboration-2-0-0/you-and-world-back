@@ -96,4 +96,4 @@ message.paramsSchema = {
   netId: Joi.number(),
   message: Joi.any(),
 };
-message.responseSchema = Joi.string();
+message.responseSchema = Joi.string().min(0);
