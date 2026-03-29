@@ -8,8 +8,8 @@ const connection = new Connection({
   user: 'you_and_world',
   password: 'you_and_world',
   /* heroku */
-  ssl: { rejectUnauthorized: false },
-  connectionString: '',
+  // ssl: { rejectUnauthorized: false },
+  // connectionString: '',
 });
 
 const exec = async () => {
@@ -21,7 +21,7 @@ const exec = async () => {
     `
     UPDATE nets_data SET rules = $1;
 `,
-    [RULES_DEFAULT],
+    [RULES_DEFAULT.trim()],
   )) as any[];
 
   console.log(result);
