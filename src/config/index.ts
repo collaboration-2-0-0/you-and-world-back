@@ -79,8 +79,8 @@ const config: IConfig = {
     services: [
       'mailService',
       'chatService',
-      'notificationService',
       'tgService',
+      'notificationService',
     ],
     inputModules: [
       'setSession',
