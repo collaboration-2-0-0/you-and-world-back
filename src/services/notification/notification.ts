@@ -1,5 +1,5 @@
 import { Readable } from 'node:stream';
-import { INet, ITableMessages, ITableUsers } from '@shared/types/db';
+import { INet, ITableUsers } from '@shared/types/db';
 import { IEventMessage, INewEventsMessage } from '@domain/types';
 import { IConnectionService } from '@root/server/types';
 import { IServices } from '@root/controller/types';
@@ -65,18 +65,6 @@ export class NotificationService {
         logger.warn(e);
         logger.warn("CAN'T SEND TO EMAIL", user_id);
       }
-    }
-  }
-
-  sendForUsers(
-    users: ITableUsers[],
-    message: ITableMessages,
-    onMessageSent: (users: ITableUsers, message: ITableMessages) => void,
-  ) {
-    for (const user of users) {
-      this.tg.send(user.chat_id, message.content, {
-        onSuccess: () => onMessageSent(user, message),
-      });
     }
   }
 

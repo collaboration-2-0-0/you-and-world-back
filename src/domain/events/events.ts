@@ -10,10 +10,10 @@ const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {
 };
 
 export class Events {
-  private notifService = notificationService;
+  private tg = tgService;
 
   async setMessage(netId: number, message: Message) {
-    const { message_id, text, edit_date, date, chat } = message;
+    const { message_id, text, edit_date, date } = message;
 
     if (!text) {
       throw new Error('Empty message');
@@ -67,12 +67,14 @@ export class Events {
 
       if (!users.length) {
         await execQuery.message.removeById([msg.message_id]);
-      } else if (i === messages.length - 1) {
-        this.notifService.sendForUsers(
-          users,
-          msg,
-          this.onMessageSent.bind(this),
-        );
+      } else if (i !== messages.length - 1) {
+        continue;
+      }
+
+      for (const user of users) {
+        this.tg.send(user.chat_id, msg.content, {
+          onSuccess: () => this.onMessageSent(user, msg),
+        });
       }
     }
   }
