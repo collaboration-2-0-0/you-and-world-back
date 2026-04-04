@@ -75,6 +75,7 @@ export type ITableNodes = {
   parent_node_id: number | null;
   net_id: number;
   node_position: number;
+  node_address: string;
   count_of_members: number;
   updated: string;
 };

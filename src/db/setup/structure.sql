@@ -185,6 +185,7 @@ CREATE TABLE public.nodes (
     parent_node_id integer,
     net_id integer NOT NULL,
     node_position integer DEFAULT 0 NOT NULL,
+    node_address character varying NOT NULL,
     count_of_members integer DEFAULT 0 NOT NULL,
     updated timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -413,7 +414,7 @@ COPY public.nets_guests (net_id, user_id, comment) FROM stdin;
 -- Data for Name: nodes; Type: TABLE DATA; Schema: public; Owner: you_and_world
 --
 
-COPY public.nodes (node_id, node_level, parent_node_id, net_id, node_position, count_of_members, updated) FROM stdin;
+COPY public.nodes (node_id, node_level, parent_node_id, net_id, node_position, node_address, count_of_members, updated) FROM stdin;
 \.
 
 

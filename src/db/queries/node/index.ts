@@ -19,20 +19,19 @@ export interface IQueriesNode {
       ['node_id', number],
       ['new_parent_node_id', number | null],
       ['new_node_position', number],
-      ['new_count_of_members', number],
+      ['node_address', string],
     ]
   >;
-  changeLevel: TQuery<[['node_id', number]]>;
-  changeLevelAll: TQuery<[['net_id', number]]>;
+  updateDescendants: TQuery<[['parent_node_id', number]]>;
   findFreeByDate: TQuery<[['strDate', Date]], ITableNodes>;
   tree: IQueriesNodeTree;
 }
 
 export const create = `
   INSERT INTO nodes (
-    net_id, count_of_members
+    net_id, count_of_members, node_address
   )
-  VALUES ($1, 1)
+  VALUES ($1, 1, '0')
   RETURNING *
 `;
 
@@ -68,26 +67,34 @@ export const getChild = `
     node_position = $2
 `;
 
+/* UPDATE SET FROM WHERE */
 export const move = `
   UPDATE nodes
   SET
     parent_node_id = $2,
     node_position = $3,
-    count_of_members = $4
+    node_address = $4
   WHERE node_id = $1
 `;
 
-export const changeLevel = `
-  UPDATE nodes
-  SET node_level = node_level - 1
-  WHERE node_id = $1
-  RETURNING *
-`;
-
-export const changeLevelAll = `
-  UPDATE nodes
-  SET node_level = node_level - 1
-  WHERE net_id = $1
+export const updateDescendants = `
+WITH RECURSIVE tree AS (
+    SELECT n.node_id, (p.node_level + 1) as node_level,
+      CASE
+        WHEN p.node_address = '0' THEN (n.node_position + 1)::text
+        ELSE p.node_address || '.' || (n.node_position + 1)::text
+      END AS new_address
+    FROM nodes n
+    JOIN nodes p ON p.node_id = n.parent_node_id
+    WHERE n.parent_node_id = $1
+    UNION ALL
+    SELECT n.node_id, (tree.node_level + 1) as node_level,
+      tree.new_address || '.' || (n.node_position + 1)::text
+    FROM nodes n
+    JOIN tree ON n.parent_node_id = tree.node_id
+  )
+  UPDATE nodes SET node_address = tree.new_address, node_level = tree.node_level
+  FROM tree WHERE nodes.node_id = tree.node_id
 `;
 
 export const findFreeByDate = `

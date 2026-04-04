@@ -11,20 +11,26 @@ import { MAX_NODE_LEVEL } from './constants';
 import { NetArrange } from './net.arrange';
 
 export const createTree = async (t: ITransaction, node: ITableNodes) => {
-  const { node_level, node_id, net_id } = node;
+  const { node_level, node_id, net_id, node_address } = node;
+
   if (node_level >= MAX_NODE_LEVEL) {
     return;
   }
+
   for (
     let node_position = 0;
     node_position < TREE_MEMBERS_COUNT;
     node_position++
   ) {
+    const segment = String(node_position + 1);
+    const childAddress =
+      node_address === '0' ? segment : `${node_address}.${segment}`;
     await t.execQuery.node.tree.create([
       node_level + 1,
       node_id,
       net_id,
       node_position,
+      childAddress,
     ]);
   }
 };

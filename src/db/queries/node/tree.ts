@@ -8,6 +8,7 @@ export interface IQueriesNodeTree {
       ['parent_node_id', number],
       ['net_id', number],
       ['node_position', number],
+      ['node_address', string],
     ]
   >;
   remove: TQuery<[['parent_node_id', number]], Pick<ITableNodes, 'node_id'>>;
@@ -15,9 +16,9 @@ export interface IQueriesNodeTree {
 
 export const create = `
   INSERT INTO nodes (
-    node_level, parent_node_id, net_id, node_position
+    node_level, parent_node_id, net_id, node_position, node_address
   )
-  VALUES ($1, $2, $3, $4)
+  VALUES ($1, $2, $3, $4, $5)
 `;
 
 export const remove = `

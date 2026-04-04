@@ -7,6 +7,7 @@ export const NodeSchema = {
   parent_node_id: [Joi.number(), JOI_NULL],
   net_id: Joi.number(),
   node_position: Joi.number(),
+  node_address: Joi.string(),
   count_of_members: Joi.number(),
   updated: Joi.date(),
 };

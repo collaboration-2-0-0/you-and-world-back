@@ -6,6 +6,7 @@ import {
   IMemberResponse,
 } from '@shared/types/api';
 import { JOI_NULL } from './common.schema';
+import { NodeSchema } from './node.schema';
 
 export const UserNodeSchema = {
   node_id: Joi.number().required(),
@@ -26,8 +27,7 @@ export const MemberInviteParamsSchema = {
 } as Record<keyof IMemberInviteParams, TJoiSchema>;
 
 export const MemberResponseSchema = {
-  node_id: Joi.number(),
-  count_of_members: Joi.number(),
+  ...NodeSchema,
   user_id: [Joi.number(), JOI_NULL],
   name: [Joi.string(), JOI_NULL],
   photo_url: [Joi.string(), JOI_NULL],
