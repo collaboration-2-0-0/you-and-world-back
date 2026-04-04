@@ -15,8 +15,7 @@ export interface IQueriesNetCircle {
 
 export const getData = `
   SELECT
-    nodes.node_id,
-    nodes.count_of_members,
+    nodes.*,
     members.user_id,
     members.confirmed,
     users.name,
