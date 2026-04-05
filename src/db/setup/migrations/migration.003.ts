@@ -6,6 +6,9 @@ const connection = new Connection({
   database: 'you_and_world',
   user: 'you_and_world',
   password: 'you_and_world',
+  /* heroku */
+  // ssl: { rejectUnauthorized: false },
+  // connectionString: '',
 });
 
 const exec = async () => {

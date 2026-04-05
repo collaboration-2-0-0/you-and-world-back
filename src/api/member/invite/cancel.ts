@@ -1,10 +1,10 @@
 import Joi from 'joi';
-import { THandler } from '@root/controller/types';
-import { IMemberConfirmParams } from '@shared/types/api';
+import { IMemberAndNode } from '@shared/types/api';
 import { getMemberStatus } from '@shared/server/utils';
-import { MemberConfirmParamsSchema } from '../../schema';
+import { THandler } from '@root/controller/types';
+import { MemberAndNodeSchema } from '@root/api/schema';
 
-const cancel: THandler<IMemberConfirmParams, boolean> = async (
+const cancel: THandler<IMemberAndNode, boolean> = async (
   _,
   { node_id, member_id },
 ) => {
@@ -15,7 +15,7 @@ const cancel: THandler<IMemberConfirmParams, boolean> = async (
   await execQuery.member.invite.remove([member_id]);
   return true;
 };
-cancel.paramsSchema = MemberConfirmParamsSchema;
+cancel.paramsSchema = MemberAndNodeSchema;
 cancel.responseSchema = Joi.boolean();
 cancel.checkNet = true;
 

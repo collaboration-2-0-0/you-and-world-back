@@ -1,13 +1,11 @@
 import Joi from 'joi';
-import { IUserNetDataResponse } from '@root/shared/types/api';
+import { IUserNetDataResponse } from '@shared/types/api';
 import { TJoiSchema } from '@root/controller/types';
 import { JOI_NULL } from './common.schema';
+import { MemberSchema } from './member.schema';
 
 export const UserNetDataResponseSchema = {
-  node_id: Joi.number(),
-  parent_node_id: [Joi.number(), JOI_NULL],
-  confirmed: [Joi.boolean(), JOI_NULL],
-  count_of_members: Joi.number(),
+  ...MemberSchema,
   vote: [Joi.boolean(), JOI_NULL],
   vote_count: Joi.number(),
 } as Record<keyof IUserNetDataResponse, TJoiSchema>;

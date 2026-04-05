@@ -15,8 +15,12 @@ export const TABLES_MAP = {
   MEMBERS: 'members',
   MEMBERS_INVITES: 'members_invites',
   MEMBERS_TO_MEMBERS: 'members_to_members',
+  MEMBERS_INFO: 'members_info',
+  MEMBERS_SPACES: 'members_spaces',
   EVENTS: 'events',
   USERS_EVENTS: 'users_events',
+  SPACES: 'spaces',
+  SPACES_TO_SPACES: 'spaces_to_spaces',
 };
 
 export type ITableUsers = {
@@ -143,4 +147,29 @@ export type ITableEvents = {
 export type ITableUsersEvents = {
   user_id: number;
   notification_date: string;
+};
+
+export type ITableSpaces = {
+  space_id: number;
+  name: string;
+  description: string | null;
+};
+
+export type ITableSpacesToSpaces = {
+  space_rel_id: number;
+  space_id: number;
+  parent_space_id: number | null;
+};
+
+export type ITableMembersInfo = {
+  member_id: number;
+  member_desire: string | null;
+  member_goal: string | null;
+  member_activity: string | null;
+  member_role: string | null;
+};
+
+export type ITableMembersSpaces = {
+  member_id: number;
+  space_rel_id: number;
 };

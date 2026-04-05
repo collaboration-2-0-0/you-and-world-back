@@ -23,9 +23,7 @@ export const findByNode = `
 
 export const get = `
   SELECT
-    nodes.node_id,
-    nodes.parent_node_id,
-    nodes.count_of_members,
+    members.member_id,
     members.confirmed,
     members_to_members.vote,
     SUM (
@@ -47,8 +45,7 @@ export const get = `
     members.user_id = $1 AND
     nodes.net_id = $2
   GROUP BY
-    nodes.node_id,
-    nodes.parent_node_id,
+    members.member_id,
     members.confirmed,
     members_to_members.vote
 `;

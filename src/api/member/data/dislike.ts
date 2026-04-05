@@ -1,11 +1,11 @@
 import Joi from 'joi';
-import { THandler } from '@root/controller/types';
-import { IMemberConfirmParams } from '@shared/types/api';
+import { IMemberAndNode } from '@shared/types/api';
 import { getMemberStatus } from '@shared/server/utils';
 import { NetEvent } from '@domain/event/event';
-import { MemberConfirmParamsSchema } from '../../schema';
+import { THandler } from '@root/controller/types';
+import { MemberAndNodeSchema } from '@root/api/schema';
 
-export const set: THandler<IMemberConfirmParams, boolean> = async (
+export const set: THandler<IMemberAndNode, boolean> = async (
   { member: m },
   { node_id, member_id },
 ) => {
@@ -17,7 +17,10 @@ export const set: THandler<IMemberConfirmParams, boolean> = async (
     let [member] = await execQuery.member.find.inTree([node_id, member_id]);
     const parentNodeId = member ? node_id : parent_node_id;
     if (!member) {
-      if (!parent_node_id) return false; // bad request
+      /* if user in root node  */
+      if (!parent_node_id) {
+        return false; // bad request
+      }
       [member] = await execQuery.member.find.inCircle([
         parent_node_id,
         member_id,
@@ -37,11 +40,11 @@ export const set: THandler<IMemberConfirmParams, boolean> = async (
   event?.send();
   return result;
 };
-set.paramsSchema = MemberConfirmParamsSchema;
+set.paramsSchema = MemberAndNodeSchema;
 set.responseSchema = Joi.boolean();
 set.checkNet = true;
 
-export const unSet: THandler<IMemberConfirmParams, boolean> = async (
+export const unSet: THandler<IMemberAndNode, boolean> = async (
   { member: m },
   { node_id, member_id },
 ) => {
@@ -59,6 +62,6 @@ export const unSet: THandler<IMemberConfirmParams, boolean> = async (
   await execQuery.member.data.unsetDislike([node_id, member_id]);
   return true;
 };
-unSet.paramsSchema = MemberConfirmParamsSchema;
+unSet.paramsSchema = MemberAndNodeSchema;
 unSet.responseSchema = Joi.boolean();
 unSet.checkNet = true;

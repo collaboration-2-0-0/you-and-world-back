@@ -57,35 +57,43 @@ export const getApi = (
 
   },
   'member': {
+    'info': {
+      'read': (options: P.IMemberAndNode) =>
+        fetch<P.IMemberInfoRes>('/member/info/read', options),
+
+      'update': (options: P.IMemberInfoReq) =>
+        fetch<P.IMemberInfoRes>('/member/info/update', options),
+
+    },
     'data': {
       'dislike': {
-        'set': (options: P.IMemberConfirmParams) =>
+        'set': (options: P.IMemberAndNode) =>
           fetch<boolean>('/member/data/dislike/set', options),
 
-        'unSet': (options: P.IMemberConfirmParams) =>
+        'unSet': (options: P.IMemberAndNode) =>
           fetch<boolean>('/member/data/dislike/unSet', options),
 
       },
       'vote': {
-        'set': (options: P.IMemberConfirmParams) =>
+        'set': (options: P.IMemberAndNode) =>
           fetch<P.TMemberDataVoteSetResponse>('/member/data/vote/set', options),
 
-        'unSet': (options: P.IMemberConfirmParams) =>
+        'unSet': (options: P.IMemberAndNode) =>
           fetch<boolean>('/member/data/vote/unSet', options),
 
       },
     },
     'invite': {
-      'cancel': (options: P.IMemberConfirmParams) =>
+      'cancel': (options: P.IMemberAndNode) =>
         fetch<boolean>('/member/invite/cancel', options),
 
-      'confirm': (options: P.IMemberConfirmParams) =>
+      'confirm': (options: P.IMemberAndNode) =>
         fetch<boolean>('/member/invite/confirm', options),
 
       'create': (options: P.IMemberInviteParams) =>
         fetch<P.TMemberInviteCreateResponse>('/member/invite/create', options),
 
-      'refuse': (options: P.IMemberConfirmParams) =>
+      'refuse': (options: P.IMemberAndNode) =>
         fetch<boolean>('/member/invite/refuse', options),
 
     },
@@ -125,6 +133,10 @@ export const getApi = (
       'get': (options: P.IUserNode) =>
         fetch<P.INetWaitingResponse>('/net/wait/get', options),
 
+    },
+  },
+  'space': {
+    'space': {
     },
   },
   'subscription': {

@@ -25,15 +25,7 @@ export type INetViewResponse = IMemberResponse[];
 
 export type NetViewEnum = Exclude<NetViewKeys, 'net'>;
 
-export type IUserNetDataResponse = Pick<
-  IUserNetData,
-  | 'node_id'
-  | 'parent_node_id'
-  | 'count_of_members'
-  | 'confirmed'
-  | 'vote'
-  | 'vote_count'
->;
+export type IUserNetDataResponse = IUserNetData;
 
 export type INetConnectByToken = {
   net_id: number;

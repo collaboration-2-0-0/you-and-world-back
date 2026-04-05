@@ -1,4 +1,5 @@
 import {
+  OuterJoin,
   ITableMembers,
   ITableMembersInvites,
   ITableNodes,
@@ -6,4 +7,6 @@ import {
 } from './index';
 
 export type IMember = ITableMembers & ITableUsers & ITableNodes;
-export type IMemberInvites = IMember & ITableMembersInvites;
+
+export type INodeMemberOrInvite = ITableNodes &
+  OuterJoin<IMember & ITableMembersInvites>;

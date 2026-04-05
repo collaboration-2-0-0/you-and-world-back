@@ -1,11 +1,11 @@
 import Joi from 'joi';
-import { THandler } from '@root/controller/types';
-import { IMemberConfirmParams } from '@shared/types/api';
+import { IMemberAndNode } from '@shared/types/api';
 import { getMemberStatus } from '@shared/server/utils';
 import { NetEvent } from '@domain/event/event';
-import { MemberConfirmParamsSchema, JOI_NULL } from '../../schema';
+import { THandler } from '@root/controller/types';
+import { MemberAndNodeSchema, JOI_NULL } from '@root/api/schema';
 
-export const set: THandler<IMemberConfirmParams, boolean | null> = async (
+export const set: THandler<IMemberAndNode, boolean | null> = async (
   { member: m },
   { node_id, member_id },
 ) => {
@@ -35,11 +35,11 @@ export const set: THandler<IMemberConfirmParams, boolean | null> = async (
   event?.send();
   return result;
 };
-set.paramsSchema = MemberConfirmParamsSchema;
+set.paramsSchema = MemberAndNodeSchema;
 set.responseSchema = [Joi.boolean(), JOI_NULL];
 set.checkNet = true;
 
-export const unSet: THandler<IMemberConfirmParams, boolean> = async (
+export const unSet: THandler<IMemberAndNode, boolean> = async (
   { member: actionMember },
   { member_id },
 ) => {
@@ -61,6 +61,6 @@ export const unSet: THandler<IMemberConfirmParams, boolean> = async (
   event.send();
   return true;
 };
-unSet.paramsSchema = MemberConfirmParamsSchema;
+unSet.paramsSchema = MemberAndNodeSchema;
 unSet.responseSchema = Joi.boolean();
 unSet.checkNet = true;

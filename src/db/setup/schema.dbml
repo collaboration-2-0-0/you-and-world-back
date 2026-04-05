@@ -192,3 +192,37 @@ Ref "fk_events_user": "users"."user_id" < "events"."user_id" [delete: cascade]
 Ref "fk_events_net": "nets"."net_id" < "events"."net_id"
 Ref "fk_events_from_node": "nodes"."node_id" < "events"."from_node_id" [delete: cascade] // ON DELETE ?
 Ref "fk_users_events_user": "users"."user_id" - "users_events"."user_id" [delete: cascade]
+
+Table spaces {
+  "space_id" integer [primary key, not null]
+  "name" "character varying(255)" [not null]
+  "description" text [default: NULL]
+}
+
+Table spaces_to_spaces {
+  "space_rel_id" integer [primary key, not null]
+  "space_id" integer [not null]
+  "parent_space_id" integer [default: NULL]
+}
+
+Table members_info {
+  "member_id" integer [primary key, not null]
+  "member_desire" text [default: NULL]
+  "member_goal" text [default: NULL]
+  "member_activity" text [default: NULL]
+  "member_role" "character varying(100)" [default: NULL]
+}
+
+Table members_spaces {
+  "member_id" integer [not null]
+  "space_rel_id" integer [not null]
+  Indexes {
+    (member_id, space_rel_id) [pk, name: "pk_members_spaces"]
+  }
+}
+
+Ref "fk_spaces_to_spaces_space": "spaces"."space_id" < "spaces_to_spaces"."space_id" // [delete: cascade]
+Ref "fk_spaces_to_spaces_parent": "spaces"."space_id" < "spaces_to_spaces"."parent_space_id" // [delete: set null]
+Ref "fk_members_info_member": "members"."member_id" - "members_info"."member_id" [delete: cascade]
+Ref "fk_members_spaces_member": "members"."member_id" < "members_spaces"."member_id" [delete: cascade]
+Ref "fk_members_spaces_space_rel": "spaces_to_spaces"."space_rel_id" < "members_spaces"."space_rel_id" // [delete: cascade]

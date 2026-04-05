@@ -4,7 +4,7 @@ import {
   INodeMember,
   INetDataExtended,
 } from '@shared/types/db';
-import { TREE_MEMBERS_COUNT } from '@root/shared/server/constants';
+import { TREE_MEMBERS_COUNT } from '@shared/server/constants';
 import { ITransaction } from '@db/types';
 import { INetCreate, INetNode } from '../types';
 import { MAX_NODE_LEVEL } from './constants';

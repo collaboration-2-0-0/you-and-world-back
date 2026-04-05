@@ -1,15 +1,15 @@
-import { IMember, IMemberInvites } from '@shared/types/db';
+import { IMember, INodeMemberOrInvite } from '@shared/types/db';
 import { TQuery } from '@db/types';
 
 export interface IQueriesMemberFind {
   unactive: TQuery<[['date', Date]], IMember>;
   inTree: TQuery<
     [['user_node_id', number], ['member_node_id', number]],
-    IMemberInvites
+    INodeMemberOrInvite
   >;
   inCircle: TQuery<
     [['parent_node_id', number], ['member_node_id', number]],
-    IMemberInvites
+    INodeMemberOrInvite
   >;
   getByChatId: TQuery<[['chat_id', number]], IMember>;
 }
@@ -31,7 +31,6 @@ export const unactive = `
 export const inTree = `
   SELECT
     nodes.*,
-
     members.*,
     members_invites.member_name,
     members_invites.token

@@ -7,6 +7,7 @@ import { IQueriesNet } from '../queries/net';
 import { IQueriesMember } from '../queries/member';
 import { IQueriesNode } from '../queries/node';
 import { IQueriesEvents } from '../queries/events';
+import { IQueriesSpace } from '../queries/space';
 
 export interface IDatabaseConfig {
   path: string;
@@ -61,6 +62,7 @@ export interface IDatabaseQueries {
   member: IQueriesMember;
   node: IQueriesNode;
   events: IQueriesEvents;
+  space: IQueriesSpace;
 }
 
 export interface IQueries {

@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { TJoiSchema } from '@root/controller/types';
 import {
-  IMemberConfirmParams,
+  IMemberAndNode,
   IMemberInviteParams,
   IMemberResponse,
 } from '@shared/types/api';
@@ -16,24 +16,31 @@ export const MemberNodeSchema = {
   member_id: Joi.number().required(),
 };
 
-export const MemberConfirmParamsSchema = {
+export const MemberSchema = {
+  confirmed: [Joi.boolean(), JOI_NULL],
+};
+
+export const MemberAndNodeSchema = {
   ...UserNodeSchema,
   ...MemberNodeSchema,
-} as Record<keyof IMemberConfirmParams, TJoiSchema>;
+} as Record<keyof IMemberAndNode, TJoiSchema>;
 
 export const MemberInviteParamsSchema = {
-  ...MemberConfirmParamsSchema,
+  ...MemberAndNodeSchema,
   member_name: Joi.string().required(),
 } as Record<keyof IMemberInviteParams, TJoiSchema>;
 
 export const MemberResponseSchema = {
   ...NodeSchema,
+  ...MemberSchema,
+  /* user */
   user_id: [Joi.number(), JOI_NULL],
   name: [Joi.string(), JOI_NULL],
   photo_url: [Joi.string(), JOI_NULL],
-  confirmed: [Joi.boolean(), JOI_NULL],
+  /* invite */
   token: [Joi.string(), JOI_NULL],
   member_name: [Joi.string(), JOI_NULL],
+  /* member to member */
   dislike: [Joi.boolean(), JOI_NULL],
   vote: [Joi.boolean(), JOI_NULL],
   vote_count: Joi.number(),

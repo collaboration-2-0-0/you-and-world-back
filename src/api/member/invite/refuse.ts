@@ -1,11 +1,11 @@
 import Joi from 'joi';
-import { THandler } from '@root/controller/types';
-import { IMemberConfirmParams } from '@shared/types/api';
+import { IMemberAndNode } from '@shared/types/api';
 import { getMemberStatus } from '@shared/server/utils';
 import { NetEvent } from '@domain/event/event';
-import { MemberConfirmParamsSchema } from '../../schema';
+import { THandler } from '@root/controller/types';
+import { MemberAndNodeSchema } from '@root/api/schema';
 
-const refuse: THandler<IMemberConfirmParams, boolean> = async (
+const refuse: THandler<IMemberAndNode, boolean> = async (
   { member: m },
   { node_id, member_id },
 ) => {
@@ -28,7 +28,7 @@ const refuse: THandler<IMemberConfirmParams, boolean> = async (
   event?.send();
   return result;
 };
-refuse.paramsSchema = MemberConfirmParamsSchema;
+refuse.paramsSchema = MemberAndNodeSchema;
 refuse.responseSchema = Joi.boolean();
 refuse.checkNet = true;
 

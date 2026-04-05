@@ -3,6 +3,7 @@ import { TQuery } from '@db/types';
 import { IQueriesMemberData } from './data';
 import { IQueriesMemberInvite } from './invite';
 import { IQueriesMemberFind } from './find';
+import { IQueriesMemberInfo } from './info';
 
 export interface IQueriesMember {
   create: TQuery<[['node_id', number], ['user_id', number]], ITableMembers>;
@@ -30,6 +31,7 @@ export interface IQueriesMember {
   data: IQueriesMemberData;
   invite: IQueriesMemberInvite;
   find: IQueriesMemberFind;
+  info: IQueriesMemberInfo;
 }
 
 export const create = `

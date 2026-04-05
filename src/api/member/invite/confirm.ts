@@ -1,11 +1,12 @@
 import Joi from 'joi';
-import { THandler } from '@root/controller/types';
-import { IMemberConfirmParams } from '@shared/types/api';
+import { IMember } from '@shared/types/db';
+import { IMemberAndNode } from '@shared/types/api';
 import { getMemberStatus } from '@shared/server/utils';
 import { NetEvent } from '@domain/event/event';
-import { MemberConfirmParamsSchema } from '../../schema';
+import { THandler } from '@root/controller/types';
+import { MemberAndNodeSchema } from '@root/api/schema';
 
-const confirm: THandler<IMemberConfirmParams, boolean> = async (
+const confirm: THandler<IMemberAndNode, boolean> = async (
   { member: m },
   { node_id, member_id },
 ) => {
@@ -22,7 +23,11 @@ const confirm: THandler<IMemberConfirmParams, boolean> = async (
     await net.updateCountOfMembers(member_id);
     await domain.net.createTree(t, member);
 
-    event = new domain.event.NetEvent(m!.getNet(), 'CONFIRM', member);
+    event = new domain.event.NetEvent(
+      m!.getNet(),
+      'CONFIRM',
+      member as IMember,
+    );
     await event.messages.create(t);
     await event.commit(t);
 
@@ -31,7 +36,7 @@ const confirm: THandler<IMemberConfirmParams, boolean> = async (
   event?.send();
   return result;
 };
-confirm.paramsSchema = MemberConfirmParamsSchema;
+confirm.paramsSchema = MemberAndNodeSchema;
 confirm.responseSchema = Joi.boolean();
 confirm.checkNet = true;
 

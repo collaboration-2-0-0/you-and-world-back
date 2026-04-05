@@ -1,24 +1,13 @@
-import {
-  ITableMembersInvites,
-  ITableMembersToMembers,
-  ITableNodes,
-  IMember,
-  OuterJoin,
-} from '../db';
+import { OuterJoin, ITableMembersToMembers, INodeMemberOrInvite } from '../db';
 
 export type IUserNode = { node_id: number };
-
 export type IMemberNode = { member_id: number };
-
-export type IMemberConfirmParams = IUserNode & IMemberNode;
-
-export type IMemberInviteParams = IMemberConfirmParams & {
+export type IMemberAndNode = IUserNode & IMemberNode;
+export type IMemberInviteParams = IMemberAndNode & {
   member_name: string;
 };
 
-export type IMemberResponse = ITableNodes &
-  OuterJoin<Omit<IMember, 'password'>> &
-  OuterJoin<ITableMembersInvites> &
+export type IMemberResponse = Omit<INodeMemberOrInvite, 'password'> &
   OuterJoin<ITableMembersToMembers> & {
     vote_count: number;
   };

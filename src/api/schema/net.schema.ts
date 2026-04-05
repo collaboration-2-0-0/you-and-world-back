@@ -1,6 +1,5 @@
 import Joi from 'joi';
-import { TJoiSchema } from '@root/controller/types';
-import { INetDataExtended } from '@root/shared/types/db';
+import { INetDataExtended } from '@shared/types/db';
 import {
   INetCreateParams,
   INetsResponse,
@@ -8,6 +7,7 @@ import {
   INetWaiting,
   IWaitNets,
 } from '@shared/types/api';
+import { TJoiSchema } from '@root/controller/types';
 import { JOI_NULL } from './common.schema';
 import { MemberResponseSchema } from './member.schema';
 import { NodeSchema } from './node.schema';

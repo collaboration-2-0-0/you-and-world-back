@@ -31,10 +31,6 @@ export class NetEvent {
     for (const child of this.children) {
       await child.commit(t);
     }
-    // console.log('COMMIT', {
-    //   records: this.messages.records,
-    //   instant: this.messages.instantRecords,
-    // });
     const { messages, event_type } = this;
     for (const record of messages.records) {
       const { user_id, net_id, net_view, from_node_id, message } = record;

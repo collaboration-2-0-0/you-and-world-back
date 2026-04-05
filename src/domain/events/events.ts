@@ -1,5 +1,5 @@
 import { Message } from 'grammy/types';
-import { ITableMessages, ITableUsers } from '@root/shared/types/db';
+import { ITableMessages, ITableUsers } from '@shared/types/db';
 import { SubscriptionSubjectKeys } from '../types';
 
 const SUBJECT_BY_TEG: Record<string, SubscriptionSubjectKeys> = {

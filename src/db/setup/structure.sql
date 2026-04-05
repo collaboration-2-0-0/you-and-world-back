@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict QZr9KGjGA8QqVgNeAkr7kb25u7OVScJ7LlRHKOltL7poBJT3QLRFx9T9zGalh8L
+\restrict GN6PAWijmkg5HzdSe9wP1QnIJcjKevjv0tzc2D2xCzjsiLAOMmFS1eFp3jKPAB6
 
--- Dumped from database version 18.1
--- Dumped by pg_dump version 18.1
+-- Dumped from database version 18.3
+-- Dumped by pg_dump version 18.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -73,6 +73,21 @@ CREATE TABLE public.members (
 ALTER TABLE public.members OWNER TO you_and_world;
 
 --
+-- Name: members_info; Type: TABLE; Schema: public; Owner: you_and_world
+--
+
+CREATE TABLE public.members_info (
+    member_id integer NOT NULL,
+    member_desire text,
+    member_goal text,
+    member_activity text,
+    member_role character varying(255) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.members_info OWNER TO you_and_world;
+
+--
 -- Name: members_invites; Type: TABLE; Schema: public; Owner: you_and_world
 --
 
@@ -85,6 +100,18 @@ CREATE TABLE public.members_invites (
 
 
 ALTER TABLE public.members_invites OWNER TO you_and_world;
+
+--
+-- Name: members_spaces; Type: TABLE; Schema: public; Owner: you_and_world
+--
+
+CREATE TABLE public.members_spaces (
+    member_id integer NOT NULL,
+    space_rel_id integer NOT NULL
+);
+
+
+ALTER TABLE public.members_spaces OWNER TO you_and_world;
 
 --
 -- Name: members_to_members; Type: TABLE; Schema: public; Owner: you_and_world
@@ -263,6 +290,60 @@ ALTER TABLE public.sessions ALTER COLUMN session_id ADD GENERATED ALWAYS AS IDEN
 
 
 --
+-- Name: spaces; Type: TABLE; Schema: public; Owner: you_and_world
+--
+
+CREATE TABLE public.spaces (
+    space_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.spaces OWNER TO you_and_world;
+
+--
+-- Name: spaces_space_id_seq; Type: SEQUENCE; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE public.spaces ALTER COLUMN space_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.spaces_space_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: spaces_to_spaces; Type: TABLE; Schema: public; Owner: you_and_world
+--
+
+CREATE TABLE public.spaces_to_spaces (
+    space_rel_id integer NOT NULL,
+    space_id integer NOT NULL,
+    parent_space_id integer
+);
+
+
+ALTER TABLE public.spaces_to_spaces OWNER TO you_and_world;
+
+--
+-- Name: spaces_to_spaces_space_rel_id_seq; Type: SEQUENCE; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE public.spaces_to_spaces ALTER COLUMN space_rel_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.spaces_to_spaces_space_rel_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: subscriptions; Type: TABLE; Schema: public; Owner: you_and_world
 --
 
@@ -288,7 +369,7 @@ CREATE TABLE public.users (
     mobile character varying(50) DEFAULT NULL::character varying,
     password character varying(255) DEFAULT NULL::character varying,
     confirmed boolean DEFAULT false NOT NULL,
-    chat_id bigint DEFAULT NULL,
+    chat_id bigint,
     username character varying(50) DEFAULT NULL::character varying,
     photo_url character varying(100) DEFAULT NULL::character varying
 );
@@ -363,10 +444,26 @@ COPY public.members (member_id, user_id, email_show, name_show, mobile_show, con
 
 
 --
+-- Data for Name: members_info; Type: TABLE DATA; Schema: public; Owner: you_and_world
+--
+
+COPY public.members_info (member_id, member_desire, member_goal, member_activity, member_role) FROM stdin;
+\.
+
+
+--
 -- Data for Name: members_invites; Type: TABLE DATA; Schema: public; Owner: you_and_world
 --
 
 COPY public.members_invites (member_id, node_id, member_name, token) FROM stdin;
+\.
+
+
+--
+-- Data for Name: members_spaces; Type: TABLE DATA; Schema: public; Owner: you_and_world
+--
+
+COPY public.members_spaces (member_id, space_rel_id) FROM stdin;
 \.
 
 
@@ -431,6 +528,22 @@ COPY public.roles (role_id, name) FROM stdin;
 --
 
 COPY public.sessions (session_id, user_id, session_key, session_value, updated) FROM stdin;
+\.
+
+
+--
+-- Data for Name: spaces; Type: TABLE DATA; Schema: public; Owner: you_and_world
+--
+
+COPY public.spaces (space_id, name, description) FROM stdin;
+\.
+
+
+--
+-- Data for Name: spaces_to_spaces; Type: TABLE DATA; Schema: public; Owner: you_and_world
+--
+
+COPY public.spaces_to_spaces (space_rel_id, space_id, parent_space_id) FROM stdin;
 \.
 
 
@@ -510,6 +623,20 @@ SELECT pg_catalog.setval('public.sessions_session_id_seq', 1, false);
 
 
 --
+-- Name: spaces_space_id_seq; Type: SEQUENCE SET; Schema: public; Owner: you_and_world
+--
+
+SELECT pg_catalog.setval('public.spaces_space_id_seq', 1, false);
+
+
+--
+-- Name: spaces_to_spaces_space_rel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: you_and_world
+--
+
+SELECT pg_catalog.setval('public.spaces_to_spaces_space_rel_id_seq', 1, false);
+
+
+--
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: you_and_world
 --
 
@@ -533,11 +660,27 @@ ALTER TABLE ONLY public.members
 
 
 --
+-- Name: members_info pk_members_info; Type: CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.members_info
+    ADD CONSTRAINT pk_members_info PRIMARY KEY (member_id);
+
+
+--
 -- Name: members_invites pk_members_invites; Type: CONSTRAINT; Schema: public; Owner: you_and_world
 --
 
 ALTER TABLE ONLY public.members_invites
     ADD CONSTRAINT pk_members_invites PRIMARY KEY (node_id);
+
+
+--
+-- Name: members_spaces pk_members_spaces; Type: CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.members_spaces
+    ADD CONSTRAINT pk_members_spaces PRIMARY KEY (member_id, space_rel_id);
 
 
 --
@@ -602,6 +745,22 @@ ALTER TABLE ONLY public.roles
 
 ALTER TABLE ONLY public.sessions
     ADD CONSTRAINT pk_sessions PRIMARY KEY (session_id);
+
+
+--
+-- Name: spaces pk_spaces; Type: CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.spaces
+    ADD CONSTRAINT pk_spaces PRIMARY KEY (space_id);
+
+
+--
+-- Name: spaces_to_spaces pk_spaces_to_spaces; Type: CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.spaces_to_spaces
+    ADD CONSTRAINT pk_spaces_to_spaces PRIMARY KEY (space_rel_id);
 
 
 --
@@ -771,6 +930,14 @@ ALTER TABLE ONLY public.events
 
 
 --
+-- Name: members_info fk_members_info_member; Type: FK CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.members_info
+    ADD CONSTRAINT fk_members_info_member FOREIGN KEY (member_id) REFERENCES public.members(member_id) ON DELETE CASCADE;
+
+
+--
 -- Name: members_invites fk_members_invites_member; Type: FK CONSTRAINT; Schema: public; Owner: you_and_world
 --
 
@@ -792,6 +959,22 @@ ALTER TABLE ONLY public.members_invites
 
 ALTER TABLE ONLY public.members
     ADD CONSTRAINT fk_members_node FOREIGN KEY (member_id) REFERENCES public.nodes(node_id);
+
+
+--
+-- Name: members_spaces fk_members_spaces_member; Type: FK CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.members_spaces
+    ADD CONSTRAINT fk_members_spaces_member FOREIGN KEY (member_id) REFERENCES public.members(member_id) ON DELETE CASCADE;
+
+
+--
+-- Name: members_spaces fk_members_spaces_space_rel; Type: FK CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.members_spaces
+    ADD CONSTRAINT fk_members_spaces_space_rel FOREIGN KEY (space_rel_id) REFERENCES public.spaces_to_spaces(space_rel_id);
 
 
 --
@@ -867,6 +1050,22 @@ ALTER TABLE ONLY public.sessions
 
 
 --
+-- Name: spaces_to_spaces fk_spaces_to_spaces_parent; Type: FK CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.spaces_to_spaces
+    ADD CONSTRAINT fk_spaces_to_spaces_parent FOREIGN KEY (parent_space_id) REFERENCES public.spaces(space_id);
+
+
+--
+-- Name: spaces_to_spaces fk_spaces_to_spaces_space; Type: FK CONSTRAINT; Schema: public; Owner: you_and_world
+--
+
+ALTER TABLE ONLY public.spaces_to_spaces
+    ADD CONSTRAINT fk_spaces_to_spaces_space FOREIGN KEY (space_id) REFERENCES public.spaces(space_id);
+
+
+--
 -- Name: subscriptions fk_subscribtions_members; Type: FK CONSTRAINT; Schema: public; Owner: you_and_world
 --
 
@@ -910,5 +1109,5 @@ ALTER TABLE ONLY public.users_tokens
 -- PostgreSQL database dump complete
 --
 
-\unrestrict QZr9KGjGA8QqVgNeAkr7kb25u7OVScJ7LlRHKOltL7poBJT3QLRFx9T9zGalh8L
+\unrestrict GN6PAWijmkg5HzdSe9wP1QnIJcjKevjv0tzc2D2xCzjsiLAOMmFS1eFp3jKPAB6
 

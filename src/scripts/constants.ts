@@ -23,7 +23,6 @@ export const FILES_TO_COPY_FROM_BACK_TO_FRONT: [string, string][] = [
   ['src/domain/types/net.types.ts', 'local/net.types.ts'],
   ['src/domain/types/subscription.types.ts', 'local/subscription.types.ts'],
   ['src/domain/types/user.types.ts', 'local/user.types.ts'],
-  ['src/domain/types/util.types.ts', 'local/util.types.ts'],
 ].map(([i, j]) => [resolve(i!), join(FRONT_PATH, j!)]);
 
 export const FILES_TO_COPY_FROM_FRONT_TO_BACK: [string, string][] = [
