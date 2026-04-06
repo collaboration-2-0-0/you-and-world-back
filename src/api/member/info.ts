@@ -15,7 +15,15 @@ export const read: THandler<IMemberAndNode, IMemberInfoRes> = async (
   { node_id },
 ) => {
   const [info] = await execQuery.member.info.get([node_id]);
-  return info || null;
+  return (
+    info || {
+      member_id: node_id,
+      member_desire: null,
+      member_goal: null,
+      member_activity: null,
+      member_role: null,
+    }
+  );
 };
 read.paramsSchema = MemberAndNodeSchema;
 read.responseSchema = MemberInfoResSchema;
