@@ -8,10 +8,10 @@ import { UserNodeSchema } from './member.schema';
 export const MemberInfoReqSchema = {
   ...UserNodeSchema,
   member_id: Joi.number(),
-  member_desire: [Joi.string().empty(''), JOI_NULL],
-  member_goal: [Joi.string().empty(''), JOI_NULL],
-  member_activity: [Joi.string().empty(''), JOI_NULL],
-  member_role: [Joi.string().empty(''), JOI_NULL],
+  member_desire: [Joi.string().empty('').max(1024), JOI_NULL],
+  member_goal: [Joi.string().empty('').max(1024), JOI_NULL],
+  member_activity: [Joi.string().empty('').max(1024), JOI_NULL],
+  member_role: [Joi.string().empty('').max(255), JOI_NULL],
 } as Record<keyof IMemberInfoReq, TJoiSchema>;
 
 export const MemberInfoResSchema = [
