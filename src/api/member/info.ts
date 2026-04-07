@@ -11,13 +11,36 @@ import {
 } from '../schema';
 
 export const read: THandler<IMemberAndNode, IMemberInfoRes> = async (
-  _,
-  { node_id },
+  { member: m },
+  { node_id, member_id },
 ) => {
-  const [info] = await execQuery.member.info.get([node_id]);
+  let isAllowed = node_id === member_id;
+
+  if (!isAllowed) {
+    const [member] = await execQuery.member.find.inTree([node_id, member_id]);
+    isAllowed = Boolean(member);
+  }
+
+  if (!isAllowed) {
+    /* if user in root node  */
+    const { parent_node_id } = m!.get();
+    if (!parent_node_id) {
+      return null; // bad request
+    }
+    const [member] = await execQuery.member.find.inCircle([
+      parent_node_id,
+      member_id,
+    ]);
+    if (!member) {
+      return null; // bad request
+    }
+  }
+
+  const [info] = await execQuery.member.info.get([member_id]);
+
   return (
     info || {
-      member_id: node_id,
+      member_id,
       member_desire: null,
       member_goal: null,
       member_activity: null,
