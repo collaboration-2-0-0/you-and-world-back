@@ -81,7 +81,7 @@ CREATE TABLE public.members_info (
     member_desire text,
     member_goal text,
     member_activity text,
-    member_role character varying(50) DEFAULT NULL::character varying
+    member_role character varying(255) DEFAULT NULL::character varying
 );
 
 

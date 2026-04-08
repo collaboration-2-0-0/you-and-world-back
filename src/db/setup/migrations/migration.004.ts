@@ -40,7 +40,7 @@ const exec = async () => {
       member_desire text DEFAULT NULL,
       member_goal text DEFAULT NULL,
       member_activity text DEFAULT NULL,
-      member_role character varying(50) DEFAULT NULL,
+      member_role character varying(255) DEFAULT NULL,
       CONSTRAINT pk_members_info PRIMARY KEY (member_id),
       CONSTRAINT fk_members_info_member FOREIGN KEY (member_id)
         REFERENCES public.members (member_id) ON DELETE CASCADE
