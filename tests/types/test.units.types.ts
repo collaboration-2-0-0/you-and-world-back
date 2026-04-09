@@ -60,6 +60,7 @@ export interface ITestUnitsMap {
         'dislikeFacilitator': TTestUnit;
         'leaveFacilitator': TTestUnit;
         'inTree': TTestUnit;
+        'connected': TTestUnit;
         'inCircle': TTestUnit;
       };
       'vote': {

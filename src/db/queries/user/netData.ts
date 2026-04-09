@@ -9,8 +9,9 @@ export interface IQueriesUserNetData {
 export const findByNode = `
   SELECT
     nodes.*,
-    members.*,
-    users.*
+    users.*,
+-- members after users as member has confirmed field as user
+    members.*
   FROM members
   INNER JOIN nodes ON
     nodes.node_id = members.member_id

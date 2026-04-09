@@ -42,6 +42,9 @@ export const generalCases = (units: ITestUnitsMap): ITestCase[] => [
       [units.invite.create.tMember(0), 0],
       [units.net.create.second, 1],
       [units.invite.create.tMember(0), 1],
+      [units.net.get.structure(1), 0],
+      [units.net.get.structure(2), 0],
+      [units.net.get.structure(3), 0],
     ],
   },
 ];

@@ -6,7 +6,7 @@ export const root2: TTestUnit = (state: any) => ({
   operations: [
     {
       name: '/net/create',
-      params: { net_id: null, name: 'net 2' },
+      params: { node_id: null, name: 'net 2' },
       expected: {
         goal: null,
         name: 'net 2',
@@ -60,7 +60,7 @@ export const first: TTestUnit = (state: any) => ({
   operations: [
     {
       name: '/net/create',
-      params: { net_id: null, name: 'test net' },
+      params: { node_id: null, name: 'test net' },
       expected: {
         goal: null,
         name: 'test net',
@@ -111,7 +111,10 @@ export const second: TTestUnit = (state: any) => ({
   operations: [
     {
       name: '/net/create',
-      params: { net_id: null, name: 'test net second' },
+      params: () => ({
+        node_id: state.net?.node_id || null,
+        name: 'test net second',
+      }),
       setToState: (actual) => (state.net = actual),
     },
     {

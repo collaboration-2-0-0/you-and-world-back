@@ -18,8 +18,9 @@ export interface IQueriesNode {
     [
       ['node_id', number],
       ['new_parent_node_id', number | null],
+      ['new_node_level', number],
       ['new_node_position', number],
-      ['node_address', string],
+      ['new_node_address', string],
     ]
   >;
   updateDescendants: TQuery<[['parent_node_id', number]]>;
@@ -72,8 +73,9 @@ export const move = `
   UPDATE nodes
   SET
     parent_node_id = $2,
-    node_position = $3,
-    node_address = $4
+    node_level = $3,
+    node_position = $4,
+    node_address = $5
   WHERE node_id = $1
 `;
 

@@ -1,5 +1,4 @@
 import { NetEventKeys, IMember } from '@shared/types/db';
-import { TREE_MEMBERS_COUNT } from '@shared/server/constants';
 import { ITransaction } from '@db/types';
 import { NetEvent } from '../event/event';
 import { Member } from '../member/member';
@@ -43,7 +42,7 @@ export class NetArrange {
     do {
       const [member] = await execQuery.user.nets.getChildOne([
         user_id,
-        parent_net!.parent_net_id!,
+        parent_net!.net_id,
       ]);
       if (!member) break;
       const result = await NetArrange.removeMemberFromNet(event_type, member);
@@ -150,6 +149,7 @@ export class NetArrange {
     const {
       parent_node_id,
       net_id,
+      node_level,
       node_position,
       count_of_members,
       node_address,
@@ -184,6 +184,7 @@ export class NetArrange {
     await t.execQuery.node.move([
       childNodeId,
       parent_node_id,
+      node_level,
       node_position,
       node_address,
     ]);

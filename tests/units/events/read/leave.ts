@@ -25,5 +25,9 @@ export const leaveFacilitator = getEvent(
 );
 
 export const inTree = getEvent('LEAVE', 'tree', "Від'єднався учасник дерева");
-
+export const connected = getEvent(
+  'LEAVE_CONNECTED',
+  'tree',
+  "Від'єднався запрошений учасник",
+);
 export const inCircle = getEvent('LEAVE', 'circle', "Від'єднався учасник кола");
