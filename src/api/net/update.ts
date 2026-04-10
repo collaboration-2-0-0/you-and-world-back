@@ -4,7 +4,7 @@ import { NetResponseSchema, NetUpdateParamsSchema } from '../schema';
 
 const update: THandler<INetUpdateParams, INetResponse> = async (
   { member },
-  { goal, rules },
+  { name, goal, rules },
 ) => {
   const { net_id, node_id, parent_node_id } = member!.get();
   if (parent_node_id !== null) return null; // bad request
@@ -12,9 +12,12 @@ const update: THandler<INetUpdateParams, INetResponse> = async (
 
   const [net] = await execQuery.net.find.byNode([node_id]);
 
-  const goalUpdate = goal === undefined ? net!.goal : goal || null;
-  const rulesUpdate = rules === undefined ? net!.rules : rules || null;
-  await execQuery.net.data.update([net_id, goalUpdate, rulesUpdate]);
+  await execQuery.net.data.update([
+    net_id,
+    name !== undefined ? name : net!.name,
+    goal !== undefined ? goal : net!.goal,
+    rules !== undefined ? rules : net!.rules,
+  ]);
 
   const [netUpdated] = await execQuery.net.find.byNode([node_id]);
 

@@ -13,7 +13,12 @@ export interface IQueriesNetData {
     ITableNetsData
   >;
   update: TQuery<
-    [['net_id', number], ['goal', string | null], ['rules', string | null]]
+    [
+      ['net_id', number],
+      ['name', string | null],
+      ['goal', string | null],
+      ['rules', string | null],
+    ]
   >;
 }
 
@@ -33,6 +38,6 @@ export const create = `
 
 export const update = `
   UPDATE nets_data
-  SET goal = $2, rules = $3
+  SET name = $2, goal = $3, rules = $4
   WHERE net_id = $1
 `;

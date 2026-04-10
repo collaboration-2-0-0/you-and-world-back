@@ -6,6 +6,7 @@ import {
   INet,
   INetDataExtended,
   IUserNetData,
+  ITableNetsData,
 } from '../db';
 import { IMemberResponse, INetCreate, IUserNode, Nullable } from './index';
 
@@ -15,8 +16,7 @@ export type INetCreateParams = Pick<INetCreate, 'name'> & {
 
 export type INetEnterParams = { net_id: number };
 
-export type INetUpdateParams = IUserNode &
-  Partial<{ goal: string; rules: string }>;
+export type INetUpdateParams = IUserNode & Partial<ITableNetsData>;
 
 export type INetResponse = Nullable<INetDataExtended>;
 export type INetsResponse = INetData[];
