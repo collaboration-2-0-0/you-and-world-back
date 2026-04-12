@@ -24,7 +24,7 @@ export const create: THandler<IWaitCreateParams, INetConnectByLink> = async (
   const [net] = await execQuery.net.find.byNetLink([token]);
   if (!net) return null;
   let event!: NetEvent;
-  const result = (await domain.utils.exeWithNetLock(net.net_id, async (t) => {
+  const result = await domain.utils.exeWithNetLock(net.net_id, async (t) => {
     const [net] = await execQuery.net.find.byNetLink([token]);
     if (!net) return null;
 
@@ -55,9 +55,9 @@ export const create: THandler<IWaitCreateParams, INetConnectByLink> = async (
     await event.commit(t);
 
     return { net_id };
-  })) as INetConnectByLink;
+  });
   event?.send();
-  return result;
+  return result as INetConnectByLink;
 };
 create.paramsSchema = WaitCreateParamsSchema;
 create.responseSchema = NetConnectByTokenSchema;

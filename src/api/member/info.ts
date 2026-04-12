@@ -57,10 +57,10 @@ export const update: THandler<IMemberInfoReq, IMemberInfoRes> = async (
   {
     node_id,
     member_id,
-    member_desire = null,
-    member_goal = null,
-    member_activity = null,
-    member_role = null,
+    member_desire,
+    member_goal,
+    member_activity,
+    member_role,
   },
 ) => {
   if (node_id !== member_id) {
@@ -72,10 +72,10 @@ export const update: THandler<IMemberInfoReq, IMemberInfoRes> = async (
   if (!info) {
     [info] = await execQuery.member.info.create([
       node_id,
-      member_desire,
-      member_goal,
-      member_activity,
-      member_role,
+      member_desire || null,
+      member_goal || null,
+      member_activity || null,
+      member_role || null,
     ]);
 
     return info || null;
@@ -83,10 +83,12 @@ export const update: THandler<IMemberInfoReq, IMemberInfoRes> = async (
 
   [info] = await execQuery.member.info.update([
     node_id,
-    member_desire || info.member_desire,
-    member_goal || info.member_goal,
-    member_activity || info.member_activity,
-    member_role || info.member_role,
+    member_desire !== undefined ? member_desire || null : info.member_desire,
+    member_goal !== undefined ? member_goal || null : info.member_goal,
+    member_activity !== undefined
+      ? member_activity || null
+      : info.member_activity,
+    member_role !== undefined ? member_role || null : info.member_role,
   ]);
 
   return info || null;

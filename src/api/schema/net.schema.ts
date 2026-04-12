@@ -21,7 +21,7 @@ export const NetEnterParamsSchema = { net_id: Joi.number().required() };
 
 export const NetUpdateParamsSchema = {
   node_id: Joi.number(),
-  name: Joi.string().min(0).max(255),
+  name: Joi.string().min(2).max(255),
   goal: Joi.string().min(0).max(1024),
   rules: Joi.string().min(0).max(2048),
 } as Record<keyof INetUpdateParams, TJoiSchema>;

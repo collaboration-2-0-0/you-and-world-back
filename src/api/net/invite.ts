@@ -14,8 +14,8 @@ const create: THandler<INetInviteParams, string | null> = async (
   const result = exeWithNetLock(net_id, async () => {
     await m!.reinit();
 
-    const { goal } = m!.getNet();
-    if (!goal) return null; // bad request
+    // const { goal } = m!.getNet();
+    // if (!goal) return null; // bad request
     if (!confirmed) return null; // bad request
 
     const [waiting] = await execQuery.net.wait.getByUser([net_id, user_id]);

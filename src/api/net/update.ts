@@ -15,8 +15,8 @@ const update: THandler<INetUpdateParams, INetResponse> = async (
   await execQuery.net.data.update([
     net_id,
     name !== undefined ? name : net!.name,
-    goal !== undefined ? goal : net!.goal,
-    rules !== undefined ? rules : net!.rules,
+    goal !== undefined ? goal || null : net!.goal,
+    rules !== undefined ? rules || null : net!.rules,
   ]);
 
   const [netUpdated] = await execQuery.net.find.byNode([node_id]);
