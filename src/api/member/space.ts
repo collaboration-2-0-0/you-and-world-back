@@ -17,7 +17,6 @@ export const get: THandler<IMemberAndNode, ISpacesResponse> = async (
   { member_id },
 ) => {
   const spaces = await execQuery.member.space.get([member_id]);
-  console.log({ member_id, spaces });
   return spaces;
 };
 get.paramsSchema = MemberAndNodeSchema;
