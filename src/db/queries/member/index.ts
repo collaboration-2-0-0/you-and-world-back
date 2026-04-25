@@ -4,6 +4,7 @@ import { IQueriesMemberData } from './data';
 import { IQueriesMemberInvite } from './invite';
 import { IQueriesMemberFind } from './find';
 import { IQueriesMemberInfo } from './info';
+import { IQueriesMemberSpace } from './space';
 
 export interface IQueriesMember {
   create: TQuery<[['node_id', number], ['user_id', number]], ITableMembers>;
@@ -32,6 +33,7 @@ export interface IQueriesMember {
   invite: IQueriesMemberInvite;
   find: IQueriesMemberFind;
   info: IQueriesMemberInfo;
+  space: IQueriesMemberSpace;
 }
 
 export const create = `

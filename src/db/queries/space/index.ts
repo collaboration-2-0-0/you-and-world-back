@@ -1,6 +1,6 @@
-import { ITableSpaces } from '@shared/types/db';
 import { TQuery } from '@db/types';
-import { IQueriesSpaceTree, ISpaceWithHierarchy } from './tree';
+import { ITableSpaces, ISpace } from '@shared/types/db';
+import { IQueriesSpaceTree } from './tree';
 
 export interface IQueriesSpace {
   create: TQuery<
@@ -9,9 +9,9 @@ export interface IQueriesSpace {
       ['description', string | null],
       ['parent_space_id', number | null],
     ],
-    ISpaceWithHierarchy
+    ISpace
   >;
-  get: TQuery<[['space_id', number]], ISpaceWithHierarchy>;
+  get: TQuery<[['space_id', number]], ISpace>;
   update: TQuery<
     [['space_id', number], ['name', string], ['description', string | null]],
     ITableSpaces
@@ -28,11 +28,12 @@ export const create = `
   )
   INSERT INTO spaces_to_spaces (space_id, parent_space_id)
   SELECT space_id, $3 FROM new_space
-  RETURNING (SELECT s.space_id FROM spaces s WHERE s.space_id = spaces_to_spaces.space_id) AS space_id,
-            (SELECT s.name FROM spaces s WHERE s.space_id = spaces_to_spaces.space_id) AS name,
-            (SELECT s.description FROM spaces s WHERE s.space_id = spaces_to_spaces.space_id) AS description,
-            spaces_to_spaces.space_rel_id,
-            spaces_to_spaces.parent_space_id
+  RETURNING
+    (SELECT s.space_id FROM new_space s WHERE s.space_id = spaces_to_spaces.space_id) AS space_id,
+    (SELECT s.name FROM new_space s WHERE s.space_id = spaces_to_spaces.space_id) AS name,
+    (SELECT s.description FROM new_space s WHERE s.space_id = spaces_to_spaces.space_id) AS description,
+    spaces_to_spaces.space_rel_id,
+    spaces_to_spaces.parent_space_id
 `;
 
 export const get = `

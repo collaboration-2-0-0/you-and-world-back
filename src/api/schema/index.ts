@@ -5,6 +5,6 @@ export * from './member.schema';
 export * from './member.Info.schema';
 export * from './net.schema';
 export * from './node.schema';
-// export * from './space.schema';
+export * from './space.schema';
 export * from './subscription.schema';
 export * from './user.schema';

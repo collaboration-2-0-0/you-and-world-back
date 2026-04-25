@@ -1,60 +1,74 @@
-// import Joi from 'joi';
-// import { TJoiSchema } from '@root/controller/types';
-// import {
-//   ISpaceCreateParams,
-//   ISpaceUpdateParams,
-//   ISpaceGetParams,
-//   ISpaceRemoveParams,
-//   ISpacesByParentParams,
-//   ISpaceWithParentsParams,
-//   ISpaceResponse,
-//   OmitNull,
-// } from '@shared/types/api';
-// import { JOI_NULL } from './common.schema';
+import Joi from 'joi';
+import { ISpace, ISpaceDepth } from '@root/shared/types/db';
+import {
+  ISpaceCreate,
+  ISpaceUpdate,
+  ISpaceGet,
+  IMemberSpaceReq,
+  ISpaceParent,
+  ISpacesWithDepth,
+  ISpaceGetTree,
+} from '@shared/types/api';
+import { JOI_NULL } from './common.schema';
+import { TJoiSchema } from '@root/controller/types';
+import { UserNodeSchema } from './member.schema';
 
-// const SpaceObjectSchema = {
-//   space_id: Joi.number(),
-//   space_rel_id: Joi.number(),
-//   parent_space_id: [Joi.number(), JOI_NULL],
-//   name: Joi.string(),
-//   description: [Joi.string(), JOI_NULL],
-// };
+export const SpaceSchema = {
+  space_id: Joi.number(),
+  space_rel_id: Joi.number(),
+  parent_space_id: [Joi.number(), JOI_NULL],
+  name: Joi.string(),
+  description: [Joi.string(), JOI_NULL],
+};
 
-// export const SpaceResponseSchema = [
-//   JOI_NULL,
-//   SpaceObjectSchema as Record<keyof OmitNull<ISpaceResponse>, TJoiSchema>,
-// ];
+export const SpaceResponseSchema = [
+  JOI_NULL,
+  SpaceSchema as Record<keyof ISpace, TJoiSchema>,
+];
 
-// export const SpacesResponseSchema = SpaceObjectSchema as Record<
-//   string,
-//   TJoiSchema
-// >;
+export const SpacesResponseSchema = { ...SpaceSchema };
 
-// export const SpaceCreateSchema = {
-//   name: Joi.string().required(),
-//   description: [Joi.string().empty(''), JOI_NULL],
-//   parent_space_id: [Joi.number(), JOI_NULL],
-// } as Record<keyof ISpaceCreateParams, TJoiSchema>;
+export const SpaceCreateSchema = {
+  name: Joi.string().required(),
+  description: [Joi.string().empty(''), JOI_NULL],
+  parent_space_id: [Joi.number(), JOI_NULL],
+} as Record<keyof ISpaceCreate, TJoiSchema>;
 
-// export const SpaceUpdateSchema = {
-//   space_id: Joi.number().required(),
-//   name: Joi.string().required(),
-//   description: [Joi.string().empty(''), JOI_NULL],
-//   parent_space_id: [Joi.number(), JOI_NULL],
-// } as Record<keyof ISpaceUpdateParams, TJoiSchema>;
+export const SpaceGetSchema = {
+  space_id: Joi.number().required(),
+} as Record<keyof ISpaceGet, TJoiSchema>;
 
-// export const SpaceGetSchema = {
-//   space_id: Joi.number().required(),
-// } as Record<keyof ISpaceGetParams, TJoiSchema>;
+export const SpaceUpdateSchema = {
+  ...SpaceGetSchema,
+  name: Joi.string().required(),
+  description: [Joi.string().empty(''), JOI_NULL],
+  parent_space_id: [Joi.number(), JOI_NULL],
+} as Record<keyof ISpaceUpdate, TJoiSchema>;
 
-// export const SpaceRemoveSchema = {
-//   space_id: Joi.number().required(),
-// } as Record<keyof ISpaceRemoveParams, TJoiSchema>;
+export const SpaceParentSchema = {
+  parent_space_id: [Joi.number(), JOI_NULL],
+} as Record<keyof ISpaceParent, TJoiSchema>;
 
-// export const SpacesByParentSchema = {
-//   parent_space_id: [Joi.number(), JOI_NULL],
-// } as Record<keyof ISpacesByParentParams, TJoiSchema>;
+export const SpaceDepthSchema = {
+  depth: [Joi.number().integer().min(0), JOI_NULL],
+} as Record<keyof ISpaceDepth, TJoiSchema>;
 
-// export const SpaceWithParentsSchema = {
-//   space_id: Joi.number().required(),
-// } as Record<keyof ISpaceWithParentsParams, TJoiSchema>;
+export const SpacesWithDepthSchema = {
+  ...SpaceSchema,
+  ...SpaceDepthSchema,
+} as Record<keyof ISpacesWithDepth[number], TJoiSchema>;
+
+export const SpaceGetTreeSchema = {
+  ...SpaceParentSchema,
+  ...SpaceDepthSchema,
+} as Record<keyof ISpaceGetTree, TJoiSchema>;
+
+/* member */
+export const SpaceRelSchema = {
+  space_rel_id: Joi.number().required(),
+};
+
+export const MemberSpaceReqSchema = {
+  ...UserNodeSchema,
+  ...SpaceRelSchema,
+} as Record<keyof IMemberSpaceReq, TJoiSchema>;

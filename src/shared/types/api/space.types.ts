@@ -1,35 +1,15 @@
-import { ITableSpaces, ITableSpacesToSpaces } from '../db';
+import { ISpace, ISpaceDepth, ISpaceWithDepth } from '../db';
 import { Nullable } from './common.types';
+import { IUserNode } from './member.types';
 
-export type ISpaceResponse = Nullable<ITableSpaces & ITableSpacesToSpaces>;
-export type ISpacesResponse = (ITableSpaces & ITableSpacesToSpaces)[];
-export type ISpaceWithDepthResponse = (ITableSpaces & ITableSpacesToSpaces & { depth: number })[];
+export type ISpaceResponse = Nullable<ISpace>;
+export type ISpacesResponse = ISpace[];
+export type ISpacesWithDepth = ISpaceWithDepth[];
+export type ISpaceCreate = Omit<ISpace, 'space_id' | 'space_rel_id'>;
+export type ISpaceGet = { space_id: number };
+export type ISpaceParent = { parent_space_id: number | null };
+export type ISpaceUpdate = ISpaceGet & ISpaceCreate;
+export type ISpaceGetTree = ISpaceParent & ISpaceDepth;
 
-export type ISpaceCreateParams = {
-  name: string;
-  description?: string | null;
-  parent_space_id?: number | null;
-};
-
-export type ISpaceUpdateParams = {
-  space_id: number;
-  name: string;
-  description?: string | null;
-  parent_space_id?: number | null;
-};
-
-export type ISpaceGetParams = {
-  space_id: number;
-};
-
-export type ISpaceRemoveParams = {
-  space_id: number;
-};
-
-export type ISpacesByParentParams = {
-  parent_space_id: number | null;
-};
-
-export type ISpaceWithParentsParams = {
-  space_id: number;
-};
+/* member */
+export type IMemberSpaceReq = IUserNode & { space_rel_id: number };

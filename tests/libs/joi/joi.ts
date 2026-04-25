@@ -8,12 +8,12 @@ const options = {
 };
 
 export const schema = {
-  chat_id: Joi.number(),
+  chat_id: Joi.string().empty(''),
   text: [Joi.string().empty(''), JOI_NULL],
 };
 
 const s = Joi.object(schema);
-const result = s.validate({ chat_id: '123', text: null }, options);
+const result = s.validate({ chat_id: '', text: '' }, options);
 
 console.log(result.value);
 console.log('error:', result.error?.details);

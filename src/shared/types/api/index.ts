@@ -1,4 +1,5 @@
 export * from '../../local/imports';
+export * from '../db';
 export * from './account.types';
 export * from './client.api.types';
 export * from './common.types';

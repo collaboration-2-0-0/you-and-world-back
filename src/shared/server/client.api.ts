@@ -65,6 +65,17 @@ export const getApi = (
         fetch<P.IMemberInfoRes>('/member/info/update', options),
 
     },
+    'space': {
+      'get': (options: P.IMemberAndNode) =>
+        fetch<P.ISpacesResponse>('/member/space/get', options),
+
+      'add': (options: P.IMemberSpaceReq) =>
+        fetch<boolean>('/member/space/add', options),
+
+      'remove': (options: P.IMemberSpaceReq) =>
+        fetch<boolean>('/member/space/remove', options),
+
+    },
     'data': {
       'dislike': {
         'set': (options: P.IMemberAndNode) =>
@@ -136,8 +147,15 @@ export const getApi = (
     },
   },
   'space': {
-    'space': {
-    },
+    'getByParent': (options: P.ISpaceParent) =>
+      fetch<P.ISpacesResponse>('/space/getByParent', options),
+
+    'getBySpace': (options: P.ISpaceGet) =>
+      fetch<P.ISpacesWithDepth>('/space/getBySpace', options),
+
+    'getTree': (options: P.ISpaceGetTree) =>
+      fetch<P.ISpacesWithDepth>('/space/getTree', options),
+
   },
   'subscription': {
     'get': (options: P.IUserNode) =>
