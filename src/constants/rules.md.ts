@@ -1,5 +1,5 @@
 export const RULES_DEFAULT = `
-## 1. Спільнота має структуру 1 х 12. На [малюнку](./collaboration.pdf) зображена подібна структура 1 х 4. Визначення термінів описані в [Поняттях](./concepts.md)
+## 1. Спільнота має структуру 1 х 12. На [малюнку](https://github.com/collaboration-2-0-0/you-and-world-back/blob/main/docs/users/collaboration.pdf) зображена подібна структура 1 х 4. Визначення термінів описані в [Поняттях](https://github.com/collaboration-2-0-0/you-and-world-back/blob/main/docs/users/concepts.md)
 
 ## 2. Людина може приєднатись до спільноти за власним бажанням та лише за запрошенням Людини, яка вже є у спільноті.
 
